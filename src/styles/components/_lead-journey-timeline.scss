@@ -1,0 +1,278 @@
+// ============================================
+// 🐻 LEAD JOURNEY TIMELINE - 4 OSOS
+// ============================================
+
+.lead-journey-timeline {
+  padding: 20px 24px;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.timeline-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+// ============================================
+// STEP WRAPPER & CIRCLE
+// ============================================
+
+.timeline-step-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex: 0 0 auto;
+  z-index: 2;
+}
+
+.timeline-step {
+  position: relative;
+  
+  &-circle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 3px solid rgba(255, 255, 255, 0.15);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      background: transparent;
+      transition: all 0.3s ease;
+    }
+  }
+  
+  &-emoji {
+    font-size: 28px;
+    line-height: 1;
+    filter: grayscale(0.8) opacity(0.5);
+    transition: all 0.3s ease;
+  }
+  
+  // ============================================
+  // STATUS VARIANTS
+  // ============================================
+  
+  // Completed state
+  &--completed {
+    .timeline-step-circle {
+      background: rgba(51, 244, 145, 0.15);
+      border-color: rgba(51, 244, 145, 0.6);
+      box-shadow: 0 0 12px rgba(51, 244, 145, 0.3);
+    }
+    
+    .timeline-step-emoji {
+      filter: grayscale(0) opacity(1);
+      transform: scale(1.05);
+    }
+  }
+  
+  // Current state
+  &--current {
+    .timeline-step-circle {
+      background: rgba(51, 244, 145, 0.25);
+      border-color: #33F491;
+      border-width: 4px;
+      box-shadow: 0 0 20px rgba(51, 244, 145, 0.5), 0 0 40px rgba(51, 244, 145, 0.2);
+      animation: pulse-glow 2s ease-in-out infinite;
+      
+      &::before {
+        background: radial-gradient(circle, rgba(51, 244, 145, 0.2) 0%, transparent 70%);
+      }
+    }
+    
+    .timeline-step-emoji {
+      filter: grayscale(0) opacity(1);
+      transform: scale(1.1);
+      animation: bounce-subtle 2s ease-in-out infinite;
+    }
+  }
+  
+  // Pending state (default styles already applied)
+  &--pending {
+    .timeline-step-circle {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+// ============================================
+// LABELS
+// ============================================
+
+.timeline-step-labels {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+  min-width: 90px;
+}
+
+.timeline-step-oso {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.2;
+  
+  .timeline-step--current ~ .timeline-step-labels & {
+    color: #33F491;
+  }
+  
+  .timeline-step--completed ~ .timeline-step-labels & {
+    color: rgba(51, 244, 145, 0.8);
+  }
+}
+
+.timeline-step-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.3;
+  
+  .timeline-step--current ~ .timeline-step-labels & {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+// ============================================
+// CONNECTING LINE
+// ============================================
+
+.timeline-line {
+  flex: 1;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  align-self: flex-start;
+  margin-top: 26px; // Align with circle center
+  position: relative;
+  overflow: hidden;
+  
+  &--active {
+    background: linear-gradient(90deg, 
+      rgba(51, 244, 145, 0.6) 0%, 
+      rgba(51, 244, 145, 0.4) 100%
+    );
+    box-shadow: 0 0 8px rgba(51, 244, 145, 0.3);
+    
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        transparent 100%
+      );
+      animation: shimmer 2s ease-in-out infinite;
+    }
+  }
+  
+  &--inactive {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+// ============================================
+// ANIMATIONS
+// ============================================
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(51, 244, 145, 0.5), 0 0 40px rgba(51, 244, 145, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(51, 244, 145, 0.7), 0 0 60px rgba(51, 244, 145, 0.3);
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: scale(1.1) translateY(0);
+  }
+  50% {
+    transform: scale(1.1) translateY(-3px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+// ============================================
+// RESPONSIVE - MOBILE
+// ============================================
+
+@media (max-width: 768px) {
+  .lead-journey-timeline {
+    padding: 16px;
+  }
+  
+  .timeline-container {
+    max-width: 100%;
+  }
+  
+  .timeline-step {
+    &-circle {
+      width: 48px;
+      height: 48px;
+    }
+    
+    &-emoji {
+      font-size: 24px;
+    }
+  }
+  
+  .timeline-step-labels {
+    min-width: 70px;
+  }
+  
+  .timeline-step-oso {
+    font-size: 11px;
+  }
+  
+  .timeline-step-label {
+    font-size: 10px;
+  }
+  
+  .timeline-line {
+    height: 2px;
+    margin-top: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-step-labels {
+    min-width: 60px;
+  }
+  
+  .timeline-step-oso {
+    font-size: 10px;
+  }
+  
+  .timeline-step-label {
+    display: none; // Ocultar etiqueta secundaria en móviles muy pequeños
+  }
+}

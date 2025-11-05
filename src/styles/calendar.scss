@@ -1,0 +1,241 @@
+@use './base/variables' as v;
+
+.cal { 
+  display: grid; 
+  gap: v.$spacing-lg; 
+  height: 100vh;
+  grid-template-columns: 350px 1fr;
+  background: v.$color-bg-container;
+}
+
+.cal__left {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.cal__right {
+  padding: v.$spacing-lg;
+  overflow: auto;
+}
+
+.cal-card {
+  background: v.$color-bg-common-card;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.cal-card__header { 
+  padding: v.$spacing-lg; 
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08); 
+}
+
+.cal-card__body { 
+  padding: v.$spacing-lg; 
+}
+
+.cal-legend { 
+  display: flex; 
+  gap: v.$spacing-lg; 
+  padding: 0 v.$spacing-lg v.$spacing-md; 
+  margin-bottom: v.$spacing-md;
+}
+
+.cal-legend .legend-item {
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-xs;
+  font-size: 12px;
+  color: v.$color-text-secondary;
+}
+
+.cal-legend .dot { 
+  width: 10px; 
+  height: 10px; 
+  border-radius: 50%; 
+  display: inline-block; 
+  margin-right: 8px; 
+}
+
+.dot--pagado { 
+  background: v.$color-success; 
+}
+
+.dot--pcc { 
+  background: v.$color-primary; 
+} /* por cobrar */
+
+.dot--parcial { 
+  background: #EAB308; 
+}
+
+.dot--atrasado { 
+  background: v.$color-error; 
+}
+
+.cal-controls .pill {
+  border: 1px solid rgba(255, 255, 255, 0.12); 
+  border-radius: 10px; 
+  padding: 6px 10px;
+  background: transparent;
+  color: v.$color-text-secondary;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  &.is-active { 
+    background: v.$color-primary; 
+    color: v.$color-text-dark; 
+    border-color: transparent; 
+  }
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cal-grid .day {
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  min-height: 72px; 
+  padding: 6px 8px;
+  background: v.$color-bg-common-card;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  
+  &:hover { 
+    background: rgba(255, 255, 255, 0.03); 
+  }
+  
+  &.is-today { 
+    outline: 1px solid v.$color-primary; 
+    outline-offset: -1px; 
+  }
+  
+  &.is-selected { 
+    background: rgba(51, 244, 145, 0.18); 
+    border-color: v.$color-primary; 
+  }
+  
+  .day-number {
+    font-size: 14px;
+    font-weight: 500;
+    color: v.$color-text;
+    margin-bottom: 4px;
+  }
+  
+  &.other-month .day-number {
+    color: v.$color-text-secondary;
+    opacity: 0.5;
+  }
+  
+  .events {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+    
+    .event-dot { 
+      width: 6px; 
+      height: 6px; 
+      border-radius: 50%; 
+      background: v.$color-primary;
+    }
+  }
+}
+
+.cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: v.$spacing-lg;
+}
+
+.cal-nav {
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-md;
+}
+
+.cal-nav-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: v.$color-text-secondary;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: v.$color-primary;
+    border-color: v.$color-primary;
+  }
+}
+
+.cal-month-year {
+  font-size: 18px;
+  font-weight: 600;
+  color: v.$color-text;
+  text-transform: capitalize;
+}
+
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  margin-bottom: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+}
+
+.cal-weekday {
+  background: v.$color-bg-elevated;
+  padding: v.$spacing-sm;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: v.$color-text-secondary;
+  text-transform: uppercase;
+}
+
+// Responsive
+@media (max-width: v.$breakpoint-lg) {
+  .cal {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  
+  .cal__left {
+    order: 1;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  
+  .cal__right {
+    order: 2;
+  }
+}
+
+@media (max-width: v.$breakpoint-md) {
+  .cal {
+    gap: v.$spacing-md;
+  }
+  
+  .cal__right {
+    padding: v.$spacing-md;
+  }
+  
+  .cal-grid .day {
+    min-height: 60px;
+    padding: 4px 6px;
+  }
+}

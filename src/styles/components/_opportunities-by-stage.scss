@@ -1,0 +1,134 @@
+@use '../base/variables' as *;
+@use 'common-cards';
+
+.opportunities-by-stage {
+  @extend .modern-card;
+  
+  .chart-header {
+    @extend .card-header;
+    
+    .chart-title {
+      padding: $spacing-md $spacing-lg;
+      @extend .card-title;
+    }
+  }
+  
+  .chart-content {
+    padding: 0 $spacing-lg $spacing-lg $spacing-lg;
+    
+    .loading-state {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 300px;
+      color: $color-text-secondary;
+      font-family: $font-family;
+    }
+    
+    // Custom tooltip styles
+    .custom-tooltip {
+      background: rgba(27, 42, 58, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: $spacing-sm $spacing-md;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      
+      .tooltip-label {
+        color: $color-text;
+        font-weight: 600;
+        margin: 0;
+        font-size: 14px;
+        font-family: $font-family;
+      }
+    }
+  }
+  
+  // Override recharts styles for bar chart
+  .recharts-wrapper {
+    .recharts-cartesian-grid-horizontal line,
+    .recharts-cartesian-grid-vertical line {
+      stroke: rgba(255, 255, 255, 0.1);
+      stroke-dasharray: 3 3;
+    }
+    
+    .recharts-bar-rectangle {
+      &:hover {
+        opacity: 0.8;
+        filter: brightness(1.1);
+      }
+    }
+    
+    .recharts-active-bar {
+      filter: brightness(1.1);
+    }
+    
+    .recharts-tooltip-cursor {
+      fill: transparent;
+    }
+    
+    .recharts-tooltip-wrapper {
+      .recharts-default-tooltip {
+        background: rgba(27, 42, 58, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 8px;
+        
+        .recharts-tooltip-label {
+          color: $color-text;
+          font-family: $font-family;
+        }
+        
+        .recharts-tooltip-item {
+          color: $color-text;
+          font-family: $font-family;
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: $breakpoint-md) {
+  .opportunities-by-stage {
+    padding: $spacing-md;
+    min-height: 320px;
+    
+    .chart-header {
+      .chart-title {
+        font-size: 16px;
+      }
+    }
+    
+    .chart-content {
+      .loading-state {
+        height: 250px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .opportunities-by-stage {
+    padding: $spacing-md;
+    min-height: 280px;
+    
+    .chart-header {
+      .chart-title {
+        font-size: 15px;
+      }
+    }
+    
+    .chart-content {
+      .loading-state {
+        height: 220px;
+      }
+      
+      .custom-tooltip {
+        padding: $spacing-xs $spacing-sm;
+        
+        .tooltip-label {
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}

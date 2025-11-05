@@ -1,0 +1,46 @@
+// Responsive Tables Styles
+// Hide mobile view on desktop, show table
+.desktop-table-view {
+  display: block;
+}
+
+.mobile-cards-view {
+  display: none;
+}
+
+// Tablet and Mobile breakpoint - show cards, hide table
+@media (max-width: 1024px) {
+  .desktop-table-view {
+    display: none;
+  }
+
+  .mobile-cards-view {
+    display: block;
+    padding: 0 16px;
+  }
+
+  .mobile-cobro-card,
+  .mobile-oportunidad-card {
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    .ant-card-body {
+      padding: 16px;
+    }
+  }
+}
+
+// Mobile specific adjustments
+@media (max-width: 768px) {
+  .mobile-cards-view {
+    padding: 0 8px;
+  }
+}

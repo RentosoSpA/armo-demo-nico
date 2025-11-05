@@ -1,0 +1,23 @@
+@use '../base/variables' as *;
+
+.asset-grid1 {
+  .asset-row {
+    align-items: stretch;
+  }
+
+  .asset-col {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .asset-statcard {
+    flex: 1;
+    height: 100%;
+    min-height: 160px;
+  }
+
+  .asset-progress {
+    height: 8px;
+  }
+}

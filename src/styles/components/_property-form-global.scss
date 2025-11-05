@@ -1,0 +1,226 @@
+.property-form {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: #0e1026;
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
+
+  // Utility class for hiding steps
+  .d-none {
+    display: none !important;
+  }
+
+  // FORCE all inputs to have same width in Col grid
+  .ant-col {
+    .ant-form-item {
+      .ant-input,
+      .ant-input-number,
+      .ant-select,
+      .ant-picker,
+      .ant-input-affix-wrapper {
+        width: 100% !important;
+      }
+    }
+  }
+
+// Form container
+  &__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 8rem; // Space for sticky buttons + safe area
+
+    @media (max-width: 767px) {
+      padding-bottom: calc(8rem + env(safe-area-inset-bottom));
+    }
+  }
+
+  // Modifier: reduce bottom space when using the wizard step
+  &__container.is-wizard-step {
+    padding-bottom: 2rem;
+
+    @media (max-width: 767px) {
+      padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+    }
+  }
+
+  // Navigation buttons wrapper
+  &__navigation {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom));
+    margin: 0 -1rem;
+    z-index: 300;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+    @media (min-width: 768px) {
+      padding: 1.5rem 2rem calc(1.5rem + env(safe-area-inset-bottom));
+      margin: 0 -2rem;
+    }
+
+    .ant-btn {
+      height: 3rem;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-weight: 500;
+      min-width: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      font-family: 'Poppins', sans-serif;
+
+      // Back button
+      &:not(.ant-btn-primary) {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border: 1px solid rgba(255, 255, 255, 0.3) !important;
+        color: #ffffff !important;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.25) !important;
+          border-color: rgba(255, 255, 255, 0.4) !important;
+          transform: translateX(-2px);
+          color: #ffffff !important;
+        }
+      }
+
+      // Next/Submit button
+      &.ant-btn-primary {
+        background: rgba(46, 233, 160, 0.15) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(46, 233, 160, 0.4) !important;
+        color: #2EE9A0 !important;
+        font-weight: 500;
+        box-shadow: 0 2px 8px rgba(46, 233, 160, 0.15) !important;
+
+        &:hover,
+        &:focus {
+          background: rgba(46, 233, 160, 0.25) !important;
+          border: 1px solid rgba(46, 233, 160, 0.5) !important;
+          box-shadow: 0 4px 12px rgba(46, 233, 160, 0.25) !important;
+          transform: translateY(-1px);
+          color: #2EE9A0 !important;
+        }
+
+        &:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+          transform: none;
+        }
+
+        span {
+          color: #2EE9A0 !important;
+        }
+      }
+    }
+  }
+
+  // Progress bar (bear paws)
+  .bear-progress-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to bottom, #0e1026 40%, transparent);
+    padding: 1.5rem 1rem;
+    margin: -2rem -1rem 2rem;
+    z-index: 200;
+
+    @media (min-width: 768px) {
+      padding: 1.5rem 2rem;
+      margin: -2rem -2rem 2rem;
+    }
+  }
+
+  // Optional pill/chip styles
+  .optional-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-left: 0.5rem;
+    font-weight: 400;
+  }
+
+  .bonus-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    background: rgba(61, 218, 216, 0.15);
+    border: 1px solid rgba(61, 218, 216, 0.3);
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    color: #3DDAD8;
+    margin-left: 0.5rem;
+    font-weight: 500;
+  }
+}
+
+// Dropdown overlays (Select, DatePicker, etc.)
+.ant-select-dropdown,
+.ant-picker-dropdown {
+  background: rgba(20, 22, 45, 0.98);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.75rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+
+  .ant-select-item,
+  .ant-picker-cell {
+    color: rgba(255, 255, 255, 0.9);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &.ant-select-item-option-selected,
+    &.ant-picker-cell-selected {
+      background: rgba(61, 218, 216, 0.2);
+      color: #3DDAD8;
+      font-weight: 500;
+    }
+
+    &.ant-select-item-option-disabled,
+    &.ant-picker-cell-disabled {
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  .ant-picker-header {
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    button {
+      color: rgba(255, 255, 255, 0.7);
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+  }
+
+  .ant-picker-content th {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .ant-picker-today-btn {
+    color: #3DDAD8;
+
+    &:hover {
+      color: #4ee5e3;
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@use '../../styles/base/variables' as *;
+@use '../../styles/utils/mixins' as *;
+
+.toggler-radio-group {
+  width: 100%;
+  transition: all 0.3s ease;
+  margin-bottom: 16px;
+}

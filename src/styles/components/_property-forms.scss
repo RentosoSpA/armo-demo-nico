@@ -1,0 +1,224 @@
+// Property Forms - Shared styles for property form components
+
+.property-form {
+  &__container {
+    padding: 0 24px 24px 24px;
+  }
+
+  &__back-button {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+
+    .ant-btn {
+      margin-right: 16px;
+      color: #9CA3AF;
+    }
+  }
+
+  &__layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 80vh;
+  }
+
+  &__header {
+    width: 100%;
+    background: #1b2a3a;
+    border-radius: 12px;
+    padding: 24px;
+  }
+
+  &__content {
+    flex: 1;
+    padding: 24px;
+  }
+
+  &__step-content {
+    padding: 24px;
+  }
+
+  &__title {
+    color: #ffffff;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  &__section-title {
+    color: #ffffff;
+    margin-bottom: 16px;
+  }
+
+  &__divider {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &__footer {
+    margin-top: 32px;
+    padding: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__input-full-width {
+    .ant-input-number {
+      width: 100%;
+    }
+
+    .ant-picker {
+      width: 100%;
+    }
+  }
+
+  // Standardize all form inputs
+  .ant-form-item {
+    .ant-input:not(textarea),
+    .ant-input-number,
+    .ant-picker,
+    .ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+      height: 48px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+    }
+
+    // Remove internal input background
+    .ant-input-number-input,
+    .ant-picker-input > input {
+      background: none;
+      background-color: transparent;
+    }
+
+    // Ensure select items are aligned
+    .ant-select-selector {
+      display: flex;
+      align-items: center;
+    }
+
+    .ant-input-number-input-wrap {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  // Exception for textarea (Características Ocultas)
+  textarea.ant-input {
+    height: auto !important;
+    min-height: 100px !important;
+  }
+}
+
+// Global styles for all property forms (outside .property-form scope)
+.ant-form {
+  .ant-input:not(textarea),
+  .ant-input-number,
+  .ant-picker {
+    height: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-select-selector {
+    height: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-input-number-input,
+  .ant-picker-input > input {
+    background: none;
+    background-color: transparent;
+  }
+
+  .ant-input-number-input-wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.property-form {
+  &__upload-dragger {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+
+    .ant-upload-drag-icon .anticon {
+      color: #9CA3AF;
+    }
+  }
+
+  &__upload-text {
+    color: #9CA3AF;
+  }
+
+  &__upload-hint {
+    color: #9CA3AF;
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  &__publication-platforms {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    span {
+      color: #9CA3AF;
+    }
+  }
+
+  &__dropdown-add-button {
+    padding: 8px 0;
+    border-top: 1px solid #f0f0f0;
+
+    .ant-btn {
+      width: 100%;
+      text-align: left;
+    }
+  }
+}
+
+// Modern card for property forms
+.modern-card {
+  background: #1b2a3a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  min-height: 700px;
+}
+
+// Custom steps styling for property forms
+.custom-steps {
+  margin-bottom: 0;
+
+  .ant-steps-item-wait .ant-steps-item-title {
+    color: #9CA3AF;
+  }
+
+  .ant-steps-item-process .ant-steps-item-title {
+    color: #ffffff;
+  }
+
+  .ant-steps-item-finish .ant-steps-item-title {
+    color: #ffffff;
+  }
+}
+
+// Text colors
+.text-white {
+  color: #ffffff;
+}
+
+.text-gray {
+  color: #9CA3AF;
+}
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.6);
+}

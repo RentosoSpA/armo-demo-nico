@@ -1,0 +1,1121 @@
+// Main SCSS entry point
+// Import order matters - base styles first, then components
+
+// Sass modules
+@use 'sass:color';
+
+// Base styles
+@use 'base/variables' as *;
+@use 'base/reset' as *;
+
+// Utils
+@use 'utils/mixins' as *;
+@use 'utilities' as *;
+
+// Brigada drawer styles
+@use 'brigada-drawer' as *;
+
+// Layout
+@use 'layout/sidebar' as *;
+@use 'layout/admin-layout' as *;
+
+// Components
+@use 'bear-stats' as *;
+@use 'components/buttons' as *;
+@use 'components/cards' as *;
+@use 'components/common-cards' as *;
+@use 'components/common-button' as *;
+@use 'components/loading-splash' as *;
+@use 'components/modals' as *;
+@use 'components/forms' as *;
+@use 'components/liquid-glass-inputs' as *;
+@use 'components/header' as *;
+@use 'components/menu' as *;
+@use 'components/view-toggle' as *;
+@use 'components/CustomReports' as *;
+@use 'components/AssetGrid1' as *;
+@use 'components/AssetCard1' as *;
+@use 'brigada' as *;
+@use 'brigada-forms' as *;
+@use 'brigada-notarioso' as *;
+@use 'brigada-mobile' as *;
+@use 'contratos' as *;
+@use 'cobros-calendar' as *;
+@use 'calendar' as *;
+@use 'calendar-layout' as *;
+@use 'calendar-layout-fix' as *;
+@use 'propietarios' as *;
+@use 'components/propiedades-cards' as *;
+@use 'components/mobile-bottom-nav' as *;
+@use 'components/prospecto-opportunity-modal' as *;
+@use 'components/rentoso-chat-button' as *;
+@use 'components/oso-brigada' as *;
+@use 'components/oso-flip-card' as *;
+@use 'components/oso-activity-feed' as *;
+@use 'components/dashboard-toggle-chart' as *;
+@use 'components/country-phone-select' as *;
+@use 'components/property-wizard' as *;
+@use 'components/bear-progress-bar' as *;
+@use 'components/step-wrapper' as *;
+@use 'components/field-grid' as *;
+@use 'components/property-form-dark-inputs' as *;
+@use 'components/property-form-global' as *;
+@use '../components/common/AiChat' as *;
+@use 'components/decisions-modal' as *;
+@use 'components/decisions-fab' as *;
+@use 'components/decisions-cards' as *;
+@use 'components/decisions-list' as *;
+@use 'components/finanzas-resumen' as *;
+@use 'components/finanzas-termometro' as *;
+@use 'components/finanzas-comisiones' as *;
+@use 'components/finanzas-gastos' as *;
+@use 'components/finanzas-config' as *;
+@use 'components/finanzas-oso-tooltip' as *;
+@use 'components/live-activity-feed' as *;
+@use 'components/dashboard-customizable' as *;
+@use 'components/mini-kpi-widget' as *;
+@use 'components/mini-chart-widget' as *;
+@use 'components/info-widgets' as *;
+@use 'components/whatsapp-chat' as *;
+@use 'components/lead-journey-timeline' as *;
+@use 'components/curioso-activity-feed' as *;
+@use 'components/intelligent-calendar' as *;
+@use 'components/visita-smart-card' as *;
+@use 'components/curioso-status-badge' as *;
+@use 'components/calendario-stats' as *;
+
+// Pages
+@use 'pages/auth' as *;
+@use 'pages/calendario-grid' as *;
+@use 'pages/dashboard' as *;
+@use 'pages/Ayuda' as *;
+@use 'pages/reportes' as *;
+@use 'pages/tablero' as *;
+@use 'pages/propiedadesFicha' as *;
+@use 'pages/propiedad-ficha-portal' as *;
+@use 'pages/finanzas' as *;
+@use 'pages/public-portal' as *;
+
+// === LIQUID GLASS UTILITIES ===
+
+/* Tarjeta vidrio fluido */
+.liquid-glass {
+  background: rgba(var(--fg), 0.10);
+  border: 1px solid rgba(var(--fg), 0.16);
+  backdrop-filter: blur(var(--blur-strong)) saturate(120%);
+  -webkit-backdrop-filter: blur(var(--blur-strong)) saturate(120%);
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.25rem;
+}
+
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(var(--fg), 0.10);
+  border-radius: inherit;
+}
+
+/* Glass surfaces */
+.glass {
+  background: var(--glass-2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-1);
+  position: relative;
+  z-index: 1;
+}
+
+.glass-strong {
+  background: var(--glass-3);
+  box-shadow: var(--shadow-2);
+}
+
+.surface-1 {
+  background: var(--glass-1);
+  border: 1px solid var(--glass-border);
+}
+
+.text-primary {
+  color: var(--fg-primary);
+}
+
+.text-muted {
+  color: var(--fg-muted);
+}
+
+/* Botón primario sólido con glassmorphism */
+.btn-primary {
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, rgba(52, 245, 197, 0.9), rgba(52, 245, 197, 1));
+  color: #ffffff;
+  border: 1px solid rgba(52, 245, 197, 0.3);
+  box-shadow: 0 4px 16px rgba(52, 245, 197, 0.25);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-family: $font-family;
+  font-size: $font-size-base;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, rgba(52, 245, 197, 1), rgba(69, 246, 206, 1));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(52, 245, 197, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(52, 245, 197, 0.2);
+}
+
+/* Botón secundario vidrio con glassmorphism */
+.btn-secondary {
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  color: white;
+  background: rgba(var(--fg), 0.08);
+  border: 1px solid rgba(var(--fg), 0.16);
+  backdrop-filter: blur(16px) saturate(120%);
+  -webkit-backdrop-filter: blur(16px) saturate(120%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  position: relative;
+}
+
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  border-radius: inherit;
+}
+
+.btn-secondary:hover {
+  background: rgba(var(--fg), 0.12);
+  border-color: rgba(var(--fg), 0.22);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Burbujas chat */
+.bubble-user {
+  background: rgb(var(--lg-primary));
+  color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+  padding: $spacing-md;
+}
+
+.bubble-agent {
+  border-radius: 1rem;
+  color: white;
+  background: rgba(var(--fg), 0.10);
+  border: 1px solid rgba(var(--fg), 0.16);
+  backdrop-filter: blur(var(--blur-strong));
+  box-shadow: var(--shadow-lg);
+  padding: $spacing-md;
+}
+
+/* Fondo con aurora líquida */
+.bg-aurora {
+  background:
+    radial-gradient(40% 30% at 20% 15%, rgba(var(--lg-accent-2), 0.22), transparent 60%),
+    radial-gradient(35% 30% at 80% 20%, rgba(var(--lg-accent-1), 0.20), transparent 60%),
+    radial-gradient(50% 45% at 50% 85%, rgba(var(--lg-accent-3), 0.16), transparent 66%),
+    var(--bg);
+}
+
+/* Aurora Layer */
+.aurora-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(60px);
+  opacity: 0.5;
+  mix-blend-mode: screen;
+  overflow: visible;
+}
+
+.aurora {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background:
+    radial-gradient(35% 35% at 50% 50%, var(--aurora-1) 0%, transparent 60%),
+    conic-gradient(from 180deg at 50% 50%, var(--aurora-2), var(--aurora-3), var(--aurora-4), var(--aurora-2));
+  border-radius: 9999px;
+  opacity: 0.5;
+  animation: auroraFloat 20s ease-in-out infinite;
+  will-change: transform, opacity, filter;
+}
+
+.aurora--top-right {
+  top: 10%;
+  right: 10%;
+  animation-delay: 0s;
+}
+
+.aurora--bottom-left {
+  bottom: 10%;
+  left: 10%;
+  animation-delay: -10s;
+  background: radial-gradient(35% 35% at 50% 50%, #ff00ff 0%, transparent 60%);
+}
+
+@keyframes auroraFloat {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 0.25;
+  }
+  25% {
+    transform: translate3d(15vw, -10vh, 0) rotate(90deg) scale(1.2);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translate3d(-10vw, 15vh, 0) rotate(180deg) scale(0.9);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translate3d(10vw, 5vh, 0) rotate(270deg) scale(1.1);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(360deg) scale(1);
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-layer,
+  .aurora {
+    animation: none !important;
+    opacity: 0.35;
+    filter: blur(28px);
+  }
+}
+
+// Global utility classes
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mt-0 { margin-top: 0; }
+.mt-1 { margin-top: $spacing-xs; }
+.mt-2 { margin-top: $spacing-sm; }
+.mt-3 { margin-top: $spacing-md; }
+.mt-4 { margin-top: $spacing-lg; }
+.mt-5 { margin-top: $spacing-xl; }
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: $spacing-xs; }
+.mb-2 { margin-bottom: $spacing-sm; }
+.mb-3 { margin-bottom: $spacing-md; }
+.mb-4 { margin-bottom: $spacing-lg; }
+.mb-5 { margin-bottom: $spacing-xl; }
+
+.ml-0 { margin-left: 0; }
+.ml-1 { margin-left: $spacing-xs; }
+.ml-2 { margin-left: $spacing-sm; }
+.ml-3 { margin-left: $spacing-md; }
+.ml-4 { margin-left: $spacing-lg; }
+.ml-5 { margin-left: $spacing-xl; }
+
+.mr-0 { margin-right: 0; }
+.mr-1 { margin-right: $spacing-xs; }
+.mr-2 { margin-right: $spacing-sm; }
+.mr-3 { margin-right: $spacing-md; }
+.mr-4 { margin-right: $spacing-lg; }
+.mr-5 { margin-right: $spacing-xl; }
+
+.p-0 { padding: 0; }
+.p-1 { padding: $spacing-xs; }
+.p-2 { padding: $spacing-sm; }
+.p-3 { padding: $spacing-md; }
+.p-4 { padding: $spacing-lg; }
+.p-5 { padding: $spacing-xl; }
+
+.d-flex { display: flex; }
+.d-block { display: block; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-none { display: none; }
+
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-around { justify-content: space-around; }
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+
+.align-center { align-items: center; }
+.align-start { align-items: flex-start; }
+.align-end { align-items: flex-end; }
+
+.flex-column { flex-direction: column; }
+.flex-row { flex-direction: row; }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+.cursor-pointer { cursor: pointer; }
+.cursor-not-allowed { cursor: not-allowed; }
+
+.overflow-hidden { overflow: hidden; }
+.overflow-auto { overflow: auto; }
+
+.rounded { border-radius: 6px; }
+.rounded-lg { border-radius: 12px; }
+.rounded-full { border-radius: 50%; }
+
+.shadow { box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); }
+
+// Loading utilities
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.full-height {
+  min-height: 100vh;
+}
+
+.admin-layout.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.app {
+  background: 
+    radial-gradient(40% 30% at 20% 15%, rgba(var(--lg-accent-2), 0.22), transparent 60%),
+    radial-gradient(35% 30% at 80% 20%, rgba(var(--lg-accent-1), 0.20), transparent 60%),
+    radial-gradient(50% 45% at 50% 85%, rgba(var(--lg-accent-3), 0.16), transparent 66%),
+    var(--bg);
+}
+
+button{
+    border: none;
+}
+
+// Ant Design table cell padding consistency
+.modern-card .ant-table,
+.table-card .ant-table {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px) saturate(110%);
+  -webkit-backdrop-filter: blur(12px) saturate(110%);
+  border-radius: 12px;
+  overflow: hidden;
+
+  .ant-table-container {
+    background: transparent;
+    border-radius: 12px;
+  }
+
+  .ant-table-thead > tr > th {
+    padding: $spacing-md;
+    background: rgba(255, 255, 255, 0.04);
+    color: #ffffff;
+    font-family: $font-family;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    // Mobile responsive headers
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-sm;
+      font-size: 12px;
+
+      &:nth-child(n+6) {
+        display: none; // Hide less important columns on mobile
+      }
+    }
+  }
+
+  .ant-table-tbody > tr > td {
+    padding: $spacing-md;
+    background: transparent;
+    color: #ffffff;
+    font-family: $font-family;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+
+    // Mobile responsive cells
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-sm;
+      font-size: 12px;
+
+      &:nth-child(n+6) {
+        display: none; // Hide less important columns on mobile
+      }
+    }
+
+    // Touch-friendly buttons on mobile
+    .ant-btn {
+      @media (max-width: $breakpoint-md) {
+        min-height: 32px;
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .ant-table-tbody > tr {
+    transition: all 0.2s ease;
+
+    &:hover > td {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+  }
+
+  // Mobile table improvements
+  @media (max-width: $breakpoint-md) {
+    .ant-table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .ant-table-pagination {
+      .ant-pagination-item,
+      .ant-pagination-prev,
+      .ant-pagination-next {
+        min-width: 32px;
+        height: 32px;
+        line-height: 30px;
+      }
+    }
+  }
+}
+
+// Ant Design overrides
+.Oportunidades-page .ant-tag,
+.ant-table .ant-tag {
+  background-color: rgba(11, 15, 31, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  color: $color-text;
+  border-bottom: 3px solid transparent;
+  
+  &:hover {
+    background-color: rgba(11, 15, 31, 0.5);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+  
+  // Estado colors for border-bottom
+  &.ant-tag-gold {
+    border-bottom-color: #faad14;
+  }
+  
+  &.ant-tag-blue {
+    border-bottom-color: #1890ff;
+  }
+  
+  &.ant-tag-orange {
+    border-bottom-color: #fa8c16;
+  }
+  
+  &.ant-tag-green {
+    border-bottom-color: $color-success;
+  }
+  
+  &.ant-tag-red {
+    border-bottom-color: $color-error;
+  }
+}
+
+// Action buttons in Oportunidades table
+.Oportunidades-page .ant-table .ant-btn.ant-btn-primary.ant-btn-sm {
+  background: rgba(11, 15, 31, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 3px solid $color-primary;
+  color: $color-text;
+  box-shadow: none;
+  text-shadow: none;
+  height: auto;
+  line-height: 1.5;
+  
+  &:hover,
+  &:focus {
+    background: rgba(11, 15, 31, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 3px solid $color-primary;
+    color: $color-text;
+    box-shadow: none;
+  }
+  
+  &:active {
+    background: rgba(11, 15, 31, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 3px solid $color-primary;
+    color: $color-text;
+    box-shadow: none;
+  }
+}
+
+// Make all small buttons in the table have consistent height
+.Oportunidades-page .ant-table .ant-btn.ant-btn-sm {
+  height: 24px;
+  padding: 0 7px;
+  font-size: 12px;
+}
+
+// Global primary button styling
+.ant-btn.ant-btn-primary {
+  background: rgba(11, 15, 31, 0.3);
+  border: 1px solid rgba(52, 245, 197, 0.2);
+  border-bottom: 3px solid $color-success;
+  color: $color-text !important;
+  box-shadow: none;
+  text-shadow: none;
+  transition: all 0.3s ease;
+
+  &:hover,
+  &:focus {
+    background: $color-success !important;
+    border: 1px solid $color-success !important;
+    border-bottom: 3px solid color.adjust($color-success, $lightness: -10%) !important;
+    color: #000000 !important;
+    box-shadow: 0 4px 12px rgba(52, 245, 197, 0.3) !important;
+  }
+
+  &:active {
+    background: color.adjust($color-success, $lightness: -5%) !important;
+    border: 1px solid color.adjust($color-success, $lightness: -5%) !important;
+    border-bottom: 3px solid color.adjust($color-success, $lightness: -15%) !important;
+    color: #000000 !important;
+    box-shadow: 0 2px 8px rgba(52, 245, 197, 0.2) !important;
+  }
+
+  &:disabled {
+    background: rgba(11, 15, 31, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.016) !important;
+    border-bottom: 3px solid rgba(52, 245, 197, 0.3) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+    box-shadow: none !important;
+  }
+
+  // Asegurar que el span interno también tenga el color correcto
+  span {
+    color: inherit !important;
+  }
+}
+
+// Pagination button styles
+.ant-pagination {
+  .ant-pagination-prev,
+  .ant-pagination-next {
+    button {
+      color: #ffffff !important;
+
+      &:hover {
+        color: #000000 !important;
+      }
+    }
+
+    .ant-pagination-item-link {
+      color: #ffffff !important;
+
+      &:hover {
+        color: #000000 !important;
+      }
+    }
+
+    &:hover {
+      button {
+        color: #000000 !important;
+      }
+
+      .ant-pagination-item-link {
+        color: #000000 !important;
+      }
+    }
+  }
+
+  .ant-pagination-item {
+    a {
+      color: #ffffff !important;
+    }
+
+    &:hover {
+      a {
+        color: #000000 !important;
+      }
+    }
+  }
+}
+
+// Step navigation buttons in form
+.step-nav-button {
+  color: #ffffff !important;
+
+  &:hover {
+    color: #000000 !important;
+  }
+}
+
+.step-nav-button-primary {
+  color: #ffffff !important;
+
+  &:hover {
+    color: #000000 !important;
+  }
+}
+
+// Glassmorphism form styles
+.propiedad-form-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 700px;
+
+  .ant-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+
+  // Regular inputs (not inside InputNumber)
+  .ant-input:not(.ant-input-number-input) {
+    background: rgba(11, 15, 31, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:hover {
+      background: rgba(11, 15, 31, 0.8) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:focus {
+      background: rgba(11, 15, 31, 0.9) !important;
+      border-color: rgba(52, 245, 197, 1) !important;
+      box-shadow: 0 4px 16px rgba(52, 245, 197, 0.2), 0 0 0 2px rgba(52, 245, 197, 0.1);
+    }
+  }
+
+  // Internal inputs (for InputNumber and Picker) - transparent
+  .ant-input-number-input,
+  .ant-picker-input > input {
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // TextArea
+  .ant-input-textarea textarea {
+    background: rgba(11, 15, 31, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:hover {
+      background: rgba(11, 15, 31, 0.8) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:focus {
+      background: rgba(11, 15, 31, 0.9) !important;
+      border-color: rgba(52, 245, 197, 1) !important;
+      box-shadow: 0 4px 16px rgba(52, 245, 197, 0.2), 0 0 0 2px rgba(52, 245, 197, 0.1);
+    }
+  }
+
+  // Select
+  .ant-select-selector {
+    background: rgba(11, 15, 31, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    color: #ffffff !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+
+    .ant-select-selection-placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .ant-select-selection-item {
+      color: #ffffff;
+    }
+
+    &:hover {
+      background: rgba(11, 15, 31, 0.8) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .ant-select-focused .ant-select-selector {
+    background: rgba(11, 15, 31, 0.9) !important;
+    border-color: rgba(52, 245, 197, 1) !important;
+    box-shadow: 0 4px 16px rgba(52, 245, 197, 0.2), 0 0 0 2px rgba(52, 245, 197, 0.1) !important;
+  }
+
+  .ant-select-arrow {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  // InputNumber
+  .ant-input-number {
+    background: rgba(11, 15, 31, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      background: rgba(11, 15, 31, 0.8) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &:focus-within {
+      background: rgba(11, 15, 31, 0.9) !important;
+      border-color: rgba(52, 245, 197, 1) !important;
+      box-shadow: 0 4px 16px rgba(52, 245, 197, 0.2), 0 0 0 2px rgba(52, 245, 197, 0.1);
+    }
+
+    .ant-input-number-input {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+    .ant-input-number-handler-wrap {
+      background: rgba(11, 15, 31, 0.5);
+      border-left: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .ant-input-number-handler {
+      border-color: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.6);
+
+      &:hover {
+        color: #33F491;
+      }
+    }
+  }
+
+  // DatePicker
+  .ant-picker {
+    background: rgba(11, 15, 31, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+
+    &:hover {
+      background: rgba(11, 15, 31, 0.8) !important;
+      border-color: rgba(255, 255, 255, 0.08) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    &.ant-picker-focused {
+      background: rgba(11, 15, 31, 0.9) !important;
+      border-color: rgba(52, 245, 197, 1) !important;
+      box-shadow: 0 4px 16px rgba(52, 245, 197, 0.2), 0 0 0 2px rgba(52, 245, 197, 0.1);
+    }
+
+    .ant-picker-suffix {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Radio buttons
+  .ant-radio-wrapper {
+    color: #ffffff;
+
+    .ant-radio-inner {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .ant-radio-checked .ant-radio-inner {
+      background: #33F491;
+      border-color: #33F491;
+
+      &::after {
+        background-color: #000000;
+      }
+    }
+
+    &:hover .ant-radio-inner {
+      border-color: #33F491;
+    }
+  }
+
+  // Checkboxes
+  .ant-checkbox-wrapper {
+    color: #ffffff;
+
+    .ant-checkbox-inner {
+      
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .ant-checkbox-checked .ant-checkbox-inner {
+      background: #33F491;
+      border-color: #33F491;
+    }
+
+    &:hover .ant-checkbox-inner {
+      border-color: #33F491;
+    }
+  }
+
+  // Form labels
+  .ant-form-item-label > label {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  // Upload/Dragger
+  .ant-upload-drag {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 2px dashed rgba(255, 255, 255, 0.2) !important;
+
+    &:hover {
+      border-color: #33F491 !important;
+    }
+  }
+}
+
+// Custom paragraph classes
+.paragraph-text {
+  color: $color-white;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  margin: 0 0 $spacing-md 0;
+  
+  &.paragraph-large {
+    font-size: 16px;
+  }
+  
+  &.paragraph-small {
+    font-size: 12px;
+  }
+  
+  &.paragraph-secondary {
+    color: $color-text-secondary;
+  }
+}
+
+// Override deprecated -ms-high-contrast with modern forced-colors
+// This addresses the deprecation warning from Antd's internal CSS
+@media (forced-colors: active) {
+  .ant-form-item-control {
+    display: flex;
+  }
+}
+
+// Custom webkit scrollbar styling
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $color-primary transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-primary;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background: $color-primary-hover;
+  }
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+// Typography System
+h1, h2, .ant-typography h1, .ant-typography h2 {
+  font-family: $font-family !important;
+  font-size: $font-size-h2 !important;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h3, h4, h5, h6, .subtitle-text, .ant-typography h3, .ant-typography h4 {
+  font-family: $font-family !important;
+  font-size: $font-size-subtitle !important;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+p, .paragraph-text, .ant-typography p, body, .ant-typography {
+  font-family: $font-family !important;
+  font-size: $font-size-text !important;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+// Title utility classes
+.title-text {
+  font-family: $font-family !important;
+  font-size: $font-size-title !important;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.subtitle-text {
+  font-family: $font-family !important;
+  font-size: $font-size-subtitle !important;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.text-base, .body-text {
+  font-family: $font-family !important;
+  font-size: $font-size-text !important;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+// Text color utility classes
+.text-secondary-color {
+  color: $color-text-secondary !important;
+}
+
+// Default icon styling
+svg[data-lucide] {
+  color: $color-text-secondary;
+}
+
+// Password input icon styling - override Ant Design defaults
+.ant-input-affix-wrapper .ant-input-suffix,
+.ant-input-password .ant-input-suffix {
+  color: rgba(255, 255, 255, 0.4) !important;
+
+  .anticon {
+    color: rgba(255, 255, 255, 0.4) !important;
+
+    svg {
+      color: rgba(255, 255, 255, 0.4) !important;
+      fill: rgba(255, 255, 255, 0.4) !important;
+    }
+  }
+
+  svg {
+    color: rgba(255, 255, 255, 0.4) !important;
+    fill: rgba(255, 255, 255, 0.4) !important;
+  }
+}
+
+.ant-input-password-icon {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+// Transparent Alert component styles
+.ant-alert {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  &.ant-alert-info {
+    background-color: transparent;
+    border-color: rgba(52, 245, 197, 0.3);
+  }
+
+  &.ant-alert-warning {
+    background-color: transparent;
+    border-color: rgba(234, 179, 8, 0.3);
+  }
+
+  &.ant-alert-error {
+    background-color: transparent;
+    border-color: rgba(255, 64, 128, 0.3);
+  }
+
+  &.ant-alert-success {
+    background-color: transparent;
+    border-color: rgba(52, 245, 197, 0.3);
+  }
+}
+
+// Extended gap utilities
+.gap-4 { gap: 4px; }
+.gap-6 { gap: 6px; }
+.gap-10 { gap: 10px; }
+.gap-20 { gap: 20px; }
+.gap-32 { gap: 32px; }
+
+// Flex utilities
+.flex-1 { flex: 1; }
+.flex-grow { flex-grow: 1; }
+
+// Border radius utilities
+.rounded-8 { border-radius: 8px; }
+.rounded-12 { border-radius: 12px; }
+.rounded-16 { border-radius: 16px; }
+
+// Font size utilities
+.text-12 { font-size: 12px; }
+.text-14 { font-size: 14px; }
+.text-16 { font-size: 16px; }
+.text-18 { font-size: 18px; }
+.text-24 { font-size: 24px; }
+.text-32 { font-size: 32px; }
+.text-48 { font-size: 48px; }
+
+// Color utilities
+.text-white { color: #fff; }
+.text-gray { color: #8c8c8c; }
+.text-muted { color: $color-text-secondary; }
+
+// Width and height utilities
+.w-160 { width: 160px; }
+.w-200 { width: 200px; }
+.w-240 { width: 240px; }
+.w-280 { width: 280px; }
+.w-auto { width: auto; }
+
+.h-auto { height: auto; }
+.min-h-screen { min-height: 100vh; }

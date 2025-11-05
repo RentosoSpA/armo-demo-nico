@@ -1,0 +1,366 @@
+// Z-index hierarchy:
+// 1099: ant-modal-mask
+// 1100: ant-modal-wrap, ant-modal-content
+// 1101: modal-actions container
+// 1102: buttons
+
+.bear-decision-modal {
+  .ant-modal-wrap {
+    z-index: 1100;
+  }
+
+  .ant-modal-content {
+    background: linear-gradient(135deg, rgba(14, 16, 38, 0.85) 0%, rgba(15, 19, 61, 0.9) 100%);
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 24px;
+    padding: 56px 40px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    position: relative;
+    z-index: 1100;
+    pointer-events: auto;
+    animation: modalFadeIn 0.1s ease-out forwards;
+    max-height: 85vh;
+    height:75vh;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .ant-modal-mask {
+    background: rgba(0, 0, 0, 0);
+    animation: fadeIn 0.1s ease-out forwards;
+  }
+
+  .ant-modal-body {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    width: 100%;
+
+    // Ensure DecisionsList takes full height
+    .decisions-list-container {
+      height: 100%;
+      max-width: 100%;
+    }
+
+    /* Custom scrollbar */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(46, 233, 160, 0.25);
+      border-radius: 4px;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+
+      &:hover {
+        background: rgba(46, 233, 160, 0.4);
+        background-clip: padding-box;
+      }
+    }
+
+    h2, p, button {
+      opacity: 0;
+      position: relative;
+      animation: modalContentFadeIn 0.1s 0.05s ease-out forwards;
+    }
+
+    button:nth-child(2) {
+      animation-delay: 0.08s;
+    }
+  }
+
+  // Animated Bear Icon
+  .bear-icon-container {
+    position: relative;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: modalContentFadeIn 0.1s 0.05s ease-out forwards;
+  }
+
+  .bear-icon {
+    width: 140px;
+    height: 140px;
+    background: linear-gradient(135deg, rgba(52, 245, 197, 0.15) 0%, rgba(89, 52, 245, 0.15) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 2px solid rgba(46, 233, 160, 0.3);
+    animation: float 3s ease-in-out infinite;
+    backdrop-filter: blur(8px);
+
+    .bear-emoji {
+      font-size: 72px;
+      animation: wave 2s ease-in-out infinite;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    }
+
+    .bear-glow {
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(circle, rgba(46, 233, 160, 0.4) 0%, transparent 70%);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+      z-index: -1;
+      filter: blur(20px);
+    }
+  }
+
+  // Message
+  .modal-message {
+    text-align: center;
+    max-width: 440px;
+
+    h2 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 20px;
+      line-height: 1.3;
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .count-highlight {
+      font-size: 22px;
+      font-weight: 700;
+      color: #2EE9A0;
+      text-shadow: 0 0 24px rgba(46, 233, 160, 0.7), 0 0 12px rgba(46, 233, 160, 0.4);
+    }
+  }
+
+  // Actions
+  .modal-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 12px;
+    position: relative;
+    z-index: 1101;
+
+    button {
+      padding: 16px 36px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      pointer-events: auto;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      position: relative;
+      z-index: 1102;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg,
+        rgba(46, 233, 160, 1) 0%,
+        rgba(46, 233, 160, 0.85) 50%,
+        rgba(52, 212, 176, 1) 100%);
+      color: #0e1026;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 20px rgba(46, 233, 160, 0.35),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      position: relative;
+      overflow: hidden;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg,
+          rgba(255, 255, 255, 0.2) 0%,
+          transparent 50%);
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 28px rgba(46, 233, 160, 0.5),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+        box-shadow: 0 4px 16px rgba(46, 233, 160, 0.4);
+      }
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.25);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+
+      &:active {
+        background: rgba(255, 255, 255, 0.08);
+      }
+    }
+  }
+
+  // Modal cierra
+  &.morphing {
+    .ant-modal-mask {
+      animation: fadeOut 0.1s ease-out forwards;
+    }
+
+    .ant-modal-content {
+      animation: modalFadeOut 0.1s ease-out forwards;
+    }
+
+    .bear-icon-container {
+      animation: modalContentFadeOut 0.1s ease-out forwards;
+    }
+
+    .modal-content {
+      h2, p, button {
+        animation: modalContentFadeOut 0.1s ease-out forwards;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+
+// Animaciones de entrada
+@keyframes fadeIn {
+  0% {
+    background: rgba(0, 0, 0, 0);
+  }
+  100% {
+    background: rgba(8, 11, 22, 0.85);
+  }
+}
+
+@keyframes modalFadeIn {
+  0% {
+    background: transparent;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    background: linear-gradient(135deg, rgba(14, 16, 38, 0.95) 0%, rgba(15, 19, 61, 0.98) 100%);
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes modalContentFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Animaciones de salida
+@keyframes fadeOut {
+  0% {
+    background: rgba(8, 11, 22, 0.85);
+  }
+  100% {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+@keyframes modalFadeOut {
+  0% {
+    background: linear-gradient(135deg, rgba(14, 16, 38, 0.95) 0%, rgba(15, 19, 61, 0.98) 100%);
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    background: transparent;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes modalContentFadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+

@@ -1,0 +1,79 @@
+@use '../base/variables' as v;
+
+.view-toggle {
+  &.ant-space-compact .ant-btn {
+    background: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: v.$color-text-secondary !important;
+    transition: all 0.2s ease !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    border-radius: 0 !important;
+
+    &:first-child {
+      border-top-left-radius: 8px !important;
+      border-bottom-left-radius: 8px !important;
+    }
+
+    &:last-child {
+      border-top-right-radius: 8px !important;
+      border-bottom-right-radius: 8px !important;
+    }
+
+    &:hover {
+      background: transparent !important;
+      border-color: rgba(255, 255, 255, 0.2) !important;
+      color: v.$color-white !important;
+      box-shadow: none !important;
+    }
+
+    &.ant-btn-primary {
+      background: v.$color-bg-elevated !important;
+      border-color: v.$color-primary !important;
+      color: v.$color-primary !important;
+      box-shadow: none !important;
+
+      &:hover {
+        background: v.$color-bg-elevated !important;
+        border-color: v.$color-primary !important;
+        color: v.$color-primary !important;
+        box-shadow: none !important;
+      }
+    }
+
+    &:focus {
+      background: transparent !important;
+      border-color: v.$color-primary !important;
+      color: v.$color-primary !important;
+      box-shadow: 0 0 0 2px rgba(51, 244, 145, 0.2) !important;
+    }
+
+    &:active {
+      background: transparent !important;
+      border-color: v.$color-primary !important;
+      color: v.$color-primary !important;
+      box-shadow: none !important;
+    }
+
+    &:disabled {
+      background: transparent !important;
+      border-color: rgba(255, 255, 255, 0.05) !important;
+      color: rgba(156, 163, 175, 0.5) !important;
+      box-shadow: none !important;
+    }
+  }
+
+  // Specific styling for property card toggle
+  &.property-card-toggle {
+    width: 100% !important;
+
+    &.ant-space-compact {
+      width: 100% !important;
+      display: flex !important;
+
+      .ant-btn {
+        flex: 1 !important;
+      }
+    }
+  }
+}

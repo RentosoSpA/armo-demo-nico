@@ -1,0 +1,40 @@
+@use '../base/variables' as *;
+
+// Stats cards animations and enhancements
+.ant-statistic {
+  .ant-statistic-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+  }
+
+  .ant-statistic-content-prefix {
+    display: flex;
+    align-items: center;
+  }
+}
+
+// Card hover effects
+.ant-card.glass {
+  transition: all 0.3s ease;
+  cursor: default;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-color: rgba(51, 244, 145, 0.2);
+  }
+}
+
+// Responsive
+@media (max-width: $breakpoint-md) {
+  .ant-statistic {
+    .ant-statistic-content-value {
+      font-size: 24px !important;
+    }
+
+    .ant-statistic-title {
+      font-size: 12px;
+    }
+  }
+}

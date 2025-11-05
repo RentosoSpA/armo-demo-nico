@@ -1,0 +1,261 @@
+@use '../base/variables' as *;
+
+.termometro-progreso {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 32px;
+}
+
+.termometro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.termometro-label {
+  font-size: 15px;
+  color: $color-text-secondary;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.termometro-valores {
+  font-size: 24px;
+  font-weight: 700;
+  color: $color-text;
+
+  .actual {
+    color: #34F5C5;
+    font-size: 28px;
+    text-shadow: 0 0 20px rgba(52, 245, 197, 0.4);
+  }
+}
+
+.termometro-barra-wrapper {
+  position: relative;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: visible;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.termometro-barra {
+  height: 100%;
+  border-radius: 8px;
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: visible;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 4px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 0 8px 8px 0;
+    filter: blur(2px);
+  }
+
+  &.termometro-barra--bajo {
+    background: linear-gradient(90deg, rgba(52, 245, 197, 0) 0%, rgba(52, 245, 197, 0.3) 100%);
+  }
+
+  &.termometro-barra--medio {
+    background: linear-gradient(90deg, rgba(52, 245, 197, 0) 0%, rgba(52, 245, 197, 0.5) 100%);
+  }
+
+  &.termometro-barra--alto {
+    background: linear-gradient(90deg, rgba(52, 245, 197, 0) 0%, rgba(52, 245, 197, 0.8) 100%);
+  }
+
+  &.termometro-barra--completo {
+    background: linear-gradient(90deg, rgba(52, 245, 197, 0) 0%, #34F5C5 100%);
+    animation: pulse-glow 2s infinite;
+  }
+}
+
+@keyframes shimmer {
+  0%, 100% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(52, 245, 197, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(52, 245, 197, 0.8);
+  }
+}
+
+.termometro-porcentaje {
+  display: none; // Ocultar el porcentaje dentro de la barra para diseño minimalista
+}
+
+.termometro-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 24px;
+
+  .termometro-footer-text {
+    font-size: 14px;
+    color: $color-text-secondary;
+    font-weight: 500;
+    text-align: center;
+
+    &:first-child {
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+// === Estilos para la Garrita del Oso Cuidadoso ===
+
+.termometro-barra {
+  // La garrita está dentro de la barra y se mueve con ella
+  .oso-paw-indicator {
+    position: absolute;
+    top: -36px;
+    right: -20px;
+    z-index: 10;
+    animation: paw-bounce 0.6s ease-out;
+
+    .oso-paw-svg {
+      width: 48px;
+      height: 48px;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+      animation: paw-wiggle 2s ease-in-out infinite;
+    }
+
+    &.celebrating {
+      animation: paw-celebrate 0.8s ease-in-out infinite;
+
+      .oso-paw-svg {
+        animation: paw-celebrate-wiggle 0.4s ease-in-out infinite;
+      }
+    }
+  }
+}
+
+// Animación de entrada de la garrita
+@keyframes paw-bounce {
+  0% {
+    transform: translateY(-30px) scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(5px) scale(1.1);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+// Movimiento sutil de la garrita
+@keyframes paw-wiggle {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+// Celebración al llegar al 100%
+@keyframes paw-celebrate {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotate(-15deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(15deg);
+  }
+}
+
+@keyframes paw-celebrate-wiggle {
+  0%, 100% {
+    transform: rotate(-15deg) scale(1);
+  }
+  50% {
+    transform: rotate(15deg) scale(1.2);
+  }
+}
+
+// Confeti de celebración
+.confetti-celebration {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: linear-gradient(135deg, #34F5C5, #FFD700, #FF4080, #a855f7);
+  border-radius: 2px;
+  animation: confetti-burst 1.2s ease-out forwards;
+  animation-delay: var(--delay);
+  opacity: 0;
+}
+
+@keyframes confetti-burst {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(720deg) translateX(60px);
+    opacity: 0;
+  }
+}
+
+// Variaciones de color del confeti
+.confetti-piece:nth-child(1) { background: #34F5C5; }
+.confetti-piece:nth-child(2) { background: #FFD700; }
+.confetti-piece:nth-child(3) { background: #FF4080; }
+.confetti-piece:nth-child(4) { background: #a855f7; }
+.confetti-piece:nth-child(5) { background: #22C55E; }
+.confetti-piece:nth-child(6) { background: #FFC107; }
+.confetti-piece:nth-child(7) { background: #34F5C5; }
+.confetti-piece:nth-child(8) { background: #FFD700; }
+.confetti-piece:nth-child(9) { background: #FF4080; }
+.confetti-piece:nth-child(10) { background: #a855f7; }
+.confetti-piece:nth-child(11) { background: #22C55E; }
+.confetti-piece:nth-child(12) { background: #FFC107; }

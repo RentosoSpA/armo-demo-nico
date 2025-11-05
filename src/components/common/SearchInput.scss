@@ -1,0 +1,75 @@
+@use '../../styles/base/_variables' as *;
+
+.custom-search-input {
+  display: inline-block;
+  
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(12px) saturate(120%);
+    -webkit-backdrop-filter: blur(12px) saturate(120%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    &:focus-within {
+      border-color: rgb(var(--lg-primary));
+      box-shadow: 0 0 0 3px rgba(var(--lg-primary), 0.15);
+      background: rgba(255, 255, 255, 0.10);
+    }
+    
+    .search-icon {
+      color: $color-text-secondary;
+      font-size: 16px;
+      padding: $spacing-sm;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: $color-text;
+      }
+    }
+    
+    .search-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: $color-text;
+      font-family: $font-family;
+      font-size: $font-size-base;
+      padding: $spacing-sm $spacing-md $spacing-sm 0;
+      
+      &::placeholder {
+        color: $color-text-secondary;
+        opacity: 1;
+      }
+      
+      &::-webkit-input-placeholder {
+        color: $color-text-secondary;
+      }
+      
+      &::-moz-placeholder {
+        color: $color-text-secondary;
+        opacity: 1;
+      }
+      
+      &:-ms-input-placeholder {
+        color: $color-text-secondary;
+      }
+      
+      &::-ms-input-placeholder {
+        color: $color-text-secondary;
+      }
+    }
+  }
+}

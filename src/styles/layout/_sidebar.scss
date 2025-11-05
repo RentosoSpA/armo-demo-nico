@@ -1,0 +1,86 @@
+@use '../base/variables' as *;
+@use '../utils/mixins' as *;
+
+.custom-sider {
+  background: transparent;
+  border-right: 1px solid rgba(255, 255, 255, 0.12);
+  position: relative;
+  z-index: 1;
+  
+  &__logo {
+    @include flex-center;
+    height: 64px;
+    border-bottom: 1px solid $color-border;
+    font-size: 18px;
+    font-weight: 600;
+    color: $color-primary;
+  }
+  
+  .ant-menu {
+    background-color: transparent;
+    border: none;
+
+    &-item {
+      color: $color-text;
+      margin: $spacing-xs $spacing-sm;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: $color-primary;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      &-selected {
+        background: rgba(52, 245, 197, 0.15);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        color: $color-primary;
+        border: 1px solid rgba(52, 245, 197, 0.3);
+        box-shadow: 0 4px 16px rgba(52, 245, 197, 0.2);
+
+        &::after {
+          display: none;
+        }
+      }
+      
+      .ant-menu-item-icon {
+        font-size: 16px;
+      }
+    }
+    
+    &-submenu {
+      margin: $spacing-xs $spacing-sm;
+      border-radius: 12px;
+
+      &-title {
+        color: $color-text;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          color: $color-primary;
+        }
+      }
+
+      &-arrow {
+        color: $color-text-secondary;
+      }
+
+      .ant-menu {
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 8px;
+        margin: $spacing-xs 0;
+        padding: $spacing-xs 0;
+      }
+    }
+  }
+}

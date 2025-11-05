@@ -1,0 +1,154 @@
+@use '../base/variables' as *;
+
+// Calendar grid layout styles
+
+.calendarLayout { 
+  display: grid; 
+  grid-template-columns: 1fr 2fr; 
+  gap: 18px; 
+}
+
+.calendarSubheader {
+  grid-column: 1 / -1;
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center;
+  margin: 8px 0 8px;
+}
+
+.calendarDate {
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  text-transform: capitalize;
+}
+
+.calendarLegend {
+  display: flex;
+  gap: 16px;
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #9ca3af;
+  }
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    
+    &.dot--pagado {
+      background-color: #10B981;
+    }
+    
+    &.dot--pcc {
+      background-color: #F59E0B;
+    }
+    
+    &.dot--atrasado {
+      background-color: #EF4444;
+    }
+  }
+}
+
+.leftPanel {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - var(--topbar-h,64px) - var(--page-title-h,88px));
+  border-radius: var(--radius-lg);
+  background: var(--card-bg);
+  padding: 16px;
+}
+
+.visitasPanel { 
+  flex: 0 0 auto; 
+}
+
+.notificaciones {
+  flex: 1 1 auto;
+  min-height: 0;           /* clave para que el scroll funcione */
+  overflow-y: auto;        /* scroll interno */
+  padding-bottom: 12px;
+}
+
+// Desktop styles (>=1024px) - fixed heights and card styling
+@media (min-width: 1024px) {
+  .visitasPanel {
+    height: 300px;
+    background: $color-bg-container;
+    border-radius: 20px;
+    border: 1px solid var(--color-border, #243447);
+    padding: 16px;
+    overflow-y: auto;
+  }
+
+  .notificaciones {
+    background: $color-bg-container;
+    border-radius: 20px;
+    border: 1px solid var(--color-border, #243447);
+    padding: 16px;
+    margin-top: 16px;
+    overflow-y: auto;
+    flex: 1 1 auto;
+    min-height: 0;
+  }
+}
+
+.calendarCard { 
+  min-width: 0;           /* evita recorte del calendario */
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 0;
+}
+
+.calendarCard * { 
+  max-width: 100%; 
+}
+
+.calendarInner { 
+  width: 100%; 
+  overflow: hidden;
+}
+
+.calendarCard {
+  .cal-card__header {
+    padding: 16px 24px;
+    border-bottom: 1px solid #374151;
+  }
+  
+  .cal-card__body {
+    padding: 16px 24px;
+    height: calc(100% - 80px);
+  }
+}
+
+// Evitar solaparse con el widget flotante ("Habla con Rentoso")
+@media (min-width: 768px) {
+  .leftPanel { 
+    padding-bottom: 48px; 
+  }
+}
+
+// Tablet responsive (<=1024px) - apilar y quitar min-height fijo
+@media (max-width: 1024px) {
+  .calendarLayout { 
+    grid-template-columns: 1fr; 
+  }
+  
+  .calendarSubheader { 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 8px; 
+  }
+  
+  .leftPanel { 
+    min-height: auto; 
+  }
+  
+  .calendarCard {
+    min-height: 500px;
+  }
+}

@@ -1,0 +1,16 @@
+@use '../../styles/base/variables' as *;
+@use '../../styles/utils/mixins' as *;
+
+.view-edit-toggle-example {
+  padding: 20px;
+
+  .example-title {
+    color: #ffffff;
+    margin-bottom: 16px;
+  }
+
+  .example-mode-display {
+    margin-top: 16px;
+    color: #ffffff;
+  }
+}

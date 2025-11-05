@@ -1,0 +1,101 @@
+// Liquid Glass CSS Variables (defined in :root)
+:root {
+  /* Base colors */
+  --bg: #080b16;
+  --fg: 255 255 255;
+  --muted: 255 255 255 / 0.7;
+
+  /* Brand */
+  --brand: #28e0b9;
+  --brand-strong: rgba(40, 224, 185, 0.9);
+  --fg-primary: #e8edf7;
+  --fg-muted: #a9b4c7;
+  --danger: #ef4444;
+
+  /* Liquid glass primary */
+  --lg-primary: 52 245 197;
+  --lg-accent-1: 89 52 245;
+  --lg-accent-2: 18 204 255;
+  --lg-accent-3: 255 64 128;
+
+  /* Glass surfaces */
+  --glass-bg: 255 255 255 / 0.10;
+  --glass-border: 255 255 255 / 0.16;
+  --glass-inner: 255 255 255 / 0.10;
+  --glass-1: rgba(14, 16, 38, 0.45);
+  --glass-2: rgba(14, 16, 38, 0.55);
+  --glass-3: rgba(14, 16, 38, 0.70);
+  --glass-ring: rgba(99, 102, 241, 0.35);
+
+  /* Shadows and blur */
+  --shadow-lg: 0 12px 50px rgba(0, 0, 0, 0.35);
+  --shadow-1: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-2: 0 12px 32px rgba(0, 0, 0, 0.35);
+  --blur-strong: 24px;
+  --blur-soft: 12px;
+
+  /* Ring/aurora */
+  --ring: 255 255 255 / 0.10;
+
+  /* Aurora colors */
+  --aurora-1: #28e0b9;
+  --aurora-2: #7c8cff;
+  --aurora-3: #21d4fd;
+  --aurora-4: #b16cea;
+}
+
+// SCSS Variables (hex for SASS compilation compatibility)
+$color-primary: #34F5C5;
+$color-primary-hover: #45f6ce;
+$color-primary-active: #2ad4b0;
+$color-white: #ffffff;
+
+// Background Colors
+$color-bg-container: #080b16;
+$color-bg-elevated: #080b16;
+$color-bg-common-card: rgba(255, 255, 255, 0.10);
+
+// Text Colors
+$color-text: #ffffff;
+$color-text-secondary: rgba(255, 255, 255, 0.7);
+$color-text-dark: #222222;
+
+// Border Colors
+$color-border: rgba(255, 255, 255, 0.16);
+
+// Status Colors
+$color-success: #34F5C5;
+$color-warning: #EAB308;
+$color-error: #FF4080;
+
+// Bear Colors
+$color-bear-curioso: #12CCFF;
+$color-bear-cauteloso: #34F5C5;
+$color-bear-notarioso: #D4AF37;
+$color-bear-cuidadoso: #5934F5;
+
+// Typography
+$font-family: 'Poppins', sans-serif;
+$font-size-base: 14px;
+$line-height-base: 1.5;
+
+// Typography Scale
+$font-size-text: 14px;
+$font-size-subtitle: 18px;
+$font-size-title: 24px;
+$font-size-h2: 24px;
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-xxl: 48px;
+
+// Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1600px;

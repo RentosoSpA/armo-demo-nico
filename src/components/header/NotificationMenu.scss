@@ -1,0 +1,91 @@
+@use '../../styles/base/variables' as *;
+@use '../../styles/utils/mixins' as *;
+
+.notification-menu-card {
+  width: 340px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+
+  .notification-menu-body {
+    padding: 0;
+  }
+
+  .notification-header {
+    padding: 16px 20px 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .notification-title {
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .mark-read-button {
+      padding: 0;
+      font-weight: 500;
+      color: var(--color-primary);
+    }
+  }
+
+  .notification-divider {
+    margin: 0;
+
+    &.footer-divider {
+      margin-top: 4px;
+    }
+  }
+
+  .notification-body {
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    min-height: 120px;
+
+    .notification-item-card {
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #0f133d;
+      }
+
+      :global(.ant-card-body) {
+        padding: 12px 8px;
+        transition: background 0.2s;
+      }
+
+      .notification-title-text {
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .notification-description {
+        color: #888;
+        font-size: 13px;
+        margin: 2px 0;
+      }
+
+      .notification-time {
+        font-size: 12px;
+      }
+    }
+
+    .notification-empty {
+      font-size: 13px;
+    }
+  }
+
+  .notification-footer {
+    padding: 8px 20px 16px 20px;
+    text-align: center;
+
+    .view-all-button {
+      padding: 0;
+      font-weight: 500;
+      color: var(--color-primary);
+    }
+  }
+}

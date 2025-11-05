@@ -1,0 +1,279 @@
+@use '../base/variables' as *;
+
+// Propiedades Header Styles
+#propiedades-header {
+  margin-bottom: 24px;
+}
+
+.propiedades-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.propiedades-subtitle {
+  margin-bottom: 8px;
+}
+
+// Filter Select Styles
+.filter-select-gray {
+  width: 100%;
+
+  &.ant-select-borderless {
+    .ant-select-selector {
+      color: #9CA3AF !important;
+      background: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .ant-select-selection-placeholder,
+    .ant-select-selection-item {
+      color: #9CA3AF !important;
+      padding: 0 !important;
+    }
+
+    .ant-select-clear {
+      color: #9CA3AF;
+      position: static;
+    }
+  }
+}
+
+.filter-select-dropdown {
+  .ant-select-item-option {
+    color: #9CA3AF;
+    background-color: #1b2a3a;
+
+    &:hover {
+      background-color: #2a3f4f;
+      color: #ffffff;
+    }
+
+    &-selected {
+      background-color: #33F491;
+      color: #222222;
+    }
+  }
+}
+
+.agregar-propiedad-btn {
+  &:hover {
+    color: #000000 !important;
+  }
+}
+
+// Propiedades Card Styles
+.propiedades-table-container {
+  overflow-x: auto;
+}
+
+// Property Card View Styles
+.property-card-toggle {
+  width: 100%;
+  padding: 0 8px;
+}
+
+.property-header-flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.property-header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.property-icons-group {
+  display: flex;
+  gap: 8px;
+}
+
+.property-icon-clickable {
+  cursor: pointer;
+}
+
+.property-empty-state {
+  text-align: center;
+  padding: 60px 20px;
+
+  .ant-typography {
+    color: #9CA3AF;
+  }
+}
+
+.property-empty-icon {
+  font-size: 48px;
+  color: #9CA3AF;
+  margin-bottom: 16px;
+}
+
+// Property Ficha Styles
+.property-ficha-header {
+  margin-bottom: 24px;
+  border-radius: 12px;
+}
+
+.property-ficha-title {
+  font-size: 24px !important;
+  margin: 0;
+}
+
+.property-ficha-address {
+  font-size: 16px;
+}
+
+.property-ficha-actions-space {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: flex-start;
+}
+
+// Common margin utilities
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-8 {
+  margin-bottom: 8px;
+}
+
+.mb-12 {
+  margin-bottom: 12px;
+}
+
+.mb-16 {
+  margin-bottom: 16px;
+}
+
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mt-8 {
+  margin-top: 8px;
+}
+
+.mt-16 {
+  margin-top: 16px;
+}
+
+.mt-24 {
+  margin-top: 24px;
+}
+
+// Form styles
+.form-section-title {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.form-full-width {
+  width: 100%;
+}
+
+.form-text-center {
+  text-align: center;
+}
+
+.form-steps-container {
+  margin-bottom: 32px;
+}
+
+// Modal styles
+.modal-footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+// Overflow utilities
+.overflow-auto {
+  overflow: auto;
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
+// Display utilities
+.d-flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-8 {
+  gap: 8px;
+}
+
+.gap-12 {
+  gap: 12px;
+}
+
+.gap-16 {
+  gap: 16px;
+}
+
+// Property estado footer
+.property-estado-footer {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+// Property status overlay
+.property-status-overlay {
+  position: relative;
+  z-index: 10;
+
+  .info-modal-wrapper {
+    z-index: 10001;
+    position: relative;
+  }
+
+  .info-modal-tooltip {
+    z-index: 10002;
+  }
+}
+
+// Property status select in overlay
+.property-status-select {
+  width: auto;
+
+  .ant-select-selector {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .ant-select-selection-item {
+    padding: 0 !important;
+  }
+
+  .ant-select-arrow {
+    display: none;
+  }
+}

@@ -1,0 +1,392 @@
+@use '../base/variables' as *;
+
+.comisiones-rentabilidad {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              0 0 40px rgba(168, 85, 247, 0.1);
+  padding: 48px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(168, 85, 247, 0.6) 20%,
+      rgba(168, 85, 247, 0.8) 50%,
+      rgba(168, 85, 247, 0.6) 80%,
+      transparent 100%
+    );
+    border-radius: 20px 20px 0 0;
+  }
+}
+
+.comisiones-header {
+  margin-bottom: $spacing-xl;
+  padding-bottom: $spacing-lg;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid #34F5C5;
+  padding-left: $spacing-lg;
+  
+  h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-text;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.comisiones-subtitle {
+  font-size: 16px;
+  color: $color-text-secondary;
+  
+  strong {
+    color: #34F5C5;
+    font-weight: 600;
+  }
+}
+
+.comisiones-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-lg;
+  margin: $spacing-xl 0;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  padding: $spacing-md;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.stat-label {
+  font-size: 13px;
+  color: $color-text-secondary;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: $color-text;
+}
+
+.comisiones-grafico {
+  margin: $spacing-xl 0;
+  padding: $spacing-lg;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $color-text;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.top3-ranking {
+  margin: $spacing-xl 0;
+  
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $color-text;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.top3-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: $spacing-md;
+}
+
+.top3-card {
+  padding: $spacing-lg;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.25s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    border-color: #34F5C5;
+    box-shadow: 0 8px 24px rgba(52, 245, 197, 0.2);
+  }
+}
+
+.top3-medalla {
+  font-size: 48px;
+  margin-bottom: $spacing-sm;
+}
+
+.top3-nombre {
+  font-size: 14px;
+  color: $color-text;
+  margin-bottom: $spacing-xs;
+  font-weight: 500;
+}
+
+.top3-monto {
+  font-size: 20px;
+  font-weight: 700;
+  color: #34F5C5;
+}
+
+.comisiones-tabla {
+  margin-top: $spacing-xl;
+  
+  h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: $color-text;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+.tabla-comisiones-container {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: $spacing-lg;
+  overflow-x: auto;
+}
+
+.tabla-comisiones {
+  .ant-table {
+    background: transparent;
+  }
+
+  .ant-table-thead > tr > th {
+    background: rgba(255, 255, 255, 0.06);
+    color: $color-text;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+  }
+
+  .ant-table-tbody > tr > td {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    color: $color-text;
+    transition: all 0.25s ease-out;
+  }
+
+  .ant-table-tbody > tr {
+    transition: all 0.25s ease-out;
+
+    &:hover > td {
+      background: rgba(168, 85, 247, 0.08);
+      backdrop-filter: blur(8px);
+      transform: translateX(4px);
+    }
+  }
+}
+
+// Pills de estado para reemplazar íconos
+.comision-estado-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+
+  &.estado-pagado {
+    background: linear-gradient(135deg, rgba(52, 245, 197, 0.2), rgba(34, 197, 94, 0.2));
+    color: #34F5C5;
+    border: 1px solid rgba(52, 245, 197, 0.3);
+  }
+
+  &.estado-pendiente {
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.2), rgba(234, 179, 8, 0.2));
+    color: #FACC15;
+    border: 1px solid rgba(250, 204, 21, 0.3);
+  }
+
+  &.estado-atrasado {
+    background: linear-gradient(135deg, rgba(255, 64, 128, 0.2), rgba(239, 68, 68, 0.2));
+    color: #FF4080;
+    border: 1px solid rgba(255, 64, 128, 0.3);
+  }
+}
+
+.tabla-comisiones-link {
+  color: #34F5C5;
+  cursor: pointer;
+  
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.tabla-comisiones-monto {
+  font-weight: 600;
+  color: $color-text;
+}
+
+.tabla-comisiones-tipo {
+  text-transform: capitalize;
+}
+
+// Estilos Compactos
+.comisiones-compact {
+  .comisiones-summary {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .comisiones-total-card {
+    flex: 1;
+    min-width: 200px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(168, 85, 247, 0.05));
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .comisiones-total-label {
+      font-size: 13px;
+      color: $color-text-secondary;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .comisiones-total-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: #a855f7;
+      text-shadow: 0 0 20px rgba(168, 85, 247, 0.3);
+    }
+  }
+
+  .comisiones-stats-mini {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .stat-mini {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .stat-mini-label {
+      font-size: 12px;
+      color: $color-text-secondary;
+      font-weight: 500;
+    }
+
+    .stat-mini-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: $color-text;
+    }
+  }
+
+  .comisiones-top3-compact {
+    .comisiones-top3-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: $color-text;
+      margin-bottom: 16px;
+    }
+
+    .top3-list-compact {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .top3-item-compact {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s ease-out;
+
+      &:hover {
+        background: rgba(168, 85, 247, 0.08);
+        border-color: rgba(168, 85, 247, 0.3);
+        transform: translateX(4px);
+      }
+
+      .top3-rank {
+        font-size: 28px;
+      }
+
+      .top3-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .top3-nombre {
+          font-size: 14px;
+          font-weight: 600;
+          color: $color-text;
+        }
+
+        .top3-monto {
+          font-size: 16px;
+          font-weight: 700;
+          color: #a855f7;
+        }
+      }
+    }
+  }
+
+  .btn-ver-todas {
+    width: 100%;
+    padding: 12px;
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    color: #a855f7;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+
+    &:hover {
+      background: rgba(168, 85, 247, 0.2);
+      transform: translateY(-2px);
+    }
+  }
+}

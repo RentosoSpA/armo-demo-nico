@@ -1,0 +1,39 @@
+@use '../../styles/base/variables' as *;
+@use '../../styles/utils/mixins' as *;
+
+.rapid-access-item-card {
+  width: 100%;
+  height: 100%;
+  border: none;
+
+  .rapid-access-item-body {
+    padding: 12px;
+  }
+
+  .rapid-access-icon-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E5FFD7;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+  }
+
+  .rapid-access-content-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+
+    .rapid-access-title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .rapid-access-description {
+      font-size: 14px;
+    }
+  }
+}

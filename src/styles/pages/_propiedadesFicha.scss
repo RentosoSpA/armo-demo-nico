@@ -1,0 +1,425 @@
+@use '../base/variables' as *;
+
+.propiedades-ficha-page {
+  min-height: 100vh;
+  background: $color-bg-container;
+  padding: 0;
+
+  .ficha-back-button {
+    padding: $spacing-lg $spacing-xl;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    .btn-back-ficha {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      color: $color-text;
+      border-radius: 12px;
+      padding: $spacing-sm $spacing-lg;
+      transition: all 0.3s ease-out;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateX(-4px);
+      }
+    }
+  }
+
+  .ficha-main-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    height: calc(100vh - 80px);
+    overflow: hidden;
+  }
+
+  .ficha-images-column {
+    background: rgba(255, 255, 255, 0.02);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    padding: $spacing-lg;
+    overflow-y: auto;
+
+    .modern-card {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+
+      .ant-card-body {
+        padding: 0 !important;
+      }
+
+      h4 {
+        display: none;
+      }
+    }
+
+    .property-images-carousel {
+      margin-top: 0;
+    }
+  }
+
+  .ficha-info-column {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: $color-bg-container;
+
+    .property-ficha-header {
+      margin-bottom: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 0;
+      background: rgba(255, 255, 255, 0.03);
+
+      .ant-card-body {
+        padding: $spacing-lg $spacing-xl !important;
+      }
+    }
+  }
+
+  .ficha-tabs-container {
+    display: flex;
+    gap: $spacing-xs;
+    padding: $spacing-md $spacing-xl;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba($color-primary, 0.25);
+      border-radius: 2px;
+
+      &:hover {
+        background: rgba($color-primary, 0.4);
+      }
+    }
+  }
+
+  .ficha-tab {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    padding: $spacing-sm $spacing-md;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: $color-text-secondary;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    white-space: nowrap;
+    font-family: $font-family;
+
+    span {
+      font-size: 16px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: $color-text;
+    }
+
+    &.active {
+      background: linear-gradient(135deg, rgba($color-primary, 0.15), rgba($color-primary, 0.05));
+      border-color: rgba($color-primary, 0.3);
+      color: $color-primary;
+      box-shadow: 0 4px 12px rgba($color-primary, 0.2);
+    }
+  }
+
+  .ficha-content-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: $spacing-xl;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba($color-primary, 0.25);
+      border-radius: 5px;
+
+      &:hover {
+        background: rgba($color-primary, 0.4);
+      }
+    }
+  }
+
+  .property-ficha-header {
+    margin-bottom: 0;
+  }
+
+  // Ensure all cards have proper padding - with !important to override
+  .modern-card {
+    .ant-card-body {
+      padding: $spacing-lg !important;
+    }
+
+    .ant-card-head {
+      padding: $spacing-lg $spacing-lg !important;
+    }
+
+    // Title spacing
+    h4.ant-typography {
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  // Property details table styling
+  .ant-descriptions {
+    background: transparent;
+
+    .ant-descriptions-item-label,
+    .ant-descriptions-item-content {
+      padding: $spacing-md !important;
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .ant-descriptions-item-label {
+      font-weight: 500;
+      color: $color-white !important;
+    }
+
+    .ant-descriptions-item-content {
+      color: $color-white !important;
+    }
+  }
+
+  // Fix any black text in cards
+  .modern-card {
+    h4, h3, h2, h1 {
+      color: $color-white !important;
+    }
+
+    p, span, div {
+      color: $color-white !important;
+    }
+
+    .ant-typography {
+      color: $color-white !important;
+    }
+  }
+
+  // Amenities section text
+  .ant-card-body {
+    color: $color-text-secondary !important;
+
+    p {
+      color: $color-text-secondary !important;
+    }
+  }
+
+  // Contact section buttons spacing
+  .ant-space-vertical {
+    width: 100%;
+  }
+
+  // Map container
+  .ant-card:has(iframe) {
+    .ant-card-body {
+      padding: 0 !important;
+    }
+  }
+
+  // Tag styling - transparent background with colored border
+  .ant-tag {
+    background: transparent !important;
+    border: 1px solid !important;
+    color: inherit !important;
+
+    &.ant-tag-green {
+      border-color: #52c41a !important;
+      color: #52c41a !important;
+    }
+
+    &.ant-tag-orange {
+      border-color: #fa8c16 !important;
+      color: #fa8c16 !important;
+    }
+
+    &.ant-tag-blue {
+      border-color: #1890ff !important;
+      color: #1890ff !important;
+    }
+
+    &.ant-tag-red {
+      border-color: #f5222d !important;
+      color: #f5222d !important;
+    }
+
+    &.ant-tag-default {
+      border-color: rgba(255, 255, 255, 0.3) !important;
+      color: $color-white !important;
+    }
+  }
+
+  // Responsive
+  @media (max-width: $breakpoint-lg) {
+    .ficha-main-layout {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+
+    .ficha-images-column {
+      border-right: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      max-height: 50vh;
+    }
+
+    .ficha-info-column {
+      min-height: 50vh;
+    }
+  }
+
+  // Stat cards styling
+  .stat-card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: $spacing-md;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .ant-card-body {
+      padding: 0;
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    .ficha-back-button {
+      padding: $spacing-md;
+    }
+
+    .ficha-tabs-container {
+      padding: $spacing-sm $spacing-md;
+      gap: $spacing-xs;
+    }
+
+    .ficha-tab {
+      font-size: 12px;
+      padding: $spacing-xs $spacing-sm;
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+    .ficha-content-scroll {
+      padding: $spacing-lg;
+    }
+
+    .property-ficha-header {
+      .ant-card-body {
+        padding: $spacing-md !important;
+      }
+    }
+  }
+
+  // Edit mode styles
+  .property-header-edit {
+    padding: $spacing-lg $spacing-xl;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+
+    .editable-title {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 12px;
+      padding: $spacing-md $spacing-lg;
+      color: $color-text;
+      font-size: 24px;
+      font-weight: 700;
+      font-family: $font-family;
+      transition: all 0.3s ease-out;
+
+      &:focus {
+        outline: none;
+        border-color: rgba($color-primary, 0.5);
+        box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+      }
+
+      &::placeholder {
+        color: $color-text-secondary;
+      }
+    }
+  }
+
+  .edit-section {
+    h3 {
+      color: $color-text;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: $spacing-lg;
+      font-family: $font-family;
+    }
+
+    .ant-form-item-label > label {
+      color: $color-text !important;
+      font-weight: 500;
+    }
+
+    .ant-form-item {
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  .edit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-lg;
+  }
+
+  .edit-input,
+  .edit-textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    padding: $spacing-sm $spacing-md;
+    color: $color-text;
+    font-size: 14px;
+    font-family: $font-family;
+    transition: all 0.3s ease-out;
+
+    &:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba($color-primary, 0.5);
+      box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+    }
+
+    &::placeholder {
+      color: $color-text-secondary;
+    }
+  }
+
+  .edit-textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+}

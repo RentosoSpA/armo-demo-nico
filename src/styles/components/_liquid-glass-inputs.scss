@@ -1,0 +1,342 @@
+@use '../base/variables' as *;
+
+// Unified input/select/textarea styles for Liquid Glass
+.liquid-input,
+.liquid-select,
+.liquid-textarea {
+  width: 100%;
+  border-radius: 0.75rem;
+  background: rgba(11, 15, 31, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1rem;
+  font-size: 15px;
+  color: var(--fg-primary);
+  font-family: $font-family;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  &:hover {
+    background: rgba(11, 15, 31, 0.8);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 4px 16px rgba(52, 245, 197, 0.2), 0 0 0 2px rgba(52, 245, 197, 0.1);
+    border-color: rgba(52, 245, 197, 1);
+    background: rgba(11, 15, 31, 0.9);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  &[aria-invalid="true"] {
+    box-shadow: 0 0 0 2px rgba(var(--danger), 0.6);
+    border-color: rgba(var(--danger), 0.4);
+  }
+}
+
+// Select specific styling for native select elements (not Ant Design)
+select.liquid-select {
+  appearance: none;
+  padding-right: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23e8edf7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1.25rem;
+}
+
+// Label styling
+.liquid-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(var(--fg-primary), 0.9);
+  margin-bottom: 0.5rem;
+
+  .required {
+    color: var(--brand);
+    margin-left: 0.25rem;
+  }
+}
+
+// Form item wrapper
+.liquid-form-item {
+  margin-bottom: 1rem;
+}
+
+// Ant Design overrides for liquid glass inputs
+.ant-input:not(textarea),
+.ant-input-number,
+.ant-picker {
+  @extend .liquid-input;
+  height: 48px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
+
+// Ant Design Select specific styling with high specificity to override _forms.scss
+.ant-select.liquid-select {
+  // Remove any potential background/border from the wrapper
+  background: transparent;
+  border: none;
+  position: relative;
+
+  .ant-select-selector {
+    width: 100%;
+    border-radius: 0.5rem;
+    background: rgba(11, 15, 31, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 0 2.5rem 0 1rem;
+    font-size: 15px;
+    color: var(--fg-primary);
+    font-family: $font-family;
+    transition: all 0.2s ease;
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    // Remove any pseudo-elements
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  .ant-select-selection-search {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .ant-select-selection-placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 48px;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-select-selection-item {
+    color: var(--fg-primary);
+    line-height: 48px;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &:hover .ant-select-selector {
+    background: rgba(11, 15, 31, 0.8);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  &.ant-select-focused .ant-select-selector {
+    outline: none;
+    box-shadow: 0 4px 16px rgba(52, 245, 197, 0.2), 0 0 0 2px rgba(52, 245, 197, 0.1);
+    border-color: rgba(52, 245, 197, 1);
+    background: rgba(11, 15, 31, 0.9);
+  }
+
+  &.ant-select-disabled .ant-select-selector {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .ant-select-arrow {
+    color: var(--fg-primary);
+    pointer-events: none;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.5rem;
+
+    .anticon {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+// Override _forms.scss for liquid-select with higher specificity
+.ant-form .ant-select.liquid-select {
+  background: transparent;
+  border: none;
+
+  .ant-select-selector {
+    min-height: 48px;
+    max-height: 48px;
+    height: 48px;
+    padding: 0 1rem;
+    border-radius: 0.5rem;
+    background: rgba(11, 15, 31, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+  }
+}
+
+// Global fix for all Select arrow icons alignment
+.ant-select {
+  .ant-select-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin-right: 0.5rem;
+  }
+}
+
+.ant-form-item-label > label {
+  @extend .liquid-label;
+}
+
+// Ant Design Input Number specific
+.ant-input-number {
+  width: 100%;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+
+  .ant-input-number-input {
+    background: transparent;
+    border: none;
+    color: var(--fg-primary);
+    height: 100%;
+  }
+
+  .ant-input-number-input-wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .ant-input-number-handler-wrap {
+    opacity: 1;
+    height: 100%;
+  }
+}
+
+// Ant Design Select dropdown
+.ant-select-dropdown {
+  background: var(--glass-3);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-2);
+
+  .ant-select-item {
+    color: var(--fg-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.5rem 0.75rem;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &-option-selected {
+      background: rgba(var(--lg-primary), 0.15);
+      font-weight: 500;
+    }
+  }
+}
+
+// Ant Design Modal overrides
+.ant-modal {
+  .ant-modal-content {
+    background: var(--glass-3);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.25rem;
+    box-shadow: var(--shadow-2);
+    padding: 1.5rem;
+  }
+
+  .ant-modal-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .ant-modal-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--fg-primary);
+    letter-spacing: -0.01em;
+  }
+
+  .ant-modal-close {
+    color: var(--fg-primary);
+    padding: 0.5rem;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 2px;
+    }
+
+    .ant-modal-close-x {
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .ant-modal-body {
+    color: var(--fg-primary);
+  }
+
+  .ant-modal-footer {
+    border-top: none;
+    margin-top: 1.5rem;
+    padding-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    background: transparent;
+  }
+}
+
+// Backdrop
+.ant-modal-mask {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}

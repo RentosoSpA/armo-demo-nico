@@ -1,0 +1,13 @@
+project_id = "xyuyvtqmwjeklmxrmyed"
+
+[functions.rentoso-workspace-chat]
+verify_jwt = true
+
+[functions.rentoso-chat]
+verify_jwt = false
+
+[functions.transcribe-audio]
+verify_jwt = false
+
+[functions.submit-property]
+verify_jwt = false

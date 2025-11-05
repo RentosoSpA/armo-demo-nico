@@ -1,0 +1,150 @@
+@use './base/variables' as v;
+
+:root {
+  --color-bear-curioso: #{v.$color-bear-curioso};
+  --color-bear-cauteloso: #{v.$color-bear-cauteloso};
+  --color-bear-notarioso: #{v.$color-bear-notarioso};
+  --color-bear-cuidadoso: #{v.$color-bear-cuidadoso};
+  --color-primary: #{v.$color-primary};
+}
+
+.bear-stat-card {
+  display: flex;
+  align-items: center;
+  padding: v.$spacing-lg;
+  border-radius: 20px;
+  background: v.$color-bg-common-card;
+  border: 2px solid transparent;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  min-height: 120px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  
+  &.clickable {
+    cursor: pointer;
+  }
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--bear-color);
+  }
+  
+  // Decorative corner element
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(30px, -30px);
+  }
+  
+  .bear-stat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    margin-right: v.$spacing-md;
+    flex-shrink: 0;
+    
+    span {
+      font-size: 24px;
+      filter: brightness(1.2);
+    }
+  }
+  
+  .bear-stat-content {
+    flex: 1;
+    
+    .bear-stat-caption {
+      font-size: 12px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      font-family: v.$font-family;
+      margin-bottom: v.$spacing-xs;
+      font-style: italic;
+    }
+    
+    .bear-stat-value {
+      font-size: 28px;
+      font-weight: 700;
+      color: v.$color-white;
+      font-family: v.$font-family;
+      line-height: 1.2;
+      margin-bottom: v.$spacing-xs;
+    }
+    
+    .bear-stat-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      font-family: v.$font-family;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: v.$breakpoint-md) {
+  .bear-stat-card {
+    padding: v.$spacing-md;
+    min-height: 80px;
+    
+    .bear-stat-icon {
+      width: 50px;
+      height: 50px;
+      margin-right: 12px;
+      
+      span {
+        font-size: 20px;
+      }
+    }
+    
+    .bear-stat-content {
+      .bear-stat-value {
+        font-size: 24px;
+      }
+      
+      .bear-stat-label {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .bear-stat-card {
+    padding: v.$spacing-md;
+    min-height: 70px;
+    
+    .bear-stat-icon {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+      
+      span {
+        font-size: 18px;
+      }
+    }
+    
+    .bear-stat-content {
+      .bear-stat-value {
+        font-size: 20px;
+      }
+      
+      .bear-stat-label {
+        font-size: 11px;
+      }
+    }
+  }
+}

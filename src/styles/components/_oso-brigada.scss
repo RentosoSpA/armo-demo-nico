@@ -1,0 +1,146 @@
+@use '../base/variables' as *;
+
+.oso-brigada {
+  .brigada-header {
+    margin-bottom: 24px;
+
+    .brigada-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: $color-text;
+      margin-bottom: 8px;
+      font-family: $font-family;
+    }
+
+    .brigada-subtitle {
+      color: $color-text-secondary;
+      font-family: $font-family;
+    }
+  }
+  .brigada-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing-lg;
+    width: 100%;
+    margin: 24px 0;
+    
+    // Cuando hay una tarjeta expandida, ajustar el layout
+    &.has-expanded {
+      // Las tarjetas colapsadas se hacen más opacas
+      .oso-flip-card:not(.expanded) {
+        opacity: 0.4;
+        pointer-events: none;
+      }
+    }
+
+    // Responsive breakpoints
+    @media (max-width: $breakpoint-lg) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+  }
+
+  .oso-card {
+    background: $color-bg-container;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    height: 100%;
+
+    &:hover {
+      box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+    }
+
+    .card-content {
+      text-align: center;
+      width: 100%;
+      padding: 24px 16px;
+    }
+
+    .bear-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 36px;
+      line-height: normal;
+      margin: 0 auto 20px auto;
+    }
+
+    .card-title {
+      margin-bottom: 20px;
+
+      .title-content {
+        text-align: center;
+
+        .title-text {
+          font-size: 18px;
+          font-weight: 600;
+          line-height: 1.3;
+          color: $color-text;
+          font-family: $font-family;
+
+          .title-line {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            .info-icon {
+              margin-left: 8px;
+              color: $color-text-secondary;
+              cursor: help;
+            }
+          }
+
+          .title-second-line {
+            margin-top: 4px;
+          }
+        }
+      }
+    }
+
+    .card-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      font-size: 14px;
+
+      .stat-item {
+        text-align: center;
+
+        .stat-label {
+          font-weight: 500;
+          color: $color-text-secondary;
+          margin-bottom: 8px;
+          font-family: $font-family;
+        }
+
+        .stat-value {
+          font-size: 20px;
+          font-weight: 700;
+          font-family: $font-family;
+
+          &.active-tasks {
+            // Color will be set dynamically based on bear color
+          }
+
+          &.completed-tasks {
+            color: $color-success;
+          }
+        }
+      }
+    }
+  }
+}

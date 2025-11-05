@@ -1,0 +1,208 @@
+// Variables are already globally available from main.scss
+
+.prospecto-opportunity-modal {
+  .ant-modal-content {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .ant-modal-body {
+    padding: 0;
+  }
+}
+
+.opportunity-pipeline {
+  min-height: 500px;
+  padding: 24px;
+}
+
+.pipeline-stages {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  height: 100%;
+}
+
+.pipeline-stage {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.stage-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 12px 0;
+  border-top: 3px solid;
+  border-radius: 8px 8px 0 0;
+
+  .stage-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+  }
+}
+
+.stage-card {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 400px;
+
+  .ant-card-body {
+    padding: 20px;
+    height: 100%;
+  }
+}
+
+.prospect-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.prospect-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.prospect-name {
+  h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.2;
+  }
+
+  h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height: 1.2;
+  }
+}
+
+.prospect-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+.prospect-description {
+  font-size: 14px;
+  color: #4a5568;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b7280;
+  justify-content: center;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  span {
+    line-height: 1.3;
+  }
+}
+
+.stage-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.opportunity-item {
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  background: white;
+
+  h6 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+}
+
+.opportunity-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.opportunity-price {
+  font-size: 12px;
+  font-weight: 600;
+  color: #059669;
+  text-align: right;
+}
+
+.empty-stage {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.empty-content {
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.4;
+
+  span {
+    display: block;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .pipeline-stages {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .stage-card {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pipeline-stages {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .opportunity-pipeline {
+    padding: 16px;
+  }
+}

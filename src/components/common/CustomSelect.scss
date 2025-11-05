@@ -1,0 +1,197 @@
+@use '../../styles/base/variables' as *;
+
+.custom-select {
+  position: relative;
+  display: inline-block;
+
+  .select-selector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: $color-bg-container;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    min-height: 32px; // Same height as buttons
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    &.open,
+    &:focus-within {
+      border-color: $color-primary;
+      box-shadow: 0 0 0 2px rgba(51, 244, 145, 0.2);
+    }
+    
+    .select-selection {
+      flex: 1;
+      padding: $spacing-sm $spacing-md;
+      overflow: hidden;
+      
+      .select-selection-item {
+        color: $color-text;
+        font-family: $font-family;
+        font-size: $font-size-base;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        
+        &.placeholder {
+          color: $color-text-secondary;
+        }
+        
+        &:empty::before {
+          content: attr(placeholder);
+          color: $color-text-secondary;
+        }
+      }
+      
+      .select-search-input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: $color-text;
+        font-family: $font-family;
+        font-size: $font-size-base;
+        
+        &::placeholder {
+          color: $color-text-secondary;
+          opacity: 1;
+        }
+      }
+    }
+    
+    .select-arrow {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding-right: $spacing-sm;
+      
+      .select-clear {
+        color: $color-text-secondary;
+        cursor: pointer;
+        padding: 2px;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+        
+        &:hover {
+          color: $color-text;
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+      
+      .select-arrow-icon {
+        color: $color-text-secondary;
+        font-size: 12px;
+        transition: transform 0.3s ease;
+        
+        &.open {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+  
+  .select-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1050;
+    margin-top: 4px;
+    background: $color-bg-container;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    max-height: 200px;
+    overflow: hidden;
+    
+    .select-dropdown-content {
+      max-height: 200px;
+      overflow-y: auto;
+      
+      // Custom scrollbar
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+      }
+      
+      .select-option {
+        padding: $spacing-sm $spacing-md;
+        color: $color-text;
+        font-family: $font-family;
+        font-size: $font-size-base;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+        
+        &.selected {
+          background: rgba(51, 244, 145, 0.1);
+          color: $color-primary;
+        }
+      }
+      
+      .select-option-empty {
+        padding: $spacing-sm $spacing-md;
+        color: $color-text-secondary;
+        font-family: $font-family;
+        font-size: $font-size-base;
+        text-align: center;
+        font-style: italic;
+      }
+    }
+  }
+  
+  // Disabled state
+  &.disabled {
+    .select-selector {
+      cursor: not-allowed;
+      opacity: 0.6;
+      
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+  
+  // Loading state
+  &.loading {
+    .select-selector {
+      cursor: wait;
+    }
+  }
+}
+
+// Animation for dropdown
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.custom-select .select-dropdown {
+  animation: slideDown 0.2s ease;
+}

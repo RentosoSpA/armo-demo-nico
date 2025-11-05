@@ -1,0 +1,75 @@
+.country-phone-select {
+  .ant-select-selector {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
+    border-radius: 8px !important;
+    padding: 4px 11px !important;
+    min-height: 32px !important;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
+    }
+  }
+
+  &.ant-select-focused .ant-select-selector {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(52, 245, 197, 0.5) !important;
+    box-shadow: 0 0 0 2px rgba(52, 245, 197, 0.1) !important;
+  }
+
+  .ant-select-selection-search-input {
+    color: #ffffff !important;
+  }
+
+  .ant-select-selection-placeholder {
+    color: rgba(255, 255, 255, 0.4) !important;
+  }
+
+  .ant-select-arrow {
+    color: rgba(255, 255, 255, 0.6) !important;
+  }
+}
+
+.country-phone-dropdown {
+  background: rgba(11, 15, 31, 0.95) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+  z-index: 1050 !important;
+
+  .rc-virtual-list-holder {
+    max-height: 300px !important;
+  }
+
+  .ant-select-item {
+    color: #ffffff !important;
+    padding: 8px 12px !important;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    &.ant-select-item-option-selected {
+      background: rgba(52, 245, 197, 0.15) !important;
+      
+      &:hover {
+        background: rgba(52, 245, 197, 0.2) !important;
+      }
+    }
+  }
+
+  .country-option {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .country-name {
+    flex: 1;
+    color: #ffffff;
+    font-size: 14px;
+  }
+}

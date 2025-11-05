@@ -1,0 +1,188 @@
+@use '../base/variables' as *;
+
+.live-activity-feed {
+  margin-top: $spacing-xl;
+  
+  .feed-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing-md;
+    
+    .feed-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      font-family: $font-family;
+    }
+    
+    .feed-status-badge {
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      
+      &.connected {
+        color: #34d399;
+        background: rgba(16, 185, 129, 0.1);
+        border-color: rgba(16, 185, 129, 0.3);
+      }
+      
+      &.demo {
+        color: rgba(255, 255, 255, 0.6);
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+    }
+  }
+  
+  .feed-container {
+    border-radius: 16px;
+    padding: $spacing-md;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    
+    .feed-list {
+      max-height: 360px;
+      overflow-y: auto;
+      padding-right: 4px;
+      
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 3px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.3);
+        }
+      }
+    }
+  }
+  
+  .activity-item {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: $spacing-md;
+    align-items: start;
+    padding: $spacing-md;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.025);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    margin-bottom: $spacing-sm;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.04);
+    }
+    
+    .activity-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(217, 70, 239, 0.3), rgba(34, 211, 238, 0.3));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 20px;
+    }
+    
+    .activity-content {
+      min-width: 0;
+      
+      .activity-header {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        margin-bottom: 4px;
+        
+        .activity-agent {
+          font-weight: 500;
+          color: rgba(255, 255, 255, 0.9);
+          font-family: $font-family;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        
+        .activity-status {
+          font-size: 12px;
+          padding: 2px 8px;
+          border-radius: 12px;
+          border: 1px solid;
+          white-space: nowrap;
+          
+          &.status-completado {
+            color: #34d399;
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+          }
+          
+          &.status-en-proceso {
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.15);
+            border-color: rgba(251, 191, 36, 0.3);
+          }
+          
+          &.status-pendiente {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.3);
+          }
+          
+          &.status-error {
+            color: #f87171;
+            background: rgba(248, 113, 113, 0.15);
+            border-color: rgba(248, 113, 113, 0.3);
+          }
+        }
+      }
+      
+      .activity-description {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.7);
+        font-family: $font-family;
+        line-height: 1.4;
+      }
+    }
+    
+    .activity-time {
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      font-family: $font-family;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .live-activity-feed {
+    .activity-item {
+      grid-template-columns: auto 1fr;
+      
+      .activity-time {
+        grid-column: 2 / 3;
+        text-align: right;
+        margin-top: 4px;
+      }
+    }
+  }
+}

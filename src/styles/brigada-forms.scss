@@ -1,0 +1,174 @@
+@use './base/variables' as v;
+
+/* Brigada Forms Styling */
+.drawer {
+  // Select dropdowns styling
+  .ant-select {
+    .ant-select-selector {
+      background-color: v.$color-bg-container !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
+      border-radius: 8px !important;
+      padding: 8px 12px !important;
+      color: v.$color-white !important;
+
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.16) !important;
+      }
+    }
+
+    &.ant-select-focused .ant-select-selector {
+      border-color: v.$color-primary !important;
+      box-shadow: 0 0 0 2px rgba(51, 244, 145, 0.2) !important;
+    }
+
+    .ant-select-selection-placeholder {
+      color: rgba(255, 255, 255, 0.5) !important;
+    }
+
+    .ant-select-selection-item {
+      color: v.$color-white !important;
+    }
+
+    .ant-select-arrow {
+      color: rgba(255, 255, 255, 0.7) !important;
+    }
+  }
+
+  // Section spacing to prevent overlap
+  .drawer-content__section {
+    margin-bottom: v.$spacing-xl;
+    position: relative;
+    z-index: 1;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // Form labels styling
+  label {
+    display: block;
+    margin-bottom: v.$spacing-sm;
+    color: v.$color-white;
+    font-size: v.$font-size-text;
+    font-weight: 500;
+  }
+
+  // Help text styling
+  .help {
+    margin-top: v.$spacing-xs;
+    color: v.$color-text-secondary;
+    font-size: 12px;
+    line-height: 1.4;
+  }
+
+  // Checkbox styling
+  .ant-checkbox-wrapper {
+    margin-bottom: v.$spacing-sm;
+    
+    .ant-checkbox {
+      .ant-checkbox-inner {
+        background-color: v.$color-bg-container;
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+
+      &.ant-checkbox-checked .ant-checkbox-inner {
+        background-color: v.$color-primary;
+        border-color: v.$color-primary;
+      }
+    }
+
+    .ant-checkbox-wrapper + span {
+      color: v.$color-white;
+    }
+  }
+
+  // Input number styling
+  .ant-input-number {
+    background-color: v.$color-bg-container !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px !important;
+    color: v.$color-white !important;
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.16) !important;
+    }
+
+    &:focus {
+      border-color: v.$color-primary !important;
+      box-shadow: 0 0 0 2px rgba(51, 244, 145, 0.2) !important;
+    }
+
+    .ant-input-number-input {
+      color: v.$color-white !important;
+    }
+
+    .ant-input-number-handler-wrap {
+      background-color: v.$color-bg-container;
+      border-left-color: rgba(255, 255, 255, 0.08);
+
+      .ant-input-number-handler {
+        border-color: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.7);
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+  }
+
+  // Switch styling
+  .ant-switch {
+    background-color: rgba(255, 255, 255, 0.2);
+
+    &.ant-switch-checked {
+      background-color: v.$color-primary;
+    }
+  }
+}
+
+/* Dropdown portal styling (these render in body) */
+.ant-select-dropdown {
+  background-color: v.$color-bg-elevated !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  z-index: 100;
+
+  .ant-select-item {
+    color: v.$color-white !important;
+    background-color: transparent !important;
+    padding: 8px 12px !important;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+
+    &.ant-select-item-option-selected {
+      background-color: v.$color-primary !important;
+      color: v.$color-text !important;
+      font-weight: 500;
+    }
+
+    &.ant-select-item-option-active {
+      background-color: rgba(51, 244, 145, 0.1) !important;
+    }
+  }
+
+  .ant-select-item-empty {
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+}
+
+/* Ensure proper spacing and z-index layering */
+.drawer__content {
+  position: relative;
+  z-index: 1;
+
+  .drawer-content {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-lg;
+  }
+}

@@ -1,0 +1,231 @@
+@use '../base/variables' as *;
+
+.oso-activity-feed {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  &-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+    font-family: $font-family;
+    margin: 0;
+  }
+
+  &-count {
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.15);
+    padding: 4px 10px;
+    border-radius: 12px;
+  }
+
+  &-container {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 300px;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 3px;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.4);
+      }
+    }
+  }
+
+  &-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  &-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
+    color: rgba(255, 255, 255, 0.6);
+    text-align: center;
+
+    &-icon {
+      font-size: 32px;
+      margin-bottom: $spacing-sm;
+    }
+
+    p {
+      margin: 0;
+      font-size: 14px;
+      font-family: $font-family;
+    }
+  }
+}
+
+.oso-activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-sm;
+  padding: $spacing-sm;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(4px);
+  }
+}
+
+.oso-activity-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+
+  span {
+    font-size: 18px;
+  }
+}
+
+.oso-activity-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.oso-activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-sm;
+  margin-bottom: 4px;
+}
+
+.oso-activity-status {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-family: $font-family;
+
+  &.status-completado {
+    background: rgba(16, 185, 129, 0.3);
+    color: #D1FAE5;
+  }
+
+  &.status-en-proceso {
+    background: rgba(59, 130, 246, 0.3);
+    color: #DBEAFE;
+  }
+
+  &.status-pendiente {
+    background: rgba(245, 158, 11, 0.3);
+    color: #FEF3C7;
+  }
+
+  &.status-error {
+    background: rgba(239, 68, 68, 0.3);
+    color: #FEE2E2;
+  }
+}
+
+.oso-activity-time {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: $font-family;
+  white-space: nowrap;
+}
+
+.oso-activity-description {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: $font-family;
+  line-height: 1.4;
+  margin: 0;
+}
+
+// Responsive
+@media (max-width: $breakpoint-md) {
+  .oso-activity-feed {
+    &-container {
+      max-height: 250px;
+    }
+  }
+
+  .oso-activity-item {
+    padding: 10px;
+  }
+
+  .oso-activity-icon {
+    width: 28px;
+    height: 28px;
+
+    span {
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .oso-activity-feed {
+    &-title {
+      font-size: 14px;
+    }
+
+    &-count {
+      font-size: 11px;
+      padding: 3px 8px;
+    }
+
+    &-container {
+      max-height: 200px;
+    }
+  }
+
+  .oso-activity-item {
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .oso-activity-description {
+    font-size: 12px;
+  }
+
+  .oso-activity-status {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  .oso-activity-time {
+    font-size: 10px;
+  }
+}

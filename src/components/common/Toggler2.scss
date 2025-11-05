@@ -1,0 +1,10 @@
+@use '../../styles/base/variables' as *;
+@use '../../styles/utils/mixins' as *;
+
+.performance-grid-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}

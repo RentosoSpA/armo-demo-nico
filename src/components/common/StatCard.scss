@@ -1,0 +1,28 @@
+@use '../../styles/base/variables' as *;
+@use '../../styles/utilities/spacing' as *;
+@use '../../styles/utilities/layout' as *;
+
+.stat-card {
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  &__value {
+    margin: 0;
+  }
+
+  &__footer-text {
+    display: block;
+    margin-top: 8px;
+  }
+
+  :global(.ant-card-body) {
+    padding-bottom: 15px;
+  }
+}

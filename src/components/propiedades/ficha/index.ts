@@ -1,0 +1,9 @@
+export { default as AmenitiesSection } from './AmenitiesSection';
+export { default as PropertyStats } from './PropertyStats';
+export { default as ContactSection } from './ContactSection';
+export { default as PropertyHeader } from './PropertyHeader';
+export { default as PropertyImages } from './PropertyImages';
+export { default as PropertyDetails } from './PropertyDetails';
+export { default as LocationSection } from './LocationSection';
+export { default as DescriptionSection } from './DescriptionSection';
+export { default as AvailabilitySection } from './AvailabilitySection';

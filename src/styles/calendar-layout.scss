@@ -1,0 +1,52 @@
+@use 'base/variables' as v;
+
+.cal-card { 
+  width: 100%; 
+  min-width: 0;
+}
+
+.cal__right,
+.calendar-wrapper {
+  width: 100%;
+  min-width: 0;
+  min-height: 560px;
+  display: flex;
+  flex-direction: column;
+}
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 v.$spacing-md v.$spacing-sm;
+  flex-shrink: 0;
+}
+
+.calendar-grid {
+  width: 100%;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 2px;
+  padding: 0 v.$spacing-xs;
+  box-sizing: border-box;
+}
+
+.calendar-grid .day {
+  aspect-ratio: 1 / 1;
+  min-height: 0;
+  min-width: 0;
+}
+
+@media (max-width: v.$breakpoint-lg) {
+  .calendar-grid { 
+    gap: 1px; 
+    padding: 0 v.$spacing-xs;
+  }
+}
+@media (max-width: v.$breakpoint-md) {
+  .calendar-grid { 
+    gap: 1px; 
+    padding: 0 4px;
+  }
+}

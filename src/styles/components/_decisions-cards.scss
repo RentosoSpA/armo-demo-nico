@@ -1,0 +1,174 @@
+@use '../base/variables' as *;
+
+.decision-card {
+  display: flex;
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 20px;
+  padding: 0;
+  margin-bottom: $spacing-md;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 255, 255, 0.2);
+
+    .card-action {
+      background: $color-primary;
+      color: $color-bg-container;
+      transform: scale(1.05);
+    }
+  }
+
+  // Accent lateral (barra de color)
+  .card-accent {
+    width: 6px;
+    min-height: 100%;
+    border-radius: 20px 0 0 20px;
+  }
+
+  // Content
+  .card-content {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+    padding: $spacing-lg $spacing-xl;
+    flex: 1;
+  }
+
+  // Bear Icon
+  .card-bear {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    background: linear-gradient(135deg, rgba(var(--bear-color), 0.2) 0%, rgba(var(--bear-color), 0.1) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(var(--bear-color), 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    span {
+      font-size: 32px;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    }
+  }
+
+  // Body
+  .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    .severity-icon {
+      font-size: 18px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: $color-text;
+    }
+  }
+
+  .card-message {
+    font-size: $font-size-base;
+    color: $color-text-secondary;
+    margin: 0;
+    line-height: $line-height-base;
+  }
+
+  // Action Button
+  .card-action {
+    flex-shrink: 0;
+    padding: 10px $spacing-lg;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: $color-text;
+    font-size: $font-size-base;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+    font-family: $font-family;
+
+    &:hover {
+      background: rgba(52, 245, 197, 0.15);
+      border-color: $color-primary;
+    }
+  }
+
+  // Severity variations
+  &.severity-urgent {
+    border-color: rgba($color-error, 0.3);
+
+    &:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4),
+                  0 0 40px rgba($color-error, 0.2);
+    }
+  }
+
+  &.severity-warning {
+    border-color: rgba($color-warning, 0.3);
+
+    &:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4),
+                  0 0 40px rgba($color-warning, 0.2);
+    }
+  }
+
+  &.severity-info {
+    border-color: rgba($color-bear-curioso, 0.3);
+
+    &:hover {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4),
+                  0 0 40px rgba($color-bear-curioso, 0.2);
+    }
+  }
+
+  // Responsive
+  @media (max-width: $breakpoint-md) {
+    .card-content {
+      gap: $spacing-md;
+      padding: $spacing-md;
+    }
+
+    .card-bear {
+      width: 48px;
+      height: 48px;
+
+      span {
+        font-size: 24px;
+      }
+    }
+
+    .card-header .card-title {
+      font-size: 14px;
+    }
+
+    .card-message {
+      font-size: 13px;
+    }
+
+    .card-action {
+      padding: $spacing-sm $spacing-md;
+      font-size: 13px;
+    }
+  }
+}

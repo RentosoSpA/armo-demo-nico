@@ -1,0 +1,526 @@
+.dashboard-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+  
+  // Variables CSS para controlar columnas
+  &[data-grid-columns="2"] {
+    --max-widgets-per-row: 2;
+    --min-widget-width: calc(50% - 0.5rem);
+  }
+  
+  &[data-grid-columns="3"] {
+    --max-widgets-per-row: 3;
+    --min-widget-width: calc(33.33% - 0.67rem);
+  }
+  
+  &[data-grid-columns="4"] {
+    --max-widgets-per-row: 4;
+    --min-widget-width: calc(25% - 0.75rem);
+  }
+  
+  &[data-grid-columns="6"] {
+    --max-widgets-per-row: 6;
+    --min-widget-width: calc(16.66% - 0.84rem);
+  }
+}
+
+.dashboard-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  min-height: auto; // Adaptativo al contenido
+  position: relative;
+  
+  // Transición suave al cambiar tamaño
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Altura mínima solo para widgets NO flip-card
+  &:not(:has(.draggable-widget[data-widget-type^="flip-card"])) {
+    min-height: 200px;
+  }
+  
+  // Altura específica para filas con solo flip-cards
+  &:has(.draggable-widget[data-widget-type^="flip-card"]:only-child),
+  &:has(.draggable-widget[data-widget-type^="flip-card"]:first-child:last-child) {
+    min-height: 140px; // 130px del flip-card + 10px de margen
+  }
+  
+  &__item {
+    // Flex dinámico basado en cantidad de widgets en la fila
+    min-width: 0; // Importante para que funcione correctamente
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    
+    // El flex se define inline según el column-span del widget
+    // Widgets con span=1 tienen flex: 1 1 auto
+    // Widgets con span=2 tienen flex: 2 1 auto (ocupan el doble de espacio)
+    
+    // Limitar ancho máximo según gridColumns para evitar widgets demasiado anchos
+    .dashboard-rows[data-grid-columns="2"] &[data-column-span="1"] {
+      max-width: 50%;
+    }
+    
+    .dashboard-rows[data-grid-columns="3"] &[data-column-span="1"] {
+      max-width: 33.33%;
+    }
+    
+    .dashboard-rows[data-grid-columns="4"] &[data-column-span="1"] {
+      max-width: 25%;
+    }
+    
+    .dashboard-rows[data-grid-columns="6"] &[data-column-span="1"] {
+      max-width: 16.66%;
+    }
+    
+    // Widgets de 2 columnas
+    .dashboard-rows[data-grid-columns="4"] &[data-column-span="2"],
+    .dashboard-rows[data-grid-columns="6"] &[data-column-span="2"] {
+      min-width: calc(2 * var(--min-widget-width, 25%));
+    }
+    
+    // Los widgets se estiran para llenar el espacio
+    > .draggable-widget {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  
+  // FlipCards y KPIs mantienen su altura original en el nuevo sistema
+  .draggable-widget {
+    &[data-widget-type^="flip-card"],
+    &[data-widget-type^="kpi-"] {
+      height: auto;
+      
+      .widget-container {
+        height: 130px;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        overflow: visible;
+        
+        &:hover {
+          border: none;
+        }
+        
+        // Asegurar que el flip-card use todo el espacio
+        .flip-card {
+          height: 100%;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    
+    &__item {
+      width: 100% !important;
+      flex: 1 1 100% !important;
+    }
+  }
+}
+
+// Drop zone visual entre filas
+// IMPORTANTE: Altura y margin fijos para prevenir scroll infinito
+// cuando el usuario hace hover. No debe cambiar de tamaño.
+.row-drop-zone {
+  position: relative;
+  min-height: 48px;
+  height: 48px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem 0; // Margen fijo, no cambia
+  padding: 0.5rem 0; // Padding interno para interacción
+  transition: all 0.3s ease;
+  z-index: 10;
+  cursor: pointer;
+  
+  // Línea visual sutil siempre presente
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+  }
+  
+  // Icono + cuando está inactiva
+  &::after {
+    content: '+';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.1);
+    font-weight: 700;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+  
+  &:hover {
+    &::before {
+      height: 4px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        hsl(var(--primary) / 0.6) 50%, 
+        transparent 100%
+      );
+      box-shadow: 0 0 12px hsl(var(--primary) / 0.4);
+    }
+    
+    &::after {
+      color: hsl(var(--primary) / 0.6);
+      font-size: 2rem;
+      text-shadow: 0 0 20px hsl(var(--primary) / 0.8);
+    }
+  }
+  
+  &.active {
+    &::before {
+      height: 4px;
+      background: linear-gradient(90deg, 
+        transparent 0%, 
+        hsl(var(--primary) / 0.6) 50%, 
+        transparent 100%
+      );
+      box-shadow: 0 0 12px hsl(var(--primary) / 0.4);
+      animation: gentle-pulse 1.5s ease-in-out infinite;
+    }
+    
+    // Mensaje flotante en el centro de la pantalla (fixed para no afectar layout)
+    &::after {
+      content: '⊕ Soltar aquí para crear nueva fila';
+      position: fixed; // CAMBIO CRÍTICO: fixed en lugar de absolute
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: linear-gradient(135deg, 
+        hsl(var(--primary)) 0%, 
+        hsl(var(--primary) / 0.95) 100%
+      );
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 
+        0 8px 32px hsl(var(--primary) / 0.6),
+        0 16px 64px hsl(var(--primary) / 0.3);
+      z-index: 10000; // Por encima de todo
+      pointer-events: none; // No interfiere con el drag
+    }
+  }
+}
+
+// Indicador de inserción entre widgets
+.insertion-indicator {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 4px;
+  background: hsl(var(--primary));
+  z-index: 1000;
+  pointer-events: none;
+  border-radius: 2px;
+  box-shadow: 
+    0 0 12px hsl(var(--primary)),
+    0 0 24px hsl(var(--primary) / 0.6);
+  
+  &--before {
+    left: -0.625rem;
+  }
+  
+  &--after {
+    right: -0.625rem;
+  }
+  
+  // Círculo indicador
+  &::before {
+    content: '↓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+    color: white;
+    background: hsl(var(--primary));
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 
+      0 4px 16px hsl(var(--primary) / 0.7),
+      0 0 0 4px hsl(var(--primary) / 0.2);
+    font-weight: 700;
+    animation: bounce-subtle 1s ease-in-out infinite;
+  }
+  
+  // Tooltip explicativo
+  &::after {
+    content: 'Insertar aquí';
+    position: absolute;
+    top: calc(50% + 28px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: hsl(var(--primary));
+    color: white;
+    padding: 0.375rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.5);
+    pointer-events: none;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+@keyframes gentle-pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+// Animación para el indicador de drop zone
+@keyframes pulse-scale {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+// Estilos de draggable mejorados
+.draggable-widget {
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  border-radius: 12px;
+  position: relative;
+  
+  &.edit-mode {
+    cursor: grab;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border: 2px dashed transparent;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    &:hover {
+      transform: scale(1.02) translateY(-2px);
+      box-shadow: 
+        0 8px 24px rgba(0, 0, 0, 0.15),
+        0 0 0 2px hsl(var(--primary) / 0.2);
+      z-index: 10;
+      
+      &::before {
+        border-color: hsl(var(--primary) / 0.4);
+      }
+    }
+    
+    &:active {
+      cursor: grabbing;
+      transform: scale(1.03) rotate(1deg);
+    }
+  }
+  
+  &.dragging {
+    z-index: 999;
+    opacity: 0.75;
+    transform: scale(1.08) rotate(3deg);
+    box-shadow: 
+      0 12px 36px rgba(0, 0, 0, 0.25),
+      0 0 0 3px hsl(var(--primary) / 0.4),
+      0 0 24px hsl(var(--primary) / 0.3);
+    filter: brightness(1.1);
+  }
+}
+
+// Efecto de "placeholder" donde estaba el widget
+.dashboard-row__item:has(.draggable-widget.dragging) {
+  opacity: 0.4;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.1),
+      hsl(var(--primary) / 0.05)
+    );
+    border: 2px dashed hsl(var(--primary) / 0.3);
+    border-radius: 12px;
+    animation: pulse-placeholder 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-placeholder {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+}
+
+// Placeholder cuando está vacío
+.widget-placeholder {
+  background: linear-gradient(135deg, 
+    hsl(var(--card) / 0.5) 0%, 
+    hsl(var(--card) / 0.3) 100%
+  );
+  border: 2px dashed hsl(var(--border));
+  border-radius: 12px;
+  padding: 2rem;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  .placeholder-content {
+    text-align: center;
+    color: hsl(var(--muted-foreground));
+    
+    h3 {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: hsl(var(--foreground));
+    }
+    
+    p {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+// Botón para añadir fila
+.add-row-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  background: linear-gradient(135deg, 
+    hsl(var(--card) / 0.3) 0%, 
+    hsl(var(--card) / 0.1) 100%
+  );
+  border: 2px dashed hsl(var(--border));
+  border-radius: 12px;
+  color: hsl(var(--muted-foreground));
+  font-size: 0.9375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    background: linear-gradient(135deg, 
+      hsl(var(--primary) / 0.1) 0%, 
+      hsl(var(--primary) / 0.05) 100%
+    );
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px hsl(var(--primary) / 0.2);
+    
+    svg {
+      transform: rotate(90deg);
+    }
+  }
+  
+  svg {
+    transition: transform 0.3s ease;
+  }
+}
+
+// Estilos para modo compacto
+.dashboard-customizable.compact {
+  .dashboard-rows {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  
+  .dashboard-row {
+    gap: 0.5rem;
+    
+    &:not(:has(.draggable-widget[data-widget-type^="flip-card"])) {
+      min-height: 160px;
+    }
+    
+    &:has(.draggable-widget[data-widget-type^="flip-card"]:only-child),
+    &:has(.draggable-widget[data-widget-type^="flip-card"]:first-child:last-child) {
+      min-height: 120px;
+    }
+  }
+  
+  .row-drop-zone {
+    margin: 0.5rem 0; // Margen fijo también en modo compacto
+    
+    &:hover,
+    &.active {
+      margin: 0.5rem 0; // No cambiar margen en compacto tampoco
+    }
+  }
+  
+  .draggable-widget[data-widget-type^="flip-card"] {
+    .widget-container {
+      height: 110px;
+    }
+  }
+  
+  .widget-container {
+    padding: 0.75rem;
+  }
+}

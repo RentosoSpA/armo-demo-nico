@@ -1,0 +1,21 @@
+@use '../base/variables' as *;
+
+.custom-reports {
+  .full-width {
+    width: 100%;
+  }
+
+  .title-text {
+    font-size: 24px;
+    font-weight: 600;
+  }
+
+  .description-text {
+    font-size: 16px;
+  }
+
+  .create-button {
+    font-size: 14px;
+    font-weight: 600;
+  }
+}

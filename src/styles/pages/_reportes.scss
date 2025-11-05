@@ -1,0 +1,223 @@
+@use '../base/variables' as *;
+
+.reportes-container {
+  background-color: $color-bg-container;
+  min-height: 100vh;
+  padding: $spacing-xxl;
+  color: $color-text;
+
+  .reportes-header {
+    margin-bottom: $spacing-xxl;
+
+    .reportes-title {
+      font-size: 48px;
+      font-weight: 600;
+      color: $color-text;
+      margin: 0;
+      line-height: 1.2;
+      font-family: $font-family;
+    }
+
+    .reportes-subtitle {
+      font-size: 16px;
+      color: $color-text-secondary;
+      margin-top: $spacing-sm;
+      display: block;
+      font-family: $font-family;
+    }
+  }
+
+  .report-section {
+    margin-bottom: $spacing-xxl;
+    max-width: 600px;
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: $color-text;
+      margin-bottom: $spacing-lg;
+      font-family: $font-family;
+    }
+
+    .form-item {
+      margin-bottom: $spacing-lg;
+
+      .form-label {
+        font-size: 16px;
+        color: $color-text;
+        margin-bottom: $spacing-sm;
+        display: block;
+        font-family: $font-family;
+
+        .required {
+          color: $color-error;
+        }
+      }
+
+      .ant-select {
+        width: 100%;
+        height: 45px;
+
+        .ant-select-selector {
+          background-color: $color-bg-elevated;
+          border: 1px solid $color-border;
+          border-radius: 6px;
+          height: 45px;
+          color: $color-text;
+
+          .ant-select-selection-placeholder {
+            color: $color-text-secondary;
+          }
+        }
+
+        &:hover .ant-select-selector {
+          border-color: $color-primary;
+        }
+
+        &.ant-select-focused .ant-select-selector {
+          border-color: $color-primary;
+          box-shadow: 0 0 0 2px rgba(51, 244, 145, 0.2);
+        }
+      }
+    }
+  }
+
+  .preferences-section {
+    margin-bottom: $spacing-xxl;
+
+    .preferences-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: $color-text;
+      margin-bottom: $spacing-lg;
+      font-family: $font-family;
+    }
+
+    .contact-section {
+      margin-bottom: $spacing-xl;
+
+      .contact-label {
+        font-size: 16px;
+        color: $color-text;
+        margin-bottom: 12px;
+        display: block;
+        font-family: $font-family;
+
+        .required {
+          color: $color-error;
+        }
+      }
+
+      .tags-input {
+        border: 1px solid $color-border;
+        border-radius: 6px;
+        padding: $spacing-sm 12px;
+        min-height: 45px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: $spacing-sm;
+        background-color: $color-bg-elevated;
+
+        .ant-tag {
+          background-color: $color-text;
+          color: $color-bg-container;
+          border: none;
+          border-radius: 4px;
+          padding: 4px $spacing-sm;
+          margin: 0;
+          font-family: $font-family;
+
+          .ant-tag-close-icon {
+            color: $color-bg-container;
+            font-size: 12px;
+          }
+        }
+
+        .ant-input {
+          flex: 1;
+          min-width: 150px;
+          padding: 0;
+          border: none;
+          background: transparent;
+          color: $color-text;
+          font-family: $font-family;
+
+          &::placeholder {
+            color: $color-text-secondary;
+          }
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+
+      .test-button {
+        color: $color-primary;
+        padding: 0;
+        margin-top: $spacing-sm;
+        text-align: right;
+        float: right;
+        border: none;
+        background: none;
+        font-family: $font-family;
+
+        &:hover {
+          color: $color-primary-hover;
+        }
+      }
+
+      .clear-fix {
+        clear: both;
+      }
+    }
+  }
+
+  .save-section {
+    text-align: center;
+
+    .save-button {
+      background-color: $color-primary;
+      border-color: $color-primary;
+      border-radius: 6px;
+      padding: 12px $spacing-xl;
+      height: auto;
+      font-size: 16px;
+      font-weight: 500;
+      color: $color-bg-container;
+      font-family: $font-family;
+
+      &:hover {
+        background-color: $color-primary-hover;
+        border-color: $color-primary-hover;
+      }
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-lg;
+
+    .reportes-header {
+      margin-bottom: $spacing-lg;
+
+      .reportes-title {
+        font-size: 36px;
+      }
+    }
+
+    .report-section {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: $spacing-md;
+
+    .reportes-header {
+      .reportes-title {
+        font-size: 28px;
+      }
+    }
+  }
+}

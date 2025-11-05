@@ -1,0 +1,269 @@
+@use './base/variables' as v;
+
+.cobros-calendario {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: v.$spacing-lg;
+  margin-top: v.$spacing-lg;
+}
+
+.notif-panel {
+  background: v.$color-bg-container;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: v.$spacing-lg;
+  
+  .ant-tabs {
+    .ant-tabs-tab {
+      color: v.$color-text-secondary;
+      
+      &.ant-tabs-tab-active {
+        color: v.$color-primary;
+      }
+    }
+    
+    .ant-tabs-ink-bar {
+      background: v.$color-primary;
+    }
+  }
+}
+
+.notif-list {
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: v.$spacing-sm;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: v.$color-primary;
+    border-radius: 3px;
+  }
+}
+
+.notif-item {
+  display: flex;
+  align-items: center;
+  gap: v.$spacing-md;
+  padding: v.$spacing-md;
+  margin-bottom: v.$spacing-sm;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: v.$color-primary;
+    transform: translateY(-1px);
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: v.$color-primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: v.$color-text-dark;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .content {
+    flex: 1;
+    
+    .client-name {
+      color: v.$color-text;
+      font-weight: 500;
+      font-size: v.$font-size-text;
+      margin-bottom: 2px;
+    }
+    
+    .property-title {
+      color: v.$color-text-secondary;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+    
+    .date-info {
+      color: v.$color-text-secondary;
+      font-size: 11px;
+    }
+  }
+  
+  .amount {
+    text-align: right;
+    
+    .amount-value {
+      color: v.$color-text;
+      font-weight: 600;
+      font-size: v.$font-size-text;
+      margin-bottom: 4px;
+    }
+    
+    .status-chip {
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 500;
+      
+      &.success {
+        background: rgba(52, 245, 197, 0.2);
+        color: v.$color-success;
+      }
+      
+      &.warning {
+        background: rgba(234, 179, 8, 0.2);
+        color: v.$color-warning;
+      }
+      
+      &.error {
+        background: rgba(255, 64, 128, 0.2);
+        color: v.$color-error;
+      }
+    }
+  }
+  
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-xs;
+    
+    .action-btn {
+      padding: 4px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: transparent;
+      color: v.$color-text-secondary;
+      font-size: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        color: v.$color-primary;
+        border-color: v.$color-primary;
+      }
+      
+      &.whatsapp {
+        color: #25d366;
+        
+        &:hover {
+          background: rgba(37, 211, 102, 0.1);
+        }
+      }
+    }
+  }
+}
+
+.calendar-panel {
+  .modern-card {
+    height: fit-content;
+    
+    .ant-calendar {
+      .ant-calendar-header {
+        padding: v.$spacing-sm v.$spacing-md;
+      }
+      
+      .ant-calendar-cell {
+        height: 60px;
+        
+        .ant-calendar-date {
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+.calendar-legend {
+  display: flex;
+  gap: v.$spacing-md;
+  margin-bottom: v.$spacing-md;
+  padding: v.$spacing-sm v.$spacing-md;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: v.$spacing-xs;
+    font-size: 12px;
+    color: v.$color-text-secondary;
+    
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      
+      &.success {
+        background: v.$color-success;
+      }
+      
+      &.warning {
+        background: v.$color-warning;
+      }
+      
+      &.error {
+        background: v.$color-error;
+      }
+      
+      &.processing {
+        background: #1890ff;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: v.$breakpoint-lg) {
+  .cobros-calendario {
+    grid-template-columns: 1fr;
+    gap: v.$spacing-md;
+  }
+  
+  .notif-panel {
+    order: 1;
+  }
+  
+  .calendar-panel {
+    order: 2;
+  }
+}
+
+@media (max-width: v.$breakpoint-md) {
+  .cobros-calendario {
+    gap: v.$spacing-sm;
+  }
+  
+  .notif-panel,
+  .calendar-panel {
+    padding: v.$spacing-md;
+  }
+  
+  .notif-item {
+    padding: v.$spacing-sm;
+    gap: v.$spacing-sm;
+    
+    .avatar {
+      width: 32px;
+      height: 32px;
+      font-size: 12px;
+    }
+    
+    .content {
+      .client-name {
+        font-size: 13px;
+      }
+    }
+  }
+}

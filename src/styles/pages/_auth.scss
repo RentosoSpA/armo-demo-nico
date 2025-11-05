@@ -1,0 +1,1465 @@
+@use '../base/variables' as *;
+@use '../utils/mixins' as *;
+
+.auth {
+  min-height: 100vh;
+  @include flex-center;
+  background: linear-gradient(135deg, $color-bg-container, $color-bg-elevated);
+  
+  &__container {
+    background-color: $color-bg-elevated;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    padding: $spacing-xxl;
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid $color-border;
+  }
+  
+  &__header {
+    text-align: center;
+    margin-bottom: $spacing-xl;
+    
+    &-logo {
+      font-size: 32px;
+      font-weight: 700;
+      color: $color-primary;
+      margin-bottom: $spacing-md;
+    }
+    
+    &-title {
+      font-size: 24px;
+      font-weight: 600;
+      color: $color-text;
+      margin-bottom: $spacing-sm;
+    }
+    
+    &-subtitle {
+      font-size: 14px;
+      color: $color-text-secondary;
+    }
+  }
+  
+  &__form {
+    .form__group {
+      margin-bottom: $spacing-lg;
+    }
+    
+    .form__actions {
+      margin-top: $spacing-xl;
+      flex-direction: column;
+      gap: $spacing-md;
+      
+      .btn {
+        width: 100%;
+      }
+    }
+  }
+  
+  &__divider {
+    position: relative;
+    text-align: center;
+    margin: $spacing-xl 0;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: $color-border;
+    }
+    
+    &-text {
+      background-color: $color-bg-elevated;
+      padding: 0 $spacing-md;
+      color: $color-text-secondary;
+      font-size: 14px;
+    }
+  }
+  
+  &__social {
+    @include flex-center;
+    gap: $spacing-md;
+    
+    &-btn {
+      @include flex-center;
+      gap: $spacing-sm;
+      width: 100%;
+      padding: $spacing-md;
+      border: 1px solid $color-border;
+      border-radius: 6px;
+      background-color: transparent;
+      color: $color-text;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        border-color: $color-primary;
+        background-color: rgba(52, 245, 197, 0.05);
+      }
+      
+      &-icon {
+        font-size: 18px;
+      }
+    }
+  }
+  
+  &__footer {
+    text-align: center;
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: 1px solid $color-border;
+    
+    &-text {
+      color: $color-text-secondary;
+      font-size: 14px;
+    }
+    
+    &-link {
+      color: $color-primary;
+      font-weight: 500;
+      cursor: pointer;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  
+  &__forgot-password {
+    text-align: right;
+    margin-top: $spacing-sm;
+
+    &-link {
+      color: $color-primary;
+      font-size: 12px;
+      cursor: pointer;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+}
+
+// Global password input styles - Force same background as wrapper
+body .signin-main-row,
+body .signup-container {
+  .ant-input-affix-wrapper.ant-input-password,
+  .ant-input-affix-wrapper {
+    padding: 0 !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 1rem !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    transition: all 0.2s ease !important;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.07) !important;
+    }
+
+    &:focus,
+    &:focus-within {
+      outline: none !important;
+      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.10) !important;
+      border-color: rgba(34, 211, 238, 0.40) !important;
+      background: rgba(255, 255, 255, 0.07) !important;
+    }
+
+    input.ant-input,
+    input[type="password"],
+    input[type="text"],
+    input[type="email"] {
+      background: transparent !important;
+      background-color: transparent !important;
+      background-image: none !important;
+      border: 0 !important;
+      border-radius: 1rem !important;
+      box-shadow: none !important;
+      outline: none !important;
+      padding: 0.75rem 1rem !important;
+      padding-right: 3rem !important;
+      margin: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 48px !important;
+      color: rgba(255, 255, 255, 0.90) !important;
+      font-size: 15px !important;
+      font-family: inherit !important;
+      line-height: 1 !important;
+      transition: all 0.2s ease !important;
+
+      &:hover {
+        background: transparent !important;
+        background-color: transparent !important;
+      }
+
+      &:focus,
+      &:active,
+      &:focus-visible {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+        outline: none !important;
+      }
+
+      // Prevent white background on autofill
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.90) !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        transition: background-color 5000s ease-in-out 0s !important;
+        caret-color: rgba(255, 255, 255, 0.90) !important;
+      }
+    }
+
+    .ant-input-suffix {
+      position: absolute !important;
+      right: 1rem !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      z-index: 1 !important;
+    }
+  }
+}
+
+// Global password input icon fix - must be before .signin
+.ant-input-affix-wrapper-status-error .ant-input-suffix,
+.ant-input-affix-wrapper .ant-input-suffix,
+.ant-input-password .ant-input-suffix {
+  color: rgba(255, 255, 255, 0.4) !important;
+
+  span, .anticon, svg {
+    color: rgba(255, 255, 255, 0.4) !important;
+    fill: rgba(255, 255, 255, 0.4) !important;
+  }
+}
+
+// SignIn specific styles - move outside .auth block
+.signin {
+  &-loading-row {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      min-height: 100vh;
+      min-height: 100dvh; // Dynamic viewport height for mobile
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+
+      // Fallback for older browsers
+      @supports not (height: 100dvh) {
+        height: 100vh;
+      }
+    }
+
+    &-loading-div {
+      width: 200px;
+      height: 200px;
+    }
+
+    &-main-row {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      background: #080b16; // Darker background for better contrast
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: $spacing-lg;
+      box-sizing: border-box;
+      margin: 0;
+      z-index: 1000;
+      overflow: auto;
+
+      // Aurora animation background with more subtle blobs (10-20% opacity, blur-60px)
+      &::before {
+        content: '';
+        position: fixed;
+        inset: -20%;
+        width: 140%;
+        height: 140%;
+        background-image:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"),
+          radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.12), transparent), // #3 aurora 10-20%
+          radial-gradient(ellipse 60% 50% at 80% 50%, rgba(34, 211, 238, 0.15), transparent),
+          radial-gradient(ellipse 60% 50% at 20% 50%, rgba(217, 70, 239, 0.10), transparent);
+        filter: blur(60px); // #3 blur-[60px]
+        opacity: 1;
+        animation: aurora-float 20s ease-in-out infinite alternate; // #9 renamed
+        will-change: transform; // #14 Performance optimization
+        z-index: 0;
+
+        // #14 Reduced motion fallback
+        @media (prefers-reduced-motion: reduce) {
+          animation: none;
+          transform: none;
+        }
+      }
+
+      // Rentoso logo silhouette - Starts left-center bottom (Teal/Primary color)
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 35%;
+        left: 20%;
+        width: 180px;
+        height: 180px;
+        background-image: url('/src/assets/Rentoso_iso_gris.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.10;
+        z-index: 0;
+        animation: logo-displacement-center 18s ease-in-out infinite;
+        will-change: transform; // #14 Performance
+        pointer-events: none;
+        filter: drop-shadow(0 0 15px rgba(52, 245, 197, 0.6)) brightness(0) sepia(1) saturate(8) hue-rotate(140deg) opacity(0.7) blur(1.5px);
+
+        @media (max-width: 768px) {
+          width: 130px;
+          height: 130px;
+          left: 10%;
+        }
+
+        // #14 Reduced motion fallback
+        @media (prefers-reduced-motion: reduce) {
+          animation: none;
+        }
+      }
+
+      // Ensure content is above aurora and logos
+      > * {
+        position: relative;
+        z-index: 1;
+      }
+    }
+
+    // Additional logo containers (left and right)
+    &-main-row {
+      // Left logo
+      &::before {
+        content: '';
+        position: fixed;
+        inset: -20%;
+        width: 140%;
+        height: 140%;
+        background-image:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E"),
+          radial-gradient(ellipse 80% 50% at 50% -20%, rgba(52, 245, 197, 0.3), transparent),
+          radial-gradient(ellipse 60% 50% at 80% 50%, rgba(120, 119, 198, 0.3), transparent),
+          radial-gradient(ellipse 60% 50% at 20% 50%, rgba(52, 211, 153, 0.2), transparent);
+        opacity: 0.6;
+        animation: aurora-movement 15s ease-in-out infinite;
+        z-index: 0;
+      }
+    }
+
+    // Container for additional floating logos
+    &-container {
+      // Top-left floating logo (Purple/Lavender color - smaller)
+      &::before {
+        content: '';
+        position: fixed;
+        top: 5%;
+        left: 5%;
+        width: 130px;
+        height: 130px;
+        background-image: url('/src/assets/Rentoso_iso_gris.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.08;
+        z-index: 0;
+        animation: logo-displacement-left 20s ease-in-out infinite;
+        pointer-events: none;
+        filter: drop-shadow(0 0 12px rgba(120, 119, 198, 0.5)) brightness(0) sepia(1) saturate(6) hue-rotate(220deg) opacity(0.65) blur(2px);
+
+        @media (max-width: 768px) {
+          width: 90px;
+          height: 90px;
+        }
+      }
+
+      // Bottom-right floating logo (Cyan/Emerald color - largest)
+      &::after {
+        content: '';
+        position: fixed;
+        bottom: 5%;
+        right: 5%;
+        width: 200px;
+        height: 200px;
+        background-image: url('/src/assets/Rentoso_iso_gris.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        opacity: 0.10;
+        z-index: 0;
+        animation: logo-displacement-right 25s ease-in-out infinite;
+        pointer-events: none;
+        filter: drop-shadow(0 0 18px rgba(52, 211, 153, 0.7)) brightness(0) sepia(1) saturate(7) hue-rotate(160deg) opacity(0.6) blur(1.8px);
+
+        @media (max-width: 768px) {
+          width: 140px;
+          height: 140px;
+          bottom: 3%;
+          right: 3%;
+        }
+      }
+
+      // Mobile specific adjustments
+      @media (max-width: 768px) {
+        padding: 0;
+        height: 100dvh;
+        height: 100svh;
+      }
+
+      // Fallback for older browsers
+      @supports not (height: 100dvh) {
+        height: 100vh;
+      }
+    }
+
+    // Aurora animation keyframes with smooth transitions - #9 renamed to aurora-float
+    @keyframes aurora-float {
+      0% {
+        transform: translate(0, 0) scale(1);
+      }
+      25% {
+        transform: translate(8%, -10%) scale(1.08);
+      }
+      50% {
+        transform: translate(-5%, 8%) scale(0.95);
+      }
+      75% {
+        transform: translate(12%, 5%) scale(1.05);
+      }
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+    }
+
+    // Displacement map animation - Left logo (from top-left)
+    @keyframes logo-displacement-left {
+      0% {
+        transform: translate(0, 0) skewX(0deg) skewY(0deg);
+        filter: invert(1) blur(2px);
+      }
+      20% {
+        transform: translate(30px, 25px) skewX(2deg) skewY(-1deg);
+        filter: invert(1) blur(2.5px);
+      }
+      40% {
+        transform: translate(-15px, 50px) skewX(-3deg) skewY(2deg);
+        filter: invert(1) blur(1.8px);
+      }
+      60% {
+        transform: translate(40px, 30px) skewX(1deg) skewY(-2deg);
+        filter: invert(1) blur(2.2px);
+      }
+      80% {
+        transform: translate(-20px, 15px) skewX(-2deg) skewY(1deg);
+        filter: invert(1) blur(2px);
+      }
+      100% {
+        transform: translate(0, 0) skewX(0deg) skewY(0deg);
+        filter: invert(1) blur(2px);
+      }
+    }
+
+    // Displacement map animation - Center logo (from top-right)
+    @keyframes logo-displacement-center {
+      0% {
+        transform: translate(0, 0) skewX(0deg) skewY(0deg) rotate(0deg);
+        filter: invert(1) blur(2px);
+      }
+      25% {
+        transform: translate(-35px, 40px) skewX(-2deg) skewY(1deg) rotate(-3deg);
+        filter: invert(1) blur(2.8px);
+      }
+      50% {
+        transform: translate(20px, 60px) skewX(3deg) skewY(-2deg) rotate(2deg);
+        filter: invert(1) blur(1.5px);
+      }
+      75% {
+        transform: translate(-25px, 35px) skewX(-1deg) skewY(2deg) rotate(-2deg);
+        filter: invert(1) blur(2.3px);
+      }
+      100% {
+        transform: translate(0, 0) skewX(0deg) skewY(0deg) rotate(0deg);
+        filter: invert(1) blur(2px);
+      }
+    }
+
+    // Displacement map animation - Right logo (from bottom-right)
+    @keyframes logo-displacement-right {
+      0% {
+        transform: translate(0, 0) skewX(0deg) skewY(0deg) scale(1);
+        filter: invert(1) blur(2px);
+      }
+      15% {
+        transform: translate(-45px, -30px) skewX(-3deg) skewY(-2deg) scale(1.05);
+        filter: invert(1) blur(2.5px);
+      }
+      35% {
+        transform: translate(25px, -55px) skewX(2deg) skewY(3deg) scale(0.95);
+        filter: invert(1) blur(1.8px);
+      }
+      55% {
+        transform: translate(-30px, -40px) skewX(-1deg) skewY(-1deg) scale(1.02);
+        filter: invert(1) blur(2.2px);
+      }
+      75% {
+        transform: translate(35px, -25px) skewX(2deg) skewY(1deg) scale(0.98);
+        filter: invert(1) blur(2px);
+      }
+      100% {
+        transform: translate(0, 0) skewX(0deg) skewY(0deg) scale(1);
+        filter: invert(1) blur(2px);
+      }
+    }
+
+
+    &-container {
+      width: 100%;
+      max-width: 400px;
+      max-height: 90vh;
+      overflow-y: auto;
+
+      @media (max-width: 768px) {
+        max-width: 100%;
+        max-height: 100vh;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+      }
+
+      @media (min-width: 769px) {
+        max-width: 600px;
+      }
+
+      // Left positioning for desktop screens
+      &--left {
+        @media (min-width: 769px) {
+          margin-left: 5%;
+          max-width: 500px;
+        }
+
+        @media (min-width: 1200px) {
+          margin-left: 8%;
+          max-width: 450px;
+        }
+
+        @media (min-width: 1440px) {
+          margin-left: 10%;
+          max-width: 400px;
+        }
+      }
+    }
+
+    &-card {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35); // #2 shadow-[0_12px_40px_rgba(0,0,0,0.35)]
+      border-radius: 1.5rem; // #2 rounded-3xl
+      background: rgba(255, 255, 255, 0.05); // #2 bg-white/5
+      backdrop-filter: blur(40px); // #2 backdrop-blur-2xl
+      -webkit-backdrop-filter: blur(40px);
+      border: 1px solid rgba(255, 255, 255, 0.15); // #2 border-white/15
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      animation: fadeUp 300ms ease-out forwards; // #9 renamed
+      opacity: 0;
+      transform: translateY(8px);
+      will-change: opacity, transform; // #14 Performance optimization
+
+      @supports not (backdrop-filter: blur(40px)) {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      // #14 Reduced motion fallback
+      @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .ant-card-body {
+        padding: $spacing-xl;
+        flex: 1;
+        overflow-y: auto;
+        max-height: calc(90vh - 40px);
+      }
+
+      // Enhanced mobile styling
+      @media (max-width: 768px) {
+        box-shadow: none;
+        margin: 0;
+        border-radius: 0;
+        height: 100vh;
+        height: 100dvh;
+
+        .ant-card-body {
+          max-height: 100vh;
+          height: 100vh;
+          padding: $spacing-lg;
+        }
+      }
+    }
+
+    // Card mount animation - #9 fadeUp
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    &-title {
+      text-align: center;
+      margin-bottom: 24px;
+      color: rgba(255, 255, 255, 0.90);
+      font-weight: 600;
+      font-size: 32px;
+      letter-spacing: -0.02em;
+
+      @media (max-width: 768px) {
+        font-size: 28px;
+        margin-bottom: $spacing-lg;
+      }
+
+      @media (min-width: 769px) {
+        font-size: 36px;
+      }
+    }
+
+    &-error {
+      background: rgba(239, 68, 68, 0.05); // #6 bg-red-500/5
+      color: rgba(252, 165, 165, 0.90); // #6 text-red-300/90
+      padding: 0.5rem 1rem; // #6 padding
+      margin-bottom: 1rem;
+      border-radius: 0.75rem; // #6 rounded-xl
+      border: 1px solid rgba(239, 68, 68, 0.40); // #6 border-red-400/40
+      font-size: 0.875rem; // #6 text-sm
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      // #6 Add aria-live for accessibility
+      &[role="alert"] {
+        // Style for screen readers
+      }
+    }
+
+    &-button {
+      margin-top: 8px;
+    }
+
+    &-link-button {
+      margin-top: 8px;
+    }
+
+    &-step-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: $spacing-sm 0;
+      margin-top: $spacing-sm;
+    }
+
+    &-step-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.28);
+      transition: all 0.3s ease;
+      cursor: default;
+
+      &.active {
+        background-color: $color-primary;
+        transform: scale(1.3);
+      }
+
+      &.completed {
+        background-color: $color-success;
+      }
+    }
+
+    // Form help text styling
+    .ant-form-item-explain-error,
+    .ant-form-item-explain {
+      color: $color-text-secondary !important;
+    }
+
+    // Password input eye icon styling
+    .ant-input-password-icon {
+      color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    .ant-input-suffix {
+      color: rgba(255, 255, 255, 0.4) !important;
+
+      svg {
+        color: rgba(255, 255, 255, 0.4) !important;
+        fill: rgba(255, 255, 255, 0.4) !important;
+      }
+
+      .anticon {
+        color: rgba(255, 255, 255, 0.4) !important;
+
+        svg {
+          color: rgba(255, 255, 255, 0.4) !important;
+          fill: rgba(255, 255, 255, 0.4) !important;
+        }
+      }
+    }
+
+    // Form item specific styles
+    &-form-item {
+      &--email {
+        margin-bottom: 24px;
+      }
+
+      &--password {
+        margin-bottom: 8px;
+      }
+
+      &--submit {
+        margin-bottom: 32px;
+      }
+    }
+
+    // Password visibility toggle button
+    &-password-toggl {
+      border: none;
+      background: transparent;
+      padding: 0;
+      height: auto;
+      line-height: 1;
+    }
+
+    // Ensure consistent input heights and styles
+    &-form-item--email,
+    &-form-item--password {
+      // Base input wrapper styling
+      .ant-input:not(.ant-input-affix-wrapper input),
+      .ant-input-affix-wrapper {
+        height: 48px;
+        min-height: 48px;
+        max-height: 48px;
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 1rem;
+        padding: 0.75rem 1rem;
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.90);
+        transition: all 0.2s ease;
+        box-shadow: none;
+        outline: none;
+        overflow: hidden;
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.40);
+        }
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.07);
+          box-shadow: none;
+        }
+
+        &:focus,
+        &:focus-within {
+          outline: none;
+          box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.10);
+          border-color: rgba(34, 211, 238, 0.40);
+          background: rgba(255, 255, 255, 0.07);
+        }
+
+        &:focus-visible {
+          outline: 2px solid rgba(34, 211, 238, 0.60);
+          outline-offset: 2px;
+        }
+
+        // Error state
+        &[aria-invalid="true"] {
+          border-color: rgba(239, 68, 68, 0.40);
+          background: rgba(239, 68, 68, 0.05);
+
+          &:focus,
+          &:focus-within {
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.10);
+            border-color: rgba(239, 68, 68, 0.40);
+          }
+        }
+      }
+
+      // REMOVED - Using global styles instead
+
+      .ant-input-suffix {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 8px;
+        flex-shrink: 0;
+      }
+
+      // Remove any autofill backgrounds
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.05) inset;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.90);
+        transition: background-color 5000s ease-in-out 0s;
+        caret-color: rgba(255, 255, 255, 0.90);
+      }
+    }
+
+    // Force password input autofill styles
+    .ant-input-affix-wrapper {
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px transparent inset;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.90);
+        background-color: transparent;
+        transition: background-color 5000s ease-in-out 0s;
+        caret-color: rgba(255, 255, 255, 0.90);
+      }
+    }
+
+    // Forgot password link section
+    &-forgot-password {
+      text-align: left;
+      margin-bottom: 32px;
+    }
+
+    // Link button styling
+    &-link {
+      padding: 0;
+      color: rgb(34, 211, 238);
+      font-size: 14px;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: rgb(103, 232, 249);
+        text-decoration-thickness: 2px;
+      }
+
+      &:focus-visible {
+        outline: 2px solid rgba(34, 211, 238, 0.60);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+    }
+
+    // Submit button styling with glassmorphism
+    &-submit-button.ant-btn-primary {
+      height: 48px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.05) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      border-bottom: 2px solid transparent !important;
+      color: #ffffff !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      span {
+        color: #ffffff !important;
+      }
+
+      &:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-bottom: 2px solid rgba(52, 245, 197, 1) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 0 20px rgba(52, 245, 197, 0.3);
+        color: #ffffff !important;
+
+        span {
+          color: #ffffff !important;
+        }
+      }
+
+      &:active:not(:disabled) {
+        transform: translateY(0);
+        background: rgba(255, 255, 255, 0.05) !important;
+      }
+
+      &:focus-visible {
+        outline: 2px solid rgba(34, 211, 238, 0.60);
+        outline-offset: 2px;
+      }
+
+      &:disabled {
+        background: rgba(255, 255, 255, 0.02) !important;
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        border-bottom: 2px solid transparent !important;
+        color: rgba(255, 255, 255, 0.40) !important;
+
+        span {
+          color: rgba(255, 255, 255, 0.40) !important;
+        }
+      }
+    }
+
+    // Footer text and link
+    &-footer-container {
+      text-align: center;
+    }
+
+    &-footer-text {
+      color: rgba(255, 255, 255, 0.70);
+      font-size: 14px;
+      margin-right: 8px;
+    }
+
+    // SignUp specific main row override for higher z-index
+    &-signup-row {
+      z-index: 1000;
+    }
+
+    // All primary buttons in auth pages get glassmorphism with green border
+    .ant-btn.ant-btn-primary {
+      background: rgba(255, 255, 255, 0.05) !important;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.10) !important;
+      border-bottom: 2px solid transparent !important;
+      font-weight: 500;
+
+      &:hover,
+      &:hover:not(:disabled),
+      &:focus:hover {
+        background: rgba(255, 255, 255, 0.05) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.10) !important;
+        border-bottom: 2px solid rgba(52, 245, 197, 1) !important;
+        color: #000000 !important;
+
+        span {
+          color: #000000 !important;
+        }
+      }
+
+      &:focus,
+      &:active {
+        background: rgba(255, 255, 255, 0.05) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.10) !important;
+        border-bottom: 2px solid transparent !important;
+      }
+
+      &:disabled {
+        background: rgba(255, 255, 255, 0.02) !important;
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        border-bottom: 2px solid transparent !important;
+      }
+    }
+}
+
+// SignUp specific styles - using same container as SignIn
+.signup {
+  &-container {
+    width: 100%;
+    max-width: 400px; // Same as SignIn
+    max-height: 90vh;
+    overflow-y: auto;
+
+    @media (max-width: 768px) {
+      max-width: 100%;
+      max-height: 100vh;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    @media (min-width: 769px) {
+      max-width: 600px; // Same as SignIn
+    }
+  }
+
+  &-form-item {
+    &--default {
+      margin-bottom: 1rem; // #5 space-y-4
+
+      // Label styling - #3 Enhanced contrast
+      .ant-form-item-label > label {
+        color: rgba(255, 255, 255, 0.90); // #3 text-white/90
+        font-size: 0.875rem; // text-sm
+        font-weight: 500;
+      }
+
+      // Error helper text - #6
+      .ant-form-item-explain-error {
+        color: rgba(252, 165, 165, 0.90) !important; // #6 text-red-300/90
+        font-size: 0.875rem; // #6 text-sm
+        margin-top: 0.5rem; // #6 mt-2
+      }
+
+      // Apply same input styling as signin - #5 Enhanced inputs with focus states
+      .ant-input,
+      .ant-input-affix-wrapper {
+        height: 3rem; // #5 h-12
+        min-height: 3rem;
+        max-height: 3rem;
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.05); // #5 bg-white/5
+        border: 1px solid rgba(255, 255, 255, 0.15); // #5 border-white/15
+        border-radius: 1rem; // #5 rounded-2xl
+        padding: 0 1rem; // #5 px-4
+        font-size: 15px;
+        color: rgba(255, 255, 255, 0.90); // #5 text-white/90
+        transition: all 0.2s ease;
+        box-shadow: none;
+        outline: none;
+        overflow: hidden;
+
+        &::placeholder {
+          color: rgba(255, 255, 255, 0.40); // #5 placeholder:text-white/40
+        }
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.07);
+          box-shadow: none;
+        }
+
+        &:focus,
+        &:focus-within {
+          outline: none; // #5 focus:outline-none
+          box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.10); // #5 shadow-[0_0_0_4px_rgba(34,211,238,0.10)]
+          border-color: rgba(34, 211, 238, 0.40); // #5 focus:border-cyan-300/40
+          background: rgba(255, 255, 255, 0.07);
+        }
+
+        &:focus-visible {
+          outline: none;
+          box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.10);
+          border-color: rgba(34, 211, 238, 0.40);
+        }
+
+        // Error state - #6
+        &[aria-invalid="true"] {
+          border-color: rgba(239, 68, 68, 0.40); // #6 border-red-400/40
+          background: rgba(239, 68, 68, 0.05); // #6 bg-red-500/5
+
+          &:focus,
+          &:focus-within {
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.10);
+            border-color: rgba(239, 68, 68, 0.40);
+          }
+        }
+      }
+
+      // REMOVED - Using global styles instead
+
+      .ant-input-suffix {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 8px;
+        flex-shrink: 0;
+      }
+
+      // Remove any autofill backgrounds
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px rgba(255, 255, 255, 0.05) inset;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.90);
+        transition: background-color 5000s ease-in-out 0s;
+        caret-color: rgba(255, 255, 255, 0.90);
+      }
+    }
+
+    // Force password input autofill styles
+    .ant-input-affix-wrapper {
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-box-shadow: 0 0 0 30px transparent inset;
+        -webkit-text-fill-color: rgba(255, 255, 255, 0.90);
+        background-color: transparent;
+        transition: background-color 5000s ease-in-out 0s;
+        caret-color: rgba(255, 255, 255, 0.90);
+      }
+    }
+  }
+
+  &-button-row {
+    display: flex;
+    gap: 12px;
+
+    button {
+      flex: 1;
+    }
+  }
+
+  // All primary buttons in signup get glassmorphism style - #7 CTA button with liquid gradient
+  .ant-btn.ant-btn-primary {
+    height: 3rem; // #7 h-12
+    border-radius: 1rem; // #7 rounded-2xl
+    font-weight: 600; // #7 font-semibold
+    background: linear-gradient(to right, rgba(217, 70, 239, 0.80), rgba(34, 211, 238, 0.80), rgba(99, 102, 241, 0.80)) !important; // #7 from-fuchsia-500/80 via-cyan-400/80 to-indigo-500/80
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.20) !important; // #7 border-white/20
+    color: #ffffff !important; // #7 text-white
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%; // #7 w-full
+
+    span {
+      color: #ffffff !important;
+    }
+
+    &:hover:not(:disabled) {
+      filter: brightness(1.10); // #7 hover:brightness-110
+      transform: translateY(-1px); // #7 hover:-translate-y-px
+      box-shadow: 0 0 24px rgba(99, 102, 241, 0.45); // #7 hover:shadow-[0_0_24px_rgba(99,102,241,0.45)]
+      will-change: transform; // #14 Performance
+      color: #ffffff !important;
+
+      span {
+        color: #ffffff !important;
+      }
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0); // #7 active:translate-y-0
+      filter: brightness(1);
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(34, 211, 238, 0.60);
+      outline-offset: 2px;
+    }
+
+    &:disabled {
+      background: rgba(255, 255, 255, 0.02) !important;
+      border: 1px solid rgba(255, 255, 255, 0.05) !important;
+      color: rgba(255, 255, 255, 0.40) !important;
+      cursor: not-allowed;
+      filter: none;
+
+      span {
+        color: rgba(255, 255, 255, 0.40) !important;
+      }
+    }
+
+    // Loading state
+    &.ant-btn-loading {
+      opacity: 0.8;
+    }
+  }
+
+  // All password inputs in signup get same styling as signin
+  .ant-input-password,
+  .ant-input-affix-wrapper {
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 1rem;
+    padding: 0.75rem 1rem;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.90);
+    transition: all 0.2s ease;
+    box-shadow: none;
+    outline: none;
+    overflow: hidden;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.40);
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.07);
+      box-shadow: none;
+    }
+
+    &:focus,
+    &:focus-within {
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.10);
+      border-color: rgba(34, 211, 238, 0.40);
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(34, 211, 238, 0.60);
+      outline-offset: 2px;
+    }
+
+    // Error state
+    &[aria-invalid="true"] {
+      border-color: rgba(239, 68, 68, 0.40);
+      background: rgba(239, 68, 68, 0.05);
+
+      &:focus,
+      &:focus-within {
+        box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.10);
+        border-color: rgba(239, 68, 68, 0.40);
+      }
+    }
+
+    // REMOVED - Using global styles instead
+
+    .ant-input-suffix {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 8px;
+      flex-shrink: 0;
+      color: rgba(255, 255, 255, 0.4) !important;
+
+      svg {
+        color: rgba(255, 255, 255, 0.4) !important;
+        fill: rgba(255, 255, 255, 0.4) !important;
+      }
+
+      .anticon {
+        color: rgba(255, 255, 255, 0.4) !important;
+
+        svg {
+          color: rgba(255, 255, 255, 0.4) !important;
+          fill: rgba(255, 255, 255, 0.4) !important;
+        }
+      }
+    }
+  }
+
+  .ant-input-password-icon {
+    color: rgba(255, 255, 255, 0.4) !important;
+  }
+
+  &-time-picker {
+    width: 100%;
+  }
+
+  // TimePicker glassmorphism styles
+  :global {
+    .ant-picker-dropdown {
+      .ant-picker-panel-container {
+        background: rgba(30, 30, 40, 0.95);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.10);
+        border-radius: 12px;
+        box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.5);
+      }
+
+      .ant-picker-time-panel {
+        background: transparent;
+      }
+
+      .ant-picker-content {
+        background: transparent;
+      }
+
+      .ant-picker-time-panel-column {
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 8px;
+        margin: 0 4px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      .ant-picker-time-panel-cell {
+        color: rgba(255, 255, 255, 0.6);
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: rgba(255, 255, 255, 0.9);
+        }
+
+        .ant-picker-time-panel-cell-inner {
+          color: inherit;
+          transition: all 0.2s ease;
+        }
+      }
+
+      .ant-picker-time-panel-cell-selected {
+        background: rgba(52, 245, 197, 0.2);
+
+        .ant-picker-time-panel-cell-inner {
+          background: rgba(52, 245, 197, 0.3);
+          color: #000000;
+          font-weight: 600;
+          border-radius: 6px;
+        }
+      }
+
+      .ant-picker-header {
+        background: transparent;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .ant-picker-header-view {
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .ant-picker-footer {
+        display: none !important; // Force hide OK button footer
+      }
+
+      .ant-picker-footer-extra {
+        display: none !important;
+      }
+
+      .ant-picker-ok {
+        display: none !important;
+      }
+
+      .ant-picker-now-btn {
+        color: rgba(52, 245, 197, 1);
+        font-weight: 500;
+
+        &:hover {
+          color: rgba(52, 245, 197, 0.8);
+        }
+      }
+
+      // Hide the panel footer completely
+      .ant-picker-time-panel-column::after {
+        display: none !important;
+      }
+    }
+  }
+
+  &-footer {
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  &-footer-text {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.70);
+  }
+
+  &-footer-link {
+    color: rgb(34, 211, 238);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: rgb(103, 232, 249);
+      text-decoration-thickness: 2px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(34, 211, 238, 0.60);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+
+  // Back and skip buttons - #8 Links styling
+  &-back-button,
+  &-skip-button {
+    color: rgb(34, 211, 238) !important; // #8 text-cyan-300
+    text-decoration: underline; // #8 underline
+    text-underline-offset: 4px; // #8 underline-offset-4
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      color: rgb(103, 232, 249) !important; // #8 hover:text-cyan-200
+      text-decoration-thickness: 2px; // #8 hover:decoration-2
+    }
+
+    &:focus-visible {
+      outline: 2px solid rgba(34, 211, 238, 0.60);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+}
+
+// Registro page specific styles
+.registro {
+  &-main-row {
+    min-height: 100vh;
+    background: linear-gradient(135deg, $color-bg-container, $color-bg-elevated);
+  }
+
+  &-card {
+    box-shadow:
+      0 30px 80px -10px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+  }
+
+  &-title {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  &-error-alert {
+    margin-bottom: 16px;
+  }
+
+  &-steps {
+    margin-bottom: 24px;
+  }
+
+  &-date-picker {
+    width: 100%;
+  }
+}
+
+// Utility classes
+.inline-icon {
+  display: inline;
+}

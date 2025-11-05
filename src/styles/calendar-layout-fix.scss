@@ -1,0 +1,27 @@
+@use 'base/variables' as v;
+
+/* Responsive calendar container - no clipping */
+.calendar-wrapper {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  container-type: inline-size;
+}
+
+/* Calendar grid - fully responsive without overflow */
+.calendar-grid {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  display: grid !important;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  gap: 2px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Calendar days - prevent clipping */
+.calendar-grid .day {
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  aspect-ratio: 1 / 1 !important;
+}

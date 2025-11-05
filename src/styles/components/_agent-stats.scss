@@ -1,0 +1,316 @@
+@use '../base/variables' as *;
+@use 'common-cards';
+
+.agent-stats {
+  .ant-row {
+    .ant-col {
+      .ant-card {
+        @extend .modern-card;
+        
+        .ant-card-body {
+          padding: $spacing-md $spacing-lg;
+          
+          .ant-statistic {
+            .ant-statistic-title {
+              color: $color-text;
+              font-family: $font-family;
+              font-size: 14px;
+              font-weight: 500;
+              margin-bottom: $spacing-sm;
+            }
+            
+            .ant-statistic-content {
+              color: $color-text;
+              font-family: $font-family;
+              font-weight: 600;
+              
+              .ant-statistic-content-value {
+                font-size: 24px;
+              }
+              
+              .ant-statistic-content-suffix {
+                font-size: 16px;
+                margin-left: 4px;
+              }
+            }
+          }
+        }
+      }
+      
+      &:hover .ant-card {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+  
+  .progress-card {
+    @extend .modern-card;
+    height: 100%;
+    
+    .ant-card-head {
+      @extend .card-header;
+      
+      .ant-card-head-title {
+        @extend .card-title;
+      }
+    }
+    
+    .ant-card-body {
+      padding: $spacing-lg;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      
+      .ant-progress-circle {
+        .ant-progress-text {
+          color: $color-text !important;
+          font-family: $font-family;
+          font-weight: 600;
+        }
+      }
+      
+      .ant-typography {
+        color: $color-text-secondary;
+        font-family: $font-family;
+        margin-top: $spacing-md;
+      }
+    }
+  }
+  
+  .distribution-card {
+    @extend .modern-card;
+    
+    .ant-card-head {
+      @extend .card-header;
+      
+      .ant-card-head-title {
+        @extend .card-title;
+      }
+    }
+    
+    .ant-card-body {
+      padding: $spacing-lg;
+      
+      .agent-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: $spacing-md;
+        
+        .ant-space {
+          .ant-avatar {
+            border: 2px solid rgba(255, 255, 255, 0.1);
+          }
+          
+          .ant-typography {
+            color: $color-text;
+            font-family: $font-family;
+            font-weight: 500;
+          }
+        }
+        
+        .agent-value {
+          color: $color-text;
+          font-family: $font-family;
+          font-weight: 600;
+        }
+        
+        .ant-progress {
+          margin-top: $spacing-xs;
+          
+          .ant-progress-bg {
+            background: rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+    }
+  }
+  
+  .metrics-card {
+    @extend .modern-card;
+    height: 100%;
+    
+    .ant-card-head {
+      @extend .card-header;
+      
+      .ant-card-head-title {
+        @extend .card-title;
+      }
+    }
+    
+    // Additional inline styles moved to classes
+    .summary-row {
+      margin-bottom: 24px;
+    }
+    
+    .progress-container {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    
+    .margin-top-16 {
+      margin-top: 16px;
+    }
+    
+    .margin-bottom-16 {
+      margin-bottom: 16px;
+    }
+    
+    .ant-card-body {
+      padding: $spacing-lg;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      
+      .ant-statistic {
+        margin-bottom: $spacing-lg;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        .ant-statistic-title {
+          color: $color-text;
+          font-family: $font-family;
+          font-size: 14px;
+          font-weight: 500;
+          margin-bottom: $spacing-sm;
+        }
+        
+        .ant-statistic-content {
+          color: $color-text;
+          font-family: $font-family;
+          font-weight: 600;
+          
+          .ant-statistic-content-value {
+            font-size: 20px;
+          }
+          
+          .ant-statistic-content-suffix {
+            font-size: 14px;
+            margin-left: 4px;
+          }
+        }
+      }
+    }
+  }
+  
+  .insights-card {
+    @extend .modern-card;
+    
+    .ant-card-head {
+      @extend .card-header;
+      
+      .ant-card-head-title {
+        @extend .card-title;
+      }
+    }
+    
+    .ant-card-body {
+      padding: $spacing-lg;
+      
+      .ant-row {
+        .ant-col {
+          .ant-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            
+            .ant-card-body {
+              padding: $spacing-lg;
+              
+              .ant-statistic {
+                .ant-statistic-title {
+                  color: $color-text;
+                  font-family: $font-family;
+                  font-size: 13px;
+                  font-weight: 500;
+                  margin-bottom: $spacing-xs;
+                }
+                
+                .ant-statistic-content {
+                  .ant-statistic-content-value {
+                    font-size: 18px;
+                    font-family: $font-family;
+                    font-weight: 600;
+                  }
+                  
+                  .ant-statistic-content-suffix {
+                    font-size: 12px;
+                  }
+                }
+              }
+              
+              .ant-typography {
+                color: $color-text-secondary;
+                font-family: $font-family;
+                font-size: 12px;
+                margin-top: $spacing-xs;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: $breakpoint-md) {
+  .agent-stats {
+    .ant-statistic {
+      .ant-statistic-content {
+        .ant-statistic-content-value {
+          font-size: 20px !important;
+        }
+      }
+    }
+    
+    .progress-card {
+      .ant-card-body {
+        .ant-progress-circle {
+          width: 100px !important;
+          height: 100px !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .agent-stats {
+    .ant-statistic {
+      .ant-statistic-content {
+        .ant-statistic-content-value {
+          font-size: 18px !important;
+        }
+      }
+    }
+    
+    .insights-card {
+      .ant-card-body {
+        .ant-row {
+          .ant-col {
+            .ant-card {
+              .ant-card-body {
+                .ant-statistic {
+                  .ant-statistic-content {
+                    .ant-statistic-content-value {
+                      font-size: 16px !important;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

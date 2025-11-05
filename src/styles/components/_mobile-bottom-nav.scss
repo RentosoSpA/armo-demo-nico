@@ -1,0 +1,152 @@
+@use '../base/variables' as *;
+@use '../utils/mixins' as *;
+
+// Mobile Bottom Navigation
+.mobile-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(11, 15, 31, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.016);
+  padding: env(safe-area-inset-bottom, 0) 0 0 0; // iOS safe area
+  display: none; // Hidden by default
+
+  // Only show on mobile
+  @media (max-width: 768px) {
+    display: block;
+    grid-area: bottomNav;
+  }
+
+  .bottom-nav-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 70px;
+    padding: $spacing-xs $spacing-sm;
+    max-width: 100%;
+  }
+
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: $spacing-xs;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 60px;
+    flex: 1;
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    .bottom-nav-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $color-text-secondary;
+      margin-bottom: 2px;
+      transition: all 0.3s ease;
+
+      svg {
+        stroke-width: 1.5;
+      }
+    }
+
+    .bottom-nav-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: $color-text-secondary;
+      text-align: center;
+      line-height: 1.2;
+      margin: 0;
+      transition: all 0.3s ease;
+      @include text-clamp(1);
+    }
+
+    .bottom-nav-indicator {
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: $color-primary;
+      border-radius: 50%;
+      animation: pulse 0.3s ease;
+    }
+
+    // Active state
+    &.bottom-nav-item-active {
+      .bottom-nav-icon {
+        color: $color-primary;
+        transform: translateY(-2px);
+      }
+
+      .bottom-nav-label {
+        color: $color-primary;
+        font-weight: 600;
+      }
+    }
+
+    // Hover effect (for touch feedback)
+    &:hover {
+      background: rgba(11, 15, 31, 0.3);
+
+      .bottom-nav-icon {
+        color: $color-primary;
+      }
+
+      .bottom-nav-label {
+        color: $color-text;
+      }
+    }
+  }
+}
+
+// Pulse animation for active indicator
+@keyframes pulse {
+  0% {
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(-50%) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+}
+
+// Adjust main layout for bottom nav
+@media (max-width: 768px) {
+  .admin-layout {
+    // Add padding bottom to prevent content from being hidden behind bottom nav
+    .grid-main-content {
+      padding-bottom: 80px; // Extra padding for bottom nav
+    }
+  }
+}
+
+// Handle iPhone X and newer safe areas
+@supports (padding: max(0px)) {
+  .mobile-bottom-nav {
+    padding-bottom: max(env(safe-area-inset-bottom), $spacing-xs);
+  }
+}
+
+// Dark theme adjustments
+.layout-dark {
+  .mobile-bottom-nav {
+    background: rgba(11, 15, 31, 0.95);
+    border-top-color: rgba(255, 255, 255, 0.03);
+  }
+}

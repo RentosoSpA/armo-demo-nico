@@ -1,0 +1,798 @@
+@use './base/variables' as v;
+@use 'sass:color';
+
+.contratos-container {
+  padding: 0 24px 24px 24px;
+  min-height: 100vh;
+}
+
+.contratos-header {
+  margin-bottom: v.$spacing-xl;
+  
+  h1 {
+    color: v.$color-text;
+    font-size: v.$font-size-title;
+    font-weight: 600;
+    margin: 0 0 v.$spacing-xs 0;
+  }
+  
+  p {
+    color: v.$color-text-secondary;
+    font-size: v.$font-size-text;
+    margin: 0;
+  }
+}
+
+.contratos-panel {
+  background: v.$color-bg-container;
+  border-radius: 12px;
+  padding: v.$spacing-lg;
+  margin-bottom: v.$spacing-lg;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contratos-document-toggle {
+  display: flex;
+  gap: v.$spacing-sm;
+  margin-bottom: v.$spacing-lg;
+  
+  .toggle-button {
+    padding: v.$spacing-sm v.$spacing-md;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: v.$color-text-secondary;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: v.$font-size-text;
+    font-weight: 500;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    &.active {
+      background: v.$color-bear-notarioso;
+      border-color: v.$color-bear-notarioso;
+      color: v.$color-text-dark;
+    }
+  }
+}
+
+.contracts-header {
+  margin-bottom: v.$spacing-xl;
+
+  .contracts-header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: v.$spacing-md;
+
+    .contracts-header-text {
+      h1 {
+        color: v.$color-text;
+        font-size: v.$font-size-title;
+        font-weight: 600;
+        margin: 0 0 v.$spacing-xs 0;
+      }
+
+      p {
+        color: v.$color-text-secondary;
+        font-size: v.$font-size-text;
+        margin: 0;
+      }
+    }
+
+    .contracts-header-selector {
+      min-width: 280px;
+
+      label {
+        display: block;
+        color: v.$color-text;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+
+      .property-selector {
+        width: 100%;
+        position: relative;
+
+        .ant-select-selector {
+          border-radius: 0.75rem;
+          
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          padding: 0.75rem 2.5rem 0.75rem 1rem;
+          height: auto;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          position: relative;
+
+          &:hover {
+            background: rgba(255, 255, 255, 0.07);
+          }
+
+          .ant-select-selection-search-input {
+            height: auto;
+          }
+
+          .ant-select-selection-item,
+          .ant-select-selection-placeholder {
+            color: v.$color-text;
+            line-height: 1.5;
+          }
+        }
+
+        .ant-select-arrow {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0.75rem;
+          margin: auto;
+          height: fit-content;
+          pointer-events: none;
+          z-index: 1;
+        }
+
+        &.ant-select-focused .ant-select-selector {
+          box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.4);
+          border-color: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0.07);
+        }
+
+        .ant-select-arrow {
+          color: v.$color-text-secondary;
+        }
+      }
+    }
+  }
+}
+
+.contratos-prospecto-select {
+  margin-bottom: v.$spacing-lg;
+  
+  label {
+    display: block;
+    color: v.$color-text;
+    font-size: v.$font-size-text;
+    font-weight: 500;
+    margin-bottom: v.$spacing-sm;
+  }
+  
+  .ant-select {
+    width: 100%;
+    
+    .ant-select-selector {
+      background: v.$color-bg-elevated !important;
+      border-color: rgba(255, 255, 255, 0.2) !important;
+      color: v.$color-text !important;
+    }
+    
+    .ant-select-arrow {
+      color: v.$color-text-secondary;
+    }
+    
+    &.ant-select-disabled {
+      .ant-select-selector {
+        background: rgba(255, 255, 255, 0.05) !important;
+        color: v.$color-text-secondary !important;
+      }
+    }
+  }
+}
+
+.contratos-plantilla-select {
+  margin-bottom: v.$spacing-lg;
+  
+  label {
+    display: block;
+    color: v.$color-text;
+    font-size: v.$font-size-text;
+    font-weight: 500;
+    margin-bottom: v.$spacing-sm;
+  }
+  
+  .plantilla-selector-container {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-sm;
+    
+    .ant-select {
+      width: 100%;
+      
+      .ant-select-selector {
+        background: v.$color-bg-elevated !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
+        color: v.$color-text !important;
+      }
+      
+      .ant-select-arrow {
+        color: v.$color-text-secondary;
+      }
+      
+      &.ant-select-disabled {
+        .ant-select-selector {
+          //background: rgba(255, 255, 255, 0.05) !important;
+          color: v.$color-text-secondary !important;
+        }
+      }
+    }
+    
+    .plantilla-actions {
+      display: flex;
+      gap: v.$spacing-xs;
+      justify-content: flex-start;
+      
+      .ant-btn {
+        display: flex;
+        align-items: center;
+        gap: v.$spacing-xs;
+        padding: 4px v.$spacing-sm;
+        height: auto;
+        font-size: 12px;
+        background: transparent;
+        color: v.$color-text-secondary;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.05) !important;
+          border-color: rgba(255, 255, 255, 0.3) !important;
+          color: v.$color-text !important;
+        }
+        
+        &:disabled {
+          background: transparent !important;
+          color: v.$color-text-secondary !important;
+          border-color: rgba(255, 255, 255, 0.1) !important;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+}
+
+// Empty state styles for plantilla selector
+.plantilla-empty-state {
+  padding: v.$spacing-lg;
+  text-align: center;
+  
+  .empty-icon {
+    font-size: 32px;
+    margin-bottom: v.$spacing-sm;
+  }
+  
+  h4 {
+    color: v.$color-text;
+    margin: 0 0 v.$spacing-xs 0;
+    font-size: v.$font-size-subtitle;
+    font-weight: 600;
+  }
+  
+  p {
+    color: v.$color-text-secondary;
+    margin: 0 0 v.$spacing-md 0;
+    font-size: v.$font-size-text;
+    line-height: 1.4;
+  }
+  
+  .add-template-btn {
+    background: v.$color-primary !important;
+    border-color: v.$color-primary !important;
+    border-radius: 6px;
+    padding: v.$spacing-sm v.$spacing-md;
+    height: auto;
+    font-weight: 500;
+    
+    &:hover {
+      background: color.adjust(v.$color-primary, $lightness: -10%) !important;
+      border-color: color.adjust(v.$color-primary, $lightness: -10%) !important;
+      transform: translateY(-1px);
+    }
+  }
+}
+
+.contratos-generate-section {
+  text-align: center;
+  
+  .generate-button {
+    background: v.$color-bear-notarioso;
+    color: v.$color-text-dark;
+    border: none;
+    padding: v.$spacing-md v.$spacing-xl;
+    border-radius: 8px;
+    font-size: v.$font-size-subtitle;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    
+    &:hover {
+      background: color.adjust(v.$color-bear-notarioso, $lightness: -10%);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(v.$color-bear-notarioso, 0.3);
+    }
+    
+    &:disabled {
+      background: v.$color-text-secondary;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+// Contratos actuales
+.contratos-actuales-card {
+  margin-top: v.$spacing-xl;
+  background: v.$color-bg-container;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  
+  .ant-card-body {
+    padding: v.$spacing-lg;
+  }
+  
+  .contratos-actuales-header {
+    margin-bottom: v.$spacing-md;
+    
+    h3 {
+      margin: 0 0 4px 0;
+      font-size: v.$font-size-subtitle;
+      font-weight: 600;
+      color: v.$color-text;
+    }
+    
+    p {
+      margin: 0;
+      font-size: v.$font-size-text;
+      color: v.$color-text-secondary;
+    }
+  }
+  
+  .contratos-loading {
+    padding: v.$spacing-md 0;
+  }
+  
+  .contratos-empty {
+    padding: v.$spacing-xl 0;
+    text-align: center;
+    
+    p {
+      margin: 0;
+      font-size: v.$font-size-text;
+      color: v.$color-text-secondary;
+    }
+  }
+  
+  .contratos-list {
+    .contrato-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: v.$spacing-sm 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .contrato-info {
+        flex: 1;
+        
+        .contrato-nombre {
+          font-size: v.$font-size-text;
+          font-weight: 500;
+          color: v.$color-text;
+          margin-bottom: 4px;
+        }
+        
+        .contrato-meta {
+          display: flex;
+          align-items: center;
+          gap: v.$spacing-xs;
+          
+          .ant-tag {
+            margin: 0;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+          }
+          
+          .contrato-fecha {
+            font-size: 12px;
+            color: v.$color-text-secondary;
+          }
+        }
+      }
+      
+      .contrato-actions {
+        display: flex;
+        gap: 4px;
+        
+        .ant-btn {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          padding: 4px v.$spacing-sm;
+          height: auto;
+          font-size: 12px;
+          background: transparent;
+          color: v.$color-text-secondary;
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          border-radius: 4px;
+          
+          &:hover {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+            color: v.$color-text !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.contrato-preview-modal {
+  .ant-modal-content {
+    background: v.$color-bg-container;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .ant-modal-header {
+    background: v.$color-bg-container;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    .ant-modal-title {
+      color: v.$color-text;
+    }
+  }
+  
+  .ant-modal-body {
+    padding: v.$spacing-lg;
+  }
+  
+  .contrato-preview-content {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: v.$spacing-md;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    background: v.$color-bg-elevated;
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: v.$color-text;
+  }
+  
+  .ant-modal-footer {
+    background: v.$color-bg-container;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+// Create Section Styles
+.create-section {
+  margin-top: v.$spacing-xl;
+  width: 100%;
+
+  .section-title {
+    color: v.$color-text;
+    font-size: v.$font-size-title;
+    font-weight: 600;
+    margin: 0 0 v.$spacing-lg 0;
+  }
+
+  .templates-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: v.$spacing-lg;
+    width: 100%;
+  }
+}
+
+// Template Cards - Glassmorphism
+.template-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .ant-card-body {
+    padding: v.$spacing-lg;
+  }
+
+  .template-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: v.$spacing-md;
+
+    .template-icon {
+      color: v.$color-bear-notarioso;
+    }
+
+    .ant-tag {
+      margin: 0;
+      border-radius: 6px;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .template-title {
+    color: v.$color-text;
+    font-size: v.$font-size-subtitle;
+    font-weight: 600;
+    margin: 0 0 v.$spacing-sm 0;
+    line-height: 1.4;
+  }
+
+  .template-meta {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-xs;
+    margin-bottom: v.$spacing-md;
+
+    .template-date {
+      font-size: 13px;
+      color: v.$color-text-secondary;
+    }
+  }
+
+  .template-actions {
+    display: flex;
+    gap: v.$spacing-xs;
+    margin-top: v.$spacing-md;
+    padding-top: v.$spacing-md;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    .ant-btn {
+      flex: 1;
+      border-radius: 8px;
+      height: 36px;
+      font-weight: 500;
+
+      &[type="text"] {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: v.$color-text-secondary;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.3);
+          color: v.$color-text;
+        }
+      }
+
+      &[type="primary"] {
+        background: v.$color-bear-notarioso;
+        border: none;
+        color: v.$color-text-dark;
+
+        &:hover {
+          background: color.adjust(v.$color-bear-notarioso, $lightness: -10%);
+          transform: translateY(-1px);
+        }
+      }
+    }
+  }
+}
+
+// Upload Template Card
+.upload-template-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 320px;
+
+  .upload-card-content {
+    text-align: center;
+
+    .upload-title {
+      color: v.$color-text;
+      font-size: v.$font-size-subtitle;
+      font-weight: 600;
+      margin: 0 0 v.$spacing-lg 0;
+    }
+  }
+
+  .ant-upload-wrapper {
+    width: 100%;
+  }
+}
+
+// Templates Grid
+.templates-grid {
+  display: contents;
+}
+
+// Contracts Section Card - Glassmorphism
+.contracts-section-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  margin-bottom: v.$spacing-xl;
+
+  .ant-card-body {
+    padding: v.$spacing-lg;
+  }
+
+  h2 {
+    color: v.$color-text;
+    font-size: v.$font-size-title;
+    font-weight: 600;
+    margin: 0 0 v.$spacing-lg 0;
+  }
+
+  .ant-table {
+    background: transparent;
+
+    .ant-table-thead > tr > th {
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: v.$color-text;
+      font-weight: 600;
+    }
+
+    .ant-table-tbody > tr {
+      background: transparent;
+
+      &:hover > td {
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      > td {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        color: v.$color-text;
+      }
+    }
+  }
+}
+
+// Generate Form Modal Styles
+.generate-form-modal {
+  .ant-modal-content {
+    background: v.$color-bg-container;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .ant-modal-header {
+    background: v.$color-bg-container;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+    .ant-modal-title {
+      color: v.$color-text;
+    }
+  }
+
+  .ant-modal-body {
+    padding: v.$spacing-xl v.$spacing-lg;
+  }
+}
+
+.generate-form {
+  .generate-form-header {
+    margin-bottom: v.$spacing-lg;
+
+    .plantilla-name {
+      color: v.$color-text-secondary;
+      font-size: v.$font-size-text;
+      margin: 0;
+    }
+  }
+
+  .generate-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: v.$spacing-lg;
+    margin-bottom: v.$spacing-xl;
+
+    .form-field {
+      label {
+        display: block;
+        color: v.$color-text;
+        font-size: v.$font-size-text;
+        font-weight: 500;
+        margin-bottom: v.$spacing-sm;
+      }
+
+      .ant-select {
+        .ant-select-selector {
+          background: v.$color-bg-elevated;
+          border-color: rgba(255, 255, 255, 0.2);
+          color: v.$color-text;
+        }
+
+        .ant-select-arrow {
+          color: v.$color-text-secondary;
+        }
+      }
+    }
+  }
+
+  .generate-form-actions {
+    display: flex;
+    gap: v.$spacing-md;
+    justify-content: flex-end;
+
+    .ant-btn {
+      border-radius: 8px;
+      font-weight: 500;
+
+      &[type="primary"] {
+        background: v.$color-bear-notarioso;
+        border-color: v.$color-bear-notarioso;
+        color: v.$color-text-dark;
+
+        &:hover {
+          background: color.adjust(v.$color-bear-notarioso, $lightness: -10%);
+          border-color: color.adjust(v.$color-bear-notarioso, $lightness: -10%);
+        }
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: v.$breakpoint-lg) {
+  .create-section {
+    .templates-grid-container {
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    }
+  }
+
+  .contracts-header {
+    .contracts-header-content {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .contracts-header-selector {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: v.$breakpoint-md) {
+  .contratos-document-toggle {
+    flex-direction: column;
+
+    .toggle-button {
+      text-align: center;
+    }
+  }
+
+  .contratos-actuales-card {
+    .contrato-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: v.$spacing-sm;
+
+      .contrato-actions {
+        align-self: flex-end;
+      }
+    }
+  }
+
+  .create-section {
+    .templates-grid-container {
+      grid-template-columns: 1fr;
+    }
+  }
+}

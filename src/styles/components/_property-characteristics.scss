@@ -1,0 +1,263 @@
+@use '../base/variables' as *;
+@use 'common-cards';
+
+.property-characteristics {
+  @extend .modern-card;
+  
+  .characteristics-header {
+    @extend .card-header;
+    
+    .characteristics-title {
+      padding: $spacing-md  $spacing-md $spacing-xs $spacing-lg;
+      @extend .card-title;
+    }
+    
+    .chart-selector {
+      margin-top: 2px;
+      margin-left: $spacing-lg;
+      cursor: pointer;
+      min-width: 140px;
+
+      .ant-select-selector {
+        background: transparent;
+        border: none;
+        color: $color-text;
+        font-family: $font-family;
+        font-size: 14px;
+        padding: 8px 16px;
+        height: auto;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .ant-select-selection-item {
+          color: $color-text;
+          padding: 0;
+          flex: 1;
+        }
+      }
+
+      .ant-select-arrow {
+        color: $color-text;
+        right: 12px;
+      }
+
+      &:hover .ant-select-selector {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 4px;
+      }
+    }
+  }
+  
+  .characteristics-content {
+    padding: 0 $spacing-lg $spacing-lg $spacing-lg;
+    
+    .loading-state {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      color: $color-text-secondary;
+      font-family: $font-family;
+    }
+    
+    .characteristics-list {
+      .characteristic-item {
+        margin-bottom: $spacing-lg;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+        
+        .item-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: $spacing-sm;
+          
+          .item-name {
+            color: $color-text;
+            font-size: 14px;
+            font-weight: 500;
+            font-family: $font-family;
+          }
+          
+          .item-value {
+            color: $color-text-secondary;
+            font-size: 16px;
+            font-weight: 600;
+            font-family: $font-family;
+          }
+        }
+        
+        .progress-container {
+          width: 100%;
+          height: 6px;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 3px;
+          overflow: hidden;
+
+          .progress-bar {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+            position: relative;
+
+            &::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+              animation: shimmer 2s infinite;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Custom tooltip styling for charts
+  .custom-tooltip {
+    background: rgba(20, 30, 40, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: $spacing-md;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+
+    .tooltip-label {
+      color: $color-text;
+      font-weight: 600;
+      margin: 0 0 $spacing-xs 0;
+      font-size: 14px;
+      font-family: $font-family;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: $spacing-xs;
+    }
+
+    .tooltip-item {
+      color: $color-text;
+      font-size: 13px;
+      font-family: $font-family;
+      margin: $spacing-xs 0;
+      font-weight: 500;
+    }
+  }
+}
+
+// Metrics chart specific styles for larger chart display
+.metrics-chart {
+  .characteristics-content {
+    padding: $spacing-lg;
+    min-height: 450px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 16px 16px;
+  }
+
+  .characteristics-header {
+    background: rgba(255, 255, 255, 0.02);
+
+    .characteristics-title {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+    }
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+// Dropdown styles
+.ant-select-dropdown {
+  background: $color-bg-container;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  min-width: 140px;
+  
+  .ant-select-item {
+    color: $color-text;
+    font-family: $font-family;
+    padding: 8px 12px;
+    white-space: nowrap;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    &.ant-select-item-option-selected {
+      background: rgba(51, 244, 145, 0.2);
+      color: $color-primary;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: $breakpoint-md) {
+  .property-characteristics {
+    padding: $spacing-md;
+    
+    .characteristics-header {
+      .characteristics-title {
+        font-size: 16px;
+      }
+    }
+    
+    .characteristics-content {
+      .characteristics-list {
+        .characteristic-item {
+          margin-bottom: $spacing-md;
+          
+          .item-info {
+            .item-name {
+              font-size: 13px;
+            }
+            
+            .item-value {
+              font-size: 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .property-characteristics {
+    padding: $spacing-md;
+    
+    .characteristics-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-sm;
+      
+      .characteristics-title {
+        font-size: 15px;
+      }
+    }
+    
+    .characteristics-content {
+      .characteristics-list {
+        .characteristic-item {
+          .item-info {
+            .item-name {
+              font-size: 12px;
+            }
+            
+            .item-value {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

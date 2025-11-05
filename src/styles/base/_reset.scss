@@ -1,0 +1,76 @@
+@use 'variables' as *;
+
+// Global Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: $font-family;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  @media (max-width: 768px) {
+    height: 100svh; // Small viewport height for mobile
+  }
+}
+
+body {
+  font-family: $font-family;
+  color: $color-text;
+  background-color: $color-bg-container;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  position: relative;
+
+  @media (max-width: 768px) {
+    height: 100svh; // Small viewport height for mobile
+    overflow: hidden; // Prevent scroll on mobile
+  }
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+
+  @media (max-width: 768px) {
+    height: 100svh; // Small viewport height for mobile
+  }
+}
+
+// Remove default button styles
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+// Remove default list styles
+ul, ol {
+  list-style: none;
+}
+
+// Remove default link styles
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Input reset
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}

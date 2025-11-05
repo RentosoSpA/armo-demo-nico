@@ -1,0 +1,535 @@
+@use '../base/variables' as *;
+@use '../utils/mixins' as *;
+
+.form {
+  &__group {
+    margin-bottom: $spacing-lg;
+  }
+  
+  &__label {
+    display: block;
+    margin-bottom: $spacing-xs;
+    font-weight: 500;
+    color: $color-text;
+    font-size: 14px;
+  }
+  
+  &__input {
+    width: 100%;
+    padding: $spacing-md $spacing-lg;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    background-color: rgba(11, 15, 31, 0.7);
+    color: $color-text;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      background-color: rgba(11, 15, 31, 0.8);
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+      box-shadow: 0 4px 16px rgba(52, 245, 197, 0.2), 0 0 0 2px rgba(52, 245, 197, 0.1);
+      background-color: rgba(11, 15, 31, 0.9);
+    }
+    
+    &:disabled {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: $color-text-secondary;
+      cursor: not-allowed;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+    
+    &--error {
+      border-color: $color-error;
+      box-shadow: 0 2px 8px rgba(255, 64, 128, 0.1);
+      
+      &:focus {
+        border-color: $color-error;
+        box-shadow: 0 4px 16px rgba(255, 64, 128, 0.2), 0 0 0 2px rgba(255, 64, 128, 0.1);
+      }
+    }
+  }
+  
+  &__textarea {
+    @extend .form__input;
+    min-height: 80px;
+    resize: vertical;
+  }
+  
+  &__select {
+    @extend .form__input;
+    cursor: pointer;
+    
+    &:focus {
+      cursor: text;
+    }
+  }
+  
+  &__checkbox,
+  &__radio {
+    margin-right: $spacing-sm;
+    accent-color: $color-primary;
+  }
+  
+  &__help-text {
+    margin-top: $spacing-xs;
+    font-size: 12px;
+    color: $color-text-secondary;
+  }
+  
+  &__error-text {
+    margin-top: $spacing-xs;
+    font-size: 12px;
+    color: $color-error;
+  }
+  
+  &__actions {
+    @include flex-center;
+    gap: $spacing-md;
+    margin-top: $spacing-xl;
+  }
+}
+
+// Ant Design form validation error messages styling
+.ant-form-item-explain-error,
+.ant-form-item-explain,
+.ant-form-item-feedback-icon,
+.ant-form-item-children-icon,
+.ant-form-item-explain-connected {
+  background-color: transparent !important;
+  color: $color-error;
+  font-size: 12px;
+  margin-top: $spacing-xs;
+}
+
+// More comprehensive targeting for all error message containers
+.ant-form-item {
+  .ant-form-item-explain-error,
+  .ant-form-item-explain,
+  .ant-form-item-feedback-icon,
+  .ant-form-item-children-icon {
+    background-color: transparent !important;
+    background: transparent !important;
+  }
+}
+
+// Target the error message text specifically
+.ant-form-item-explain-error > div,
+.ant-form-item-explain > div {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+// Global targeting for all possible error message elements
+:global {
+  .ant-form-item-explain-error,
+  .ant-form-item-explain,
+  .ant-form-item-explain-error *,
+  .ant-form-item-explain * {
+    background-color: transparent !important;
+    background: transparent !important;
+  }
+}
+
+// Additional targeting for modal forms specifically
+.ant-modal,
+.nueva-visita-modal {
+  .ant-form-item-explain-error,
+  .ant-form-item-explain,
+  .ant-form-item-explain-error *,
+  .ant-form-item-explain * {
+    background-color: transparent !important;
+    background: transparent !important;
+    color: $color-error !important;
+  }
+}
+
+// Super aggressive targeting to override any background - Ant Design v5
+.nueva-visita-modal {
+  // Ant Design v5 classes
+  .ant-form-item-explain-error,
+  .ant-form-item-explain,
+  .ant-form-item-feedback-icon-error,
+  .ant-form-item-with-help,
+  .ant-form-item-has-error,
+  div[class*="ant-form-item-explain"],
+  div[class*="explain-error"],
+  div[class*="form-item-explain"] {
+    background: none !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    
+    &::before,
+    &::after {
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+  }
+  
+  // Target any div that contains error text
+  .ant-form-item-control-input-content + div,
+  .ant-form-item-control-input + div {
+    background: none !important;
+    background-color: transparent !important;
+    color: $color-error !important;
+    
+    &::before,
+    &::after {
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+  }
+  
+  // Universal targeting for any child with background
+  .ant-form-item {
+    > div:last-child {
+      background: transparent !important;
+      background-color: transparent !important;
+      
+      > div {
+        background: transparent !important;
+        background-color: transparent !important;
+      }
+    }
+  }
+}
+
+// Ant Design Form styling for better legibility
+.ant-form {
+  .ant-form-item-label {
+    > label {
+      color: $color-text;
+      font-weight: 600;
+      font-size: 14px;
+      
+      &.ant-form-item-required {
+        &::before {
+          color: $color-error;
+        }
+      }
+    }
+  }
+  
+  .ant-input:not(textarea),
+  .ant-input-number,
+  .ant-select-selector,
+  .ant-picker,
+  .ant-input[disabled] {
+    background-color: rgba(11, 15, 31, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: $color-text;
+    border-radius: 8px;
+    padding: 8px 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    height: 48px;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.08);
+      background-color: rgba(11, 15, 31, 0.8);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    &:focus,
+    &.ant-input-focused,
+    &.ant-select-focused .ant-select-selector {
+      border-color: $color-primary;
+      box-shadow: 0 4px 16px rgba(52, 245, 197, 0.2), 0 0 0 2px rgba(52, 245, 197, 0.1);
+      background-color: rgba(11, 15, 31, 0.9);
+    }
+    
+    &[disabled] {
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+  }
+  
+  .ant-input-number {
+    height: 48px;
+    min-height: 48px;
+
+    .ant-input-number-input {
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      padding: 0;
+      height: 100%;
+    }
+
+    .ant-input-number-input-wrap {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .ant-select {
+    .ant-select-selector {
+      min-height: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+    }
+
+    .ant-select-selection-item,
+    .ant-select-selection-placeholder {
+      line-height: 32px;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .ant-picker {
+    min-height: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    
+    .ant-picker-input {
+      > input {
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+  
+  .ant-input::placeholder,
+  .ant-input-number-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .ant-select-selection-placeholder,
+  .ant-picker-input input::placeholder,
+  .ant-picker-input input[placeholder] {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .ant-select-clear,
+  .ant-picker-clear,
+  .ant-input-clear-icon {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: $color-text-secondary;
+
+    .anticon,
+    .anticon svg {
+      color: $color-text-secondary;
+      fill: $color-text-secondary;
+      font-size: 10px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      color: $color-text;
+
+      .anticon,
+      .anticon svg {
+        color: $color-text;
+        fill: $color-text;
+      }
+    }
+  }
+
+  .ant-select-arrow,
+  .ant-picker-suffix {
+    color: $color-text-secondary;
+
+    .anticon,
+    .anticon svg {
+      color: $color-text-secondary;
+      fill: $color-text-secondary;
+    }
+
+    &:hover {
+      color: $color-text;
+
+      .anticon,
+      .anticon svg {
+        color: $color-text;
+        fill: $color-text;
+      }
+    }
+  }
+  
+  .ant-select-selector {
+    .ant-select-arrow {
+      color: $color-text-secondary;
+      
+      .anticon {
+        color: $color-text-secondary;
+      }
+    }
+    
+    &:hover .ant-select-arrow {
+      color: $color-text;
+      
+      .anticon {
+        color: $color-text;
+      }
+    }
+  }
+  
+  .ant-checkbox-wrapper {
+    color: $color-text;
+    
+    .ant-checkbox {
+      .ant-checkbox-inner {
+        background-color: rgba(11, 15, 31, 0.3);
+        border-color: rgba(255, 255, 255, 0.05);
+      }
+      
+      &.ant-checkbox-checked .ant-checkbox-inner {
+        background-color: $color-primary;
+        border-color: $color-primary;
+      }
+    }
+  }
+  
+  .ant-upload.ant-upload-drag {
+    background-color: rgba(11, 15, 31, 0.2);
+    border: 2px dashed rgba(255, 255, 255, 0.05);
+    
+    &:hover {
+      border-color: $color-primary;
+    }
+    
+    .ant-upload-text {
+      color: $color-text;
+    }
+  }
+}
+
+// Fix for table expanded row z-index issue
+.ant-table-expanded-row-fixed {
+  z-index: auto;
+  position: relative;
+}
+
+// Modal form styling
+.ant-modal {
+  z-index: 100;
+
+  .ant-modal-title {
+    color: $color-text;
+  }
+  
+  .ant-modal-body {
+    color: $color-text-secondary;
+    
+    // Titles and subtitles should be white
+    h1, h2, h3, h4, h5, h6 {
+      color: $color-text;
+    }
+    
+    // Target specific title/subtitle elements
+    .ant-typography-title,
+    .modal-title,
+    .section-title,
+    [class*="title"],
+    [class*="Title"] {
+      color: $color-text;
+    }
+    
+    // Target all other text elements in modal body (secondary color)
+    p, span, div, label, .ant-typography {
+      color: $color-text-secondary;
+    }
+    
+    // Target specific Ant Design components text
+    .ant-form-item-label > label {
+      color: $color-text-secondary;
+    }
+    
+    // Override any default text colors in modal content
+    .ant-descriptions-item-label,
+    .ant-descriptions-item-content {
+      color: $color-text-secondary;
+    }
+    
+    // Ensure form help text uses secondary color
+    .ant-form-item-extra {
+      color: $color-text-secondary;
+    }
+  }
+  
+  .ant-steps-item-title {
+    color: $color-text;
+  }
+  
+  .ant-steps-item:not(.ant-steps-item-active):not(.ant-steps-item-finish) {
+    .ant-steps-item-title {
+      color: $color-text-secondary;
+    }
+  }
+  
+  .ant-steps-item-description {
+    color: $color-text-secondary;
+  }
+  
+  h4 {
+    color: $color-text;
+  }
+}
+
+.input-group {
+  @include flex-center;
+  
+  &__prepend,
+  &__append {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid $color-border;
+    padding: $spacing-sm $spacing-md;
+    color: $color-text-secondary;
+    font-size: 14px;
+  }
+  
+  &__prepend {
+    border-right: none;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+  
+  &__append {
+    border-left: none;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+  
+  .form__input {
+    border-radius: 0;
+    
+    &:first-child {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+    
+    &:last-child {
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+    }
+  }
+}

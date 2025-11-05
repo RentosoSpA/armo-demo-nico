@@ -1,0 +1,82 @@
+.field-grid {
+  display: grid;
+  gap: 1rem 2rem;
+
+  // Mobile: always 1 column
+  grid-template-columns: 1fr;
+
+  // Desktop: 2 columns by default
+  @media (min-width: 768px) {
+    &--cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    &--cols-1 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Allow specific items to span full width
+  .full-width {
+    grid-column: 1 / -1;
+  }
+
+  // RESET Ant Design Col behavior inside CSS Grid
+  // Col components were designed for Row/Flexbox, not CSS Grid
+  .ant-col {
+    // Remove all Ant Design Col default styles
+    flex: none !important;
+    max-width: none !important;
+    display: block !important;
+    width: 100% !important;
+
+    // Ensure the Col itself doesn't add padding/margin
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  // Ensure all form controls take full width in their grid cell
+  .ant-form-item {
+    width: 100% !important;
+
+    .ant-form-item-control {
+      width: 100% !important;
+
+      .ant-form-item-control-input {
+        width: 100% !important;
+
+        .ant-form-item-control-input-content {
+          width: 100% !important;
+
+          // All input types - FORCE 100% width
+          .ant-input,
+          .ant-input-number,
+          .ant-select,
+          .ant-picker,
+          .ant-input-affix-wrapper,
+          .ant-input-group-wrapper {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+
+  // Double-ensure for Col nested form controls
+  .ant-col {
+    .ant-form-item {
+      width: 100% !important;
+
+      .ant-input,
+      .ant-input-number,
+      .ant-select,
+      .ant-picker {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 100% !important;
+      }
+    }
+  }
+}

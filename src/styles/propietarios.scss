@@ -1,0 +1,299 @@
+@use 'base/variables' as v;
+
+// Propietarios table styles matching oportunidades list view
+.propietarios-table-container {
+  background: v.$color-bg-container;
+  border-radius: 12px;
+  overflow: hidden;
+  padding: v.$spacing-lg;
+
+  &.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    color: v.$color-text-secondary;
+  }
+
+  .table-header {
+    margin-bottom: v.$spacing-lg;
+    
+    .search-container {
+      max-width: 400px;
+      
+      .search-input {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: v.$color-text;
+        
+        &::placeholder {
+          color: v.$color-text-secondary;
+        }
+        
+        .ant-input {
+          background: transparent;
+          color: v.$color-text;
+          border: none;
+          
+          &::placeholder {
+            color: v.$color-text-secondary;
+          }
+        }
+      }
+    }
+  }
+
+  .table-columns-header {
+    display: grid;
+    grid-template-columns: 100px 1fr 180px;
+    gap: v.$spacing-md;
+    padding: v.$spacing-md v.$spacing-lg;
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+    color: v.$color-text;
+    font-size: 14px;
+  }
+
+  .owner-group {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .owner-group-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: v.$spacing-lg;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .owner-info {
+        display: flex;
+        align-items: center;
+        gap: v.$spacing-md;
+        
+        .owner-details {
+          .owner-name {
+            font-weight: 600;
+            font-size: 16px;
+            color: v.$color-text;
+            margin-bottom: v.$spacing-xs;
+          }
+          
+          .owner-contact {
+            display: flex;
+            gap: v.$spacing-sm;
+            margin-bottom: v.$spacing-xs;
+            
+            .contact-item {
+              font-size: 12px;
+              color: v.$color-text-secondary;
+            }
+          }
+          
+          .owner-actions {
+            display: flex;
+            gap: v.$spacing-xs;
+            flex-wrap: wrap;
+            align-items: center;
+            
+            .stat-chip {
+              padding: 2px 8px;
+              border-radius: 12px;
+              font-size: 12px;
+              font-weight: 500;
+              background: rgba(v.$color-primary, 0.2);
+              color: v.$color-primary;
+            }
+            
+            .action-pill {
+              display: inline-flex;
+              align-items: center;
+              gap: 4px;
+              padding: 4px 12px;
+              border-radius: 16px;
+              font-size: 12px;
+              font-weight: 500;
+              text-decoration: none;
+              border: 1px solid transparent;
+              cursor: pointer;
+              transition: all 0.2s ease;
+              
+              &.contactar {
+                background: rgba(v.$color-primary, 0.2);
+                color: v.$color-primary;
+                border-color: rgba(v.$color-primary, 0.3);
+                
+                &:hover:not(.disabled) {
+                  background: rgba(v.$color-primary, 0.3);
+                  color: v.$color-primary;
+                }
+                
+                &.disabled {
+                  opacity: 0.5;
+                  cursor: not-allowed;
+                  background: rgba(255, 255, 255, 0.1);
+                  color: v.$color-text-secondary;
+                }
+              }
+              
+              &.whatsapp {
+                background: rgba(37, 211, 102, 0.2);
+                color: #25d366;
+                border-color: rgba(37, 211, 102, 0.3);
+                
+                &:hover {
+                  background: rgba(37, 211, 102, 0.3);
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      .toggle-button {
+        color: v.$color-text-secondary;
+        border: none;
+        background: transparent;
+        
+        &:hover {
+          color: v.$color-text;
+          background: rgba(255, 255, 255, 0.05);
+        }
+      }
+    }
+    
+    .owner-group-body {
+      background: rgba(255, 255, 255, 0.01);
+    }
+  }
+
+  .property-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 180px;
+    gap: v.$spacing-md;
+    padding: v.$spacing-md v.$spacing-lg;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .property-column {
+      display: flex;
+      align-items: center;
+      
+      &.image-column {
+        justify-content: center;
+        
+        .property-image {
+          width: 64px;
+          height: 64px;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 6px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+          
+          .anticon {
+            font-size: 24px;
+            color: v.$color-text-secondary;
+          }
+        }
+      }
+      
+      &.property-info-column {
+        flex-direction: column;
+        align-items: flex-start;
+        
+        .property-title {
+          font-weight: 600;
+          color: v.$color-text;
+          margin-bottom: 4px;
+        }
+        
+        .property-address {
+          font-size: 12px;
+          color: v.$color-text-secondary;
+          margin-bottom: 4px;
+        }
+        
+        .property-status {
+          font-size: 12px;
+          color: v.$color-text-secondary;
+        }
+      }
+      
+      &.actions-column {
+        justify-content: flex-end;
+        gap: 8px;
+        
+        .ant-btn {
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: v.$color-text;
+          
+          &:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            color: v.$color-text;
+          }
+
+          &.ant-btn-primary {
+            background: rgba(51, 244, 145, 0.2);
+            border-color: rgba(51, 244, 145, 0.3);
+            color: #33F491;
+            
+            &:hover {
+              background: #33F491;
+              color: #000000;
+              border-color: #33F491;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .no-results {
+    text-align: center;
+    padding: v.$spacing-xxl;
+    color: v.$color-text-secondary;
+    font-style: italic;
+  }
+}
+
+.anadir-propietario-btn:hover {
+  color: #000000 !important;
+}
+
+.editar-propietario-btn {
+  background: rgba(51, 244, 145, 0.2);
+  border: 1px solid rgba(51, 244, 145, 0.3);
+  color: #33F491 !important;
+  
+  &:hover {
+    background: #33F491 !important;
+    color: #000000 !important;
+    border-color: #33F491 !important;
+  }
+}

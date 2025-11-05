@@ -1,0 +1,187 @@
+@use './base/variables.scss' as v;
+
+/* Mobile-specific styles for Brigada */
+@media (max-width: calc(v.$breakpoint-md - 1px)) {
+  .brigada {
+    padding: v.$spacing-md;
+    
+    &__header {
+      margin-bottom: v.$spacing-md;
+      
+      h1 {
+        font-size: 24px;
+      }
+    }
+    
+    &__metrics {
+      grid-template-columns: repeat(2, 1fr);
+      gap: v.$spacing-sm;
+      margin-bottom: v.$spacing-md;
+    }
+    
+    &__list {
+      gap: v.$spacing-sm;
+    }
+  }
+
+  /* Mobile bear cards - more compact layout */
+  .bear-card {
+    grid-template-columns: 8px 48px 1fr;
+    padding: v.$spacing-md;
+    border-radius: 16px;
+    
+    &__icon {
+      width: 48px;
+      height: 48px;
+      font-size: 22px;
+    }
+    
+    &__header {
+      gap: v.$spacing-sm;
+      margin-bottom: 8px;
+    }
+    
+    &__title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    &__desc {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-bottom: 8px;
+    }
+    
+    &__meta {
+      gap: v.$spacing-md;
+      flex-direction: column;
+      align-items: flex-start;
+      
+      span {
+        font-size: 12px;
+      }
+    }
+  }
+
+  /* Full-page modal styles for mobile */
+  .mobile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: v.$color-bg-elevated;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-modal-header {
+    display: flex;
+    align-items: center;
+    padding: v.$spacing-md;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: v.$color-bg-elevated;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    
+    &__back {
+      background: none;
+      border: none;
+      color: v.$color-text;
+      padding: v.$spacing-sm;
+      margin-right: v.$spacing-sm;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+    
+    &__title {
+      flex: 1;
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+      color: v.$color-text;
+    }
+    
+    &__save {
+      background: v.$color-primary;
+      border: none;
+      color: v.$color-text;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      
+      &:hover {
+        background: v.$color-primary-hover;
+      }
+    }
+  }
+
+  .mobile-modal-content {
+    flex: 1;
+    padding: v.$spacing-md;
+    overflow-y: auto;
+    background: v.$color-bg-elevated;
+  }
+
+  .mobile-modal-footer {
+    position: sticky;
+    bottom: 0;
+    background: v.$color-bg-elevated;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: v.$spacing-md;
+    display: flex;
+    gap: v.$spacing-sm;
+    
+    .ant-btn {
+      flex: 1;
+      height: 44px;
+      border-radius: 8px;
+      font-weight: 500;
+      
+      &.ant-btn-default {
+        background: transparent;
+        border-color: rgba(255, 255, 255, 0.08);
+        color: v.$color-text-secondary;
+        
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.15);
+          color: v.$color-text;
+        }
+      }
+      
+      &.ant-btn-primary {
+        background: v.$color-primary;
+        border-color: v.$color-primary;
+        
+        &:hover {
+          background: v.$color-primary-hover;
+          border-color: v.$color-primary-hover;
+        }
+      }
+    }
+  }
+
+  /* Hide desktop drawer on mobile */
+  .ant-drawer {
+    display: none !important;
+  }
+}
+
+/* Ensure desktop styles are preserved */
+@media (min-width: v.$breakpoint-md) {
+  .mobile-modal-overlay {
+    display: none;
+  }
+}

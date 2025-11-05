@@ -1,0 +1,44 @@
+@use '../../styles/base/variables' as *;
+@use '../../styles/utils/mixins' as *;
+
+.google-map-card {
+  margin-top: 16px;
+  border-radius: 12px;
+}
+
+.google-map-container {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.google-map-iframe {
+  border: 0;
+  border-radius: 8px;
+}
+
+.google-map-fallback {
+  height: 100%;
+  width: 100%;
+  background-color: #0f133d;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d9d9d9;
+
+  .map-icon {
+    margin-bottom: 16px;
+  }
+
+  .map-title {
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .map-address {
+    margin-bottom: 16px;
+    text-align: center;
+    padding: 0 16px;
+  }
+}

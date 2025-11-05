@@ -1,0 +1,690 @@
+@use '../base/variables' as *;
+
+.gastos-facturas {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+              0 0 40px rgba(255, 64, 128, 0.1);
+  padding: 48px;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255, 64, 128, 0.6) 20%,
+      rgba(255, 64, 128, 0.8) 50%,
+      rgba(255, 64, 128, 0.6) 80%,
+      transparent 100%
+    );
+    border-radius: 20px 20px 0 0;
+  }
+}
+
+.gastos-summary-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.gastos-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .gastos-summary-icon {
+    font-size: 36px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .gastos-summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .gastos-summary-label {
+    font-size: 13px;
+    color: $color-text-secondary;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .gastos-summary-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: $color-text;
+  }
+
+  &.gastos-summary-card--total {
+    .gastos-summary-icon {
+      background: linear-gradient(135deg, rgba(52, 245, 197, 0.2), rgba(52, 245, 197, 0.1));
+    }
+    .gastos-summary-value {
+      color: #34F5C5;
+      text-shadow: 0 0 20px rgba(52, 245, 197, 0.3);
+    }
+  }
+
+  &.gastos-summary-card--fijos {
+    .gastos-summary-icon {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(168, 85, 247, 0.1));
+    }
+  }
+
+  &.gastos-summary-card--variables {
+    .gastos-summary-icon {
+      background: linear-gradient(135deg, rgba(255, 183, 77, 0.2), rgba(255, 183, 77, 0.1));
+    }
+  }
+}
+
+.gastos-header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.gastos-actions {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.gastos-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 32px;
+  margin-top: 32px;
+}
+
+// Nuevo diseño estilo notificación
+.gasto-card-modern {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: $spacing-lg;
+  padding: 32px;
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  transition: all 0.3s ease-out;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+  }
+
+  // Borde lateral de color según estado
+  .gasto-border-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    border-radius: 16px 0 0 16px;
+  }
+
+  // Avatar del oso
+  .gasto-avatar {
+    position: relative;
+    flex-shrink: 0;
+
+    .oso-avatar-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(52, 245, 197, 0.2), rgba(52, 245, 197, 0.1));
+      border: 2px solid rgba(52, 245, 197, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+  }
+
+  // Contenido principal
+  .gasto-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    .gasto-titulo {
+      font-size: 18px;
+      font-weight: 700;
+      color: $color-text;
+      margin: 0;
+    }
+
+    .gasto-descripcion {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .gasto-footer {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      margin-top: $spacing-xs;
+    }
+
+    .gasto-estado-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-xs;
+      padding: 4px 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: $color-text;
+    }
+  }
+
+  // Lado derecho con monto y acciones
+  .gasto-derecha {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: $spacing-sm;
+    flex-shrink: 0;
+
+    .gasto-monto {
+      font-size: 24px;
+      font-weight: 700;
+      color: $color-text;
+    }
+
+    .gasto-btn-adjuntar {
+      background: rgba(52, 245, 197, 0.1);
+      border: 1px solid rgba(52, 245, 197, 0.3);
+      color: #34F5C5;
+
+      &:hover {
+        background: rgba(52, 245, 197, 0.2);
+        border-color: #34F5C5;
+      }
+    }
+
+    .gasto-notification-dot {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 12px;
+      height: 12px;
+      background: #FF4080;
+      border-radius: 50%;
+      border: 2px solid rgba(30, 41, 59, 0.9);
+      animation: pulse-dot 2s infinite;
+    }
+  }
+
+  // Estados con diferentes colores de borde
+  &.gasto-estado-pagado .gasto-border-indicator {
+    background: linear-gradient(180deg, #34F5C5 0%, #22C55E 100%);
+  }
+
+  &.gasto-estado-pendiente .gasto-border-indicator {
+    background: linear-gradient(180deg, #FACC15 0%, #EAB308 100%);
+  }
+
+  &.gasto-estado-atrasado .gasto-border-indicator {
+    background: linear-gradient(180deg, #FF4080 0%, #EF4444 100%);
+    animation: pulse-warning 2s infinite;
+  }
+}
+
+@keyframes pulse-warning {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 64, 128, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 64, 128, 0);
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+// Estilos antiguos (mantener por compatibilidad)
+.gasto-card {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  transition: all 0.25s ease;
+
+  &:hover {
+    transform: translateX(4px);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.gasto-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.gasto-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.gasto-nombre {
+  font-size: 16px;
+  font-weight: 600;
+  color: $color-text;
+}
+
+.gasto-estado {
+  font-size: 13px;
+  color: $color-text-secondary;
+}
+
+.gasto-monto {
+  font-size: 18px;
+  font-weight: 700;
+  color: $color-text;
+  margin-right: $spacing-md;
+}
+
+.gasto-actions {
+  display: flex;
+  gap: $spacing-xs;
+}
+
+// Estilos Compactos
+.gastos-facturas-compact {
+  .gastos-total-mini {
+    padding: 16px 20px;
+    background: linear-gradient(135deg, rgba(255, 64, 128, 0.15), rgba(255, 64, 128, 0.05));
+    border: 1px solid rgba(255, 64, 128, 0.3);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+
+    .gastos-total-mini-label {
+      font-size: 13px;
+      color: $color-text-secondary;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .gastos-total-mini-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: #ff4080;
+      text-shadow: 0 0 20px rgba(255, 64, 128, 0.3);
+    }
+  }
+
+  .gastos-list-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .gasto-card-mini {
+    position: relative;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+    overflow: hidden;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .gasto-border-indicator {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      border-radius: 12px 0 0 12px;
+    }
+
+    &.gasto-estado-pagado .gasto-border-indicator {
+      background: linear-gradient(180deg, #34F5C5 0%, #22C55E 100%);
+    }
+
+    &.gasto-estado-pendiente .gasto-border-indicator {
+      background: linear-gradient(180deg, #FACC15 0%, #EAB308 100%);
+    }
+
+    &.gasto-estado-atrasado .gasto-border-indicator {
+      background: linear-gradient(180deg, #FF4080 0%, #EF4444 100%);
+    }
+  }
+
+  .gasto-mini-content {
+    padding-left: 8px;
+  }
+
+  .gasto-mini-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+
+    .gasto-mini-nombre {
+      font-size: 14px;
+      font-weight: 600;
+      color: $color-text;
+    }
+
+    .gasto-mini-monto {
+      font-size: 16px;
+      font-weight: 700;
+      color: $color-text;
+    }
+  }
+
+  .gasto-mini-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .gasto-mini-categoria {
+      font-size: 12px;
+      color: $color-text-secondary;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .gasto-mini-estado {
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+
+      &.gasto-estado-pagado {
+        color: #34F5C5;
+      }
+
+      &.gasto-estado-pendiente {
+        color: #FACC15;
+      }
+
+      &.gasto-estado-atrasado {
+        color: #FF4080;
+      }
+    }
+  }
+
+  .btn-ver-todos-gastos {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 64, 128, 0.1);
+    border: 1px solid rgba(255, 64, 128, 0.3);
+    color: #ff4080;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+
+    &:hover {
+      background: rgba(255, 64, 128, 0.2);
+      transform: translateY(-2px);
+    }
+  }
+
+  // Tabs para Fijos/Variables
+  .gastos-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 4px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+
+    .gastos-tab {
+      flex: 1;
+      padding: 10px 16px;
+      background: transparent;
+      border: none;
+      color: $color-text-secondary;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: all 0.3s ease-out;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: $color-text;
+      }
+
+      &.active {
+        background: linear-gradient(135deg, rgba(255, 64, 128, 0.2), rgba(255, 64, 128, 0.1));
+        border: 1px solid rgba(255, 64, 128, 0.3);
+        color: #ff4080;
+        box-shadow: 0 4px 12px rgba(255, 64, 128, 0.2);
+      }
+    }
+  }
+
+  // Fade animation para cambio de tabs
+  .gastos-list-fade {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Mensaje del Oso Cuidadoso
+  .oso-message-gastos {
+    padding: 12px 16px;
+    background: linear-gradient(135deg, rgba(52, 245, 197, 0.15), rgba(52, 245, 197, 0.05));
+    border: 1px solid rgba(52, 245, 197, 0.3);
+    border-radius: 12px;
+    color: #34F5C5;
+    font-size: 13px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 16px;
+    animation: slideDown 0.4s ease-out;
+    box-shadow: 0 4px 12px rgba(52, 245, 197, 0.15);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Footer actualizado con botón de marcar pagado
+  .gasto-mini-footer-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-marcar-pagado {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: rgba(52, 245, 197, 0.1);
+    border: 1px solid rgba(52, 245, 197, 0.3);
+    color: #34F5C5;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background: rgba(52, 245, 197, 0.2);
+      border-color: #34F5C5;
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  // Botones de acción (Registrar nuevo gasto, Adjuntar factura)
+  .gastos-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+
+    .btn-gasto-action {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease-out;
+      text-align: center;
+      border: none;
+
+      &.btn-registrar {
+        background: linear-gradient(135deg, rgba(52, 245, 197, 0.15), rgba(52, 245, 197, 0.05));
+        border: 1px solid rgba(52, 245, 197, 0.3);
+        color: #34F5C5;
+
+        &:hover {
+          background: linear-gradient(135deg, rgba(52, 245, 197, 0.25), rgba(52, 245, 197, 0.1));
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(52, 245, 197, 0.2);
+        }
+      }
+
+      &.btn-adjuntar {
+        background: rgba(168, 85, 247, 0.1);
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        color: #A855F7;
+
+        &:hover {
+          background: rgba(168, 85, 247, 0.2);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(168, 85, 247, 0.2);
+        }
+      }
+    }
+  }
+
+  // Sección Fintoc
+  .gastos-fintoc-section {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    .btn-fintoc {
+      width: 100%;
+      padding: 14px 16px;
+      background: linear-gradient(135deg, rgba(255, 183, 77, 0.15), rgba(255, 183, 77, 0.05));
+      border: 1px solid rgba(255, 183, 77, 0.3);
+      color: #FFB74D;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      &:hover {
+        background: linear-gradient(135deg, rgba(255, 183, 77, 0.25), rgba(255, 183, 77, 0.1));
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(255, 183, 77, 0.25);
+        border-color: #FFB74D;
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}

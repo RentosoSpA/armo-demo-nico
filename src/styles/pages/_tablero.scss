@@ -1,0 +1,140 @@
+@use '../base/variables' as *;
+
+.tablero-container {
+  width: 100%;
+  
+  .tablero-header {
+    
+    
+    .tablero-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: $color-text;
+      margin: 0;
+      font-family: $font-family;
+    }
+  }
+  
+  .error-alert {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(244, 63, 94, 0.1);
+    border: 1px solid $color-error;
+    border-radius: 6px;
+    padding: 12px $spacing-md;
+    margin-bottom: $spacing-md;
+    color: $color-error;
+    
+    .error-message {
+      flex: 1;
+      font-size: $font-size-base;
+      font-family: $font-family;
+    }
+    
+    .error-close {
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: $color-error;
+      cursor: pointer;
+      padding: 0;
+      margin-left: 12px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &:hover {
+        background-color: rgba(244, 63, 94, 0.2);
+        border-radius: 50%;
+      }
+    }
+  }
+  
+  .loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    font-size: 16px;
+    color: $color-text-secondary;
+    font-family: $font-family;
+  }
+  
+  .tablero-content {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xl;
+  }
+  
+  .section-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: $color-text;
+    margin: 0 0 $spacing-md 0;
+    padding-bottom: $spacing-sm;
+    border-bottom: 2px solid $color-border;
+    font-family: $font-family;
+  }
+  
+  .dashboard-section,
+  .properties-section,
+  .visits-section,
+  .opportunities-section,
+  .agents-section,
+  .osos-section,
+  .live-activity-section {
+    background: transparent;
+    border-radius: 8px;
+  
+    
+    .section-title {
+      display: none;
+    }
+  }
+  
+  .dashboard-section .section-title {
+    display: none !important;
+  }
+  
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-md;
+    
+    .tablero-header {
+      margin-bottom: $spacing-md;
+      
+      .tablero-title {
+        font-size: 24px;
+      }
+    }
+    
+    .tablero-content {
+      gap: 20px;
+    }
+    
+    .section-title {
+      font-size: 18px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    padding: 12px;
+    
+    .tablero-header {
+      .tablero-title {
+        font-size: 20px;
+      }
+    }
+    
+    .tablero-content {
+      gap: $spacing-md;
+    }
+    
+    .section-title {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+  }
+}

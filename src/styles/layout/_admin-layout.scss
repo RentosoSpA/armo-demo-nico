@@ -1,0 +1,360 @@
+@use '../base/variables' as *;
+@use '../utils/mixins' as *;
+
+// Force grid layout with high specificity
+div.admin-layout.layout-fade-in {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-rows: 64px 1fr 100px;
+  grid-template-areas:
+    "mainMenu-logo header"
+    "mainMenu main"
+    "info main";
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background: var(--bg);
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+
+  // Aurora background animation
+  &::before {
+    content: "";
+    position: fixed;
+    inset: -10%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(60px);
+    opacity: 0.5;
+    background:
+      radial-gradient(40% 30% at 20% 15%, rgba(var(--lg-accent-2), 0.25), transparent 60%),
+      radial-gradient(35% 30% at 80% 20%, rgba(var(--lg-accent-1), 0.22), transparent 60%),
+      radial-gradient(50% 45% at 50% 85%, rgba(var(--lg-accent-3), 0.18), transparent 66%);
+    animation: auroraShift 25s ease-in-out infinite alternate;
+  }
+
+  // Ensure content is above aurora
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Grid layout is working correctly
+
+  // Grid area components
+  .grid-header {
+    grid-area: header;
+    z-index: 10001;
+    
+    
+    
+    .ant-layout-header {
+      background: transparent;
+      padding: 0 $spacing-md;
+      height: 100%;
+      border: none;
+    }
+  }
+  
+  .grid-main-menu-logo {
+    grid-area: mainMenu-logo;
+    padding: $spacing-sm $spacing-md;
+    
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+  
+  .grid-main-menu {
+    grid-area: mainMenu;
+    
+    .ant-layout-sider {
+      background: transparent;
+      width: 100%;
+      max-width: 100%;
+      min-width: 100%;
+      flex: 1;
+    }
+    
+    // Custom scrollbar for menu
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $color-primary;
+      border-radius: 2px;
+    }
+  }
+  
+  .menu-logo-container {
+    display: flex;
+    align-items: flex-start;
+
+    img {
+      height: 40px;
+      width: auto;
+      object-fit: contain;
+    }
+  }
+  .grid-main-content {
+    grid-area: main;
+    overflow: auto;
+    padding: 0 $spacing-lg;
+    background: transparent;
+    
+    // Custom scrollbar styling
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background: $color-primary;
+      border-radius: 3px;
+      
+      &:hover {
+        background: $color-primary-hover;
+      }
+    }
+  }
+  
+  .grid-info {
+    grid-area: info;
+    padding: $spacing-sm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    .info-banner {
+      background: linear-gradient(135deg, #2d3748, #4a5568);
+      border-radius: 12px;
+      padding: $spacing-sm;
+      width: 100%;
+      max-width: 280px;
+      max-height: 88px;
+      color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+      
+      .banner-content {
+        p {
+          font-size: 12px;
+          font-weight: 400;
+          margin: 0 0 $spacing-xs 0;
+          line-height: 1.4;
+          color: white;
+        }
+        .discover-button {
+          background: linear-gradient(135deg, #3a4558, #5a6ccc);
+          border: none;
+          border-radius: 8px;
+          padding: $spacing-xs $spacing-md;
+          color: white;
+          font-size: 12px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          width: 100%;
+          margin-bottom: $spacing-sm;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-shadow: 0 2px 8px rgba(90, 108, 204, 0.4);
+
+          &:hover {
+            background: linear-gradient(135deg, #4a5568, #6a7cdd);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(90, 108, 204, 0.6);
+          }
+
+          &:active {
+            transform: translateY(0);
+          }
+        }
+      }
+        
+        .banner-feedback {
+          font-size: 11px;
+          color: $color-text-secondary;
+          text-align: center;
+          margin-top: $spacing-xs;
+          cursor: pointer;
+
+          &:hover {
+            color: $color-text;
+          }
+        }
+      }
+    }
+    
+    .info-additional {
+      margin-top: $spacing-sm;
+      display: flex;
+      gap: 8px;
+      color: #ffffff;
+      font-size: 14px;
+      
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+
+        &:hover {
+          
+          cursor: pointer;
+        }
+      }
+    }
+    
+    // Responsive adjustments
+    
+    // Tablet (577px to 768px) - 200px sidebar
+    @media (min-width: 577px) and (max-width: 768px) {
+      grid-template-columns: 200px 1fr;
+    }
+    
+    // Mobile (≤768px) - Hide sidebar, show bottom nav
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 64px 1fr 70px;
+      grid-template-areas:
+        "header"
+        "main"
+        "bottomNav";
+      padding-bottom: 70px; // Space for bottom nav
+
+      .grid-info {
+        display: none;
+      }
+
+      .grid-main-menu-logo {
+        display: none; // Hide logo area on mobile
+      }
+
+      .grid-main-menu {
+        display: none; // Hide sidebar on mobile
+      }
+
+      .grid-main-content {
+        padding: 0 $spacing-md $spacing-md $spacing-md;
+        grid-area: main;
+      }
+
+      .grid-header {
+        padding: 0 $spacing-md;
+
+        .ant-layout-header {
+          padding: 0 $spacing-sm;
+        }
+      }
+    }
+    
+    // Loading state (legacy support - use LoadingSplash component instead)
+    &.loading {
+      @include flex-center;
+      min-height: 100vh;
+    }
+  }
+
+// Portal layout styling
+.portal-layout {
+  background: linear-gradient(135deg, $color-bg-container, $color-primary);
+  min-height: 100vh;
+  
+  .ant-layout-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    margin: $spacing-lg;
+    padding: $spacing-xl;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  }
+  
+  @include respond-to(md) {
+    .ant-layout-content {
+      margin: $spacing-sm;
+      padding: $spacing-lg;
+      border-radius: 8px;
+    }
+  }
+}
+
+// Layout animations
+.layout-fade-in {
+  @include fade-in(0.5s);
+}
+
+.layout-slide-in {
+  @include slide-in-from-left(0.3s);
+}
+
+// Custom layout utilities
+.layout-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.layout-dark {
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  color: $color-text;
+  
+  .ant-layout-content {
+    background: rgba(255, 255, 255, 0.05);
+    color: $color-text;
+  }
+}
+
+.layout-colorful {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+  .ant-layout-content {
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+  }
+}
+
+// Aurora animation keyframes
+@keyframes auroraShift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+    opacity: 0.45;
+  }
+  33% {
+    transform: translate3d(-3vw, 5vh, 0) rotate(8deg) scale(1.08);
+    opacity: 0.55;
+  }
+  66% {
+    transform: translate3d(4vw, -4vh, 0) rotate(-6deg) scale(1.12);
+    opacity: 0.50;
+  }
+  100% {
+    transform: translate3d(-2vw, 3vh, 0) rotate(4deg) scale(1.05);
+    opacity: 0.48;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  div.admin-layout.layout-fade-in::before {
+    animation: none;
+    opacity: 0.3;
+    filter: blur(40px);
+  }
+}

@@ -1,0 +1,132 @@
+@use '../base/variables' as *;
+
+.common-button {
+  border-radius: 1rem;
+  font-weight: 500;
+  font-family: $font-family;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.08s ease, filter 0.2s ease, background 0.2s ease;
+  box-shadow: none;
+  outline: none;
+  
+  &:focus-visible {
+    outline: 2px solid rgba(var(--lg-primary), 0.7);
+    outline-offset: 2px;
+  }
+  
+  &.common-button-primary {
+    background: rgb(var(--lg-primary));
+    border: none;
+    color: #ffffff;
+
+    &:hover:not(.ant-btn-disabled), &:focus:not(.ant-btn-disabled) {
+      background: rgb(var(--lg-primary));
+      color: #ffffff;
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+      box-shadow: none;
+    }
+
+    &:active:not(.ant-btn-disabled) {
+      background: rgb(var(--lg-primary));
+      color: #ffffff;
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    &.ant-btn-loading {
+      background: rgb(var(--lg-primary));
+      color: #ffffff;
+    }
+  }
+
+  &.common-button-secondary {
+    background: rgba(var(--fg), 0.10);
+    border: 1px solid rgba(var(--fg), 0.16);
+    color: white;
+    backdrop-filter: blur(var(--blur-soft));
+
+    &:hover:not(.ant-btn-disabled), &:focus:not(.ant-btn-disabled) {
+      background: rgba(var(--fg), 0.14);
+      border-color: rgba(var(--fg), 0.20);
+      color: white;
+      box-shadow: none;
+    }
+
+    &:active:not(.ant-btn-disabled) {
+      background: rgba(var(--fg), 0.16);
+      border-color: rgba(var(--fg), 0.22);
+      color: white;
+      box-shadow: none;
+    }
+
+    &.ant-btn-loading {
+      background: rgba(var(--fg), 0.14);
+      border-color: rgba(var(--fg), 0.20);
+      color: white;
+    }
+  }
+
+  // Disabled state
+  &.ant-btn-disabled {
+    &.common-button-primary {
+      background: rgba(var(--lg-primary), 0.3);
+      border: none;
+      color: rgba(255, 255, 255, 0.5);
+      transform: none;
+      filter: none;
+    }
+
+    &.common-button-secondary {
+      background: rgba(var(--fg), 0.05);
+      border-color: rgba(var(--fg), 0.08);
+      color: rgba(255, 255, 255, 0.3);
+      backdrop-filter: none;
+    }
+  }
+
+  // Size variations
+  &.ant-btn-sm {
+    height: 32px;
+    padding: 6px 12px;
+    font-size: 12px;
+
+    .anticon, svg {
+      width: 14px;
+      height: 14px;
+    }
+  }
+
+  &.ant-btn-lg {
+    height: 48px;
+    padding: 12px 24px;
+    font-size: 16px;
+
+    .anticon, svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Default middle size
+  &:not(.ant-btn-sm):not(.ant-btn-lg) {
+    height: 40px;
+    padding: 8px 16px;
+    font-size: 14px;
+
+    .anticon, svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  // Loading spinner color adjustment
+  .ant-btn-loading-icon {
+    .anticon {
+      color: inherit;
+    }
+  }
+}

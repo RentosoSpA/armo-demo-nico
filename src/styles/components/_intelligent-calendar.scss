@@ -1,0 +1,211 @@
+@use '../base/variables' as *;
+
+.intelligent-calendar-day {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #374151;
+  background-color: #1b2a3a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  position: relative;
+  padding: 4px;
+
+  &__number {
+    font-size: 14px;
+    font-weight: inherit;
+    z-index: 2;
+  }
+
+  &__indicators {
+    display: flex;
+    gap: 3px;
+    margin-top: 2px;
+    z-index: 2;
+  }
+
+  &__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    
+    &--confirmed {
+      background: #10B981;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+    }
+
+    &--pending {
+      background: #F59E0B;
+      box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+    }
+
+    &--curioso {
+      background: #3B82F6;
+      animation: pulse-curioso 2s ease-in-out infinite;
+    }
+  }
+
+  &__count {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: rgba(51, 244, 145, 0.9);
+    color: #1b2a3a;
+    font-size: 10px;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 1px 4px;
+    min-width: 16px;
+    text-align: center;
+    z-index: 3;
+  }
+
+  // States
+  &--selected {
+    background-color: #33F491 !important;
+    color: #1b2a3a !important;
+    font-weight: 600;
+    box-shadow: 0 0 12px rgba(51, 244, 145, 0.5);
+    border-color: #33F491;
+  }
+
+  &--other-month {
+    background-color: #374151;
+    color: #9ca3af;
+    cursor: default;
+  }
+
+  &--has-visits {
+    background-color: #0f133d;
+    font-weight: 600;
+    border-color: rgba(51, 244, 145, 0.2);
+  }
+
+  &--today {
+    border: 2px solid #33F491;
+    font-weight: 600;
+  }
+
+  &--recent-activity {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(51, 244, 145, 0.1),
+        transparent
+      );
+      animation: shimmer-activity 3s ease-in-out infinite;
+    }
+  }
+
+  // Hover effect (not for other-month)
+  &:not(&--other-month):not(&--selected):hover {
+    background-color: #0f133d;
+    border-color: rgba(51, 244, 145, 0.4);
+    transform: scale(1.05);
+  }
+
+  // Tooltip styles
+  &__tooltip {
+    padding: $spacing-xs;
+  }
+
+  &__tooltip-header {
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: $spacing-xs;
+    font-size: 13px;
+  }
+
+  &__tooltip-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  &__tooltip-stat {
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: 12px;
+    color: #d1d5db;
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+
+      &--confirmed {
+        background: #10B981;
+      }
+
+      &--pending {
+        background: #F59E0B;
+      }
+
+      &--curioso {
+        background: #3B82F6;
+      }
+    }
+  }
+}
+
+// Animations
+@keyframes pulse-curioso {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(59, 130, 246, 0);
+    opacity: 0.8;
+  }
+}
+
+@keyframes shimmer-activity {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+// Responsive
+@media (max-width: $breakpoint-md) {
+  .intelligent-calendar-day {
+    font-size: 12px;
+    padding: 2px;
+
+    &__number {
+      font-size: 12px;
+    }
+
+    &__dot {
+      width: 4px;
+      height: 4px;
+    }
+
+    &__count {
+      font-size: 9px;
+      padding: 0px 3px;
+      min-width: 14px;
+    }
+  }
+}

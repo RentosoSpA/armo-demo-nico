@@ -1,0 +1,10 @@
+export { default as ResumenGeneral } from './ResumenGeneral';
+export { default as ComisionesRentabilidad } from './ComisionesRentabilidad';
+export { default as GastosFacturas } from './GastosFacturas';
+export { default as ConfiguracionPersonal } from './ConfiguracionPersonal';
+export { default as OsoCuidadosoTooltip } from './OsoCuidadosoTooltip';
+export { default as KPICard } from './KPICard';
+export { default as TablaComisiones } from './TablaComisiones';
+export { default as TermometroProgreso } from './TermometroProgreso';
+export { default as OsoPaw } from './OsoPaw';
+export { default as OsoGoalGauge } from './OsoGoalGauge';
