@@ -22,8 +22,8 @@ const ContractsHeader: React.FC<ContractsHeaderProps> = ({
     <div className="contracts-header">
       <div className="contracts-header-content">
         <div className="contracts-header-text">
-          <h1>{getLabel('Contratos', 'Membresías')}</h1>
-          <p>{getLabel('Gestiona tus contratos y documentos legales', 'Gestiona tus membresías y contratos')}</p>
+          <h1>Contratos</h1>
+          <p>Gestiona tus contratos y documentos legales</p>
         </div>
         <div className="contracts-header-selector">
           <label>{getLabel('Propiedad', 'Espacio')}</label>

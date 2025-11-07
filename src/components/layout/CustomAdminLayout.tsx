@@ -120,6 +120,7 @@ const CustomAdminLayout: React.FC = () => {
       'Prospectos': '/prospectos',
       'Propietarios': '/propietarios',
       'Finanzas': '/finanzas',
+      'Membresias': '/membresias',
       'Contratos': '/contratos',
       'Brigada': '/brigada',
       'Perfil': '/perfil',
