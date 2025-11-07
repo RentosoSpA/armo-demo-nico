@@ -12,15 +12,12 @@ import {
   uploadToTemplate,
   useTemplateGenerate
 } from '../services/mock/contratosNewServiceMock';
-import { getMembresias } from '../services/membresias/membresiasServiceAdapter';
 import { getPlantillas } from '../services/plantillas/plantillasServiceAdapter';
-import { usePresetLabels } from '../hooks/usePresetLabels';
 import '../styles/contratos.scss';
 
 const Contratos = () => {
   const { message } = App.useApp();
   const navigate = useNavigate();
-  const { getLabel, isCoworking } = usePresetLabels();
 
   // Data lists
   const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
@@ -88,14 +85,12 @@ const Contratos = () => {
   const loadContratos = async (propiedadId: string) => {
     setContratosLoading(true);
     try {
-      const list = await getMembresias();
-      // Filtrar por propiedad/espacio si es necesario
-      const filtered = propiedadId === 'all' 
-        ? list 
-        : list.filter(c => c.propiedadId === propiedadId);
+      // TODO: Implementar servicio de contratos real
+      // const list = await getContratos();
+      const filtered: Contrato[] = [];
       setContratos(filtered);
     } catch (error) {
-      message.error(`Error al cargar ${isCoworking ? 'membresías' : 'contratos'}`);
+      message.error('Error al cargar contratos');
     } finally {
       setContratosLoading(false);
     }
@@ -176,7 +171,7 @@ const Contratos = () => {
 
       {selectedPropiedadId && (
         <Card className="contracts-section-card">
-          <h2>{getLabel('Mis contratos', 'Mis membresías')}</h2>
+          <h2>Mis contratos</h2>
           <ContractsTable
             contratos={contratos}
             loading={contratosLoading}

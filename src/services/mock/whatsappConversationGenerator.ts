@@ -8,6 +8,11 @@ import {
   RESPUESTAS_CURIOSO,
   EXPRESIONES_CHILENAS 
 } from './conversationTemplates';
+import { 
+  PREGUNTAS_COWORK, 
+  RESPUESTAS_CURIOSO_COWORK 
+} from '../../presets/coworking/mocks/conversationTemplatesCowork';
+import { usePresetStore } from '../../store/presetStore';
 
 // Tiempos de respuesta según personalidad (en segundos)
 const PERSONALITY_TIMING = {
@@ -82,8 +87,19 @@ function generateCuriosoResponse(
   lead: LeadProfile,
   data?: Record<string, string>
 ): string {
-  const templates = RESPUESTAS_CURIOSO[templateType];
-  let response = getRandomFromArray(templates);
+  const { activePreset } = usePresetStore.getState();
+  
+  // Usar plantillas de coworking si el preset es coworking
+  let templates: string[] = RESPUESTAS_CURIOSO[templateType];
+  
+  if (activePreset === 'coworking') {
+    const coworkTemplates = (RESPUESTAS_CURIOSO_COWORK as any)[templateType];
+    if (Array.isArray(coworkTemplates)) {
+      templates = coworkTemplates;
+    }
+  }
+  
+  let response: string = getRandomFromArray(templates);
   
   // Reemplazar variables
   if (data) {
@@ -281,7 +297,7 @@ function createCuriosoWelcomeBlock(
 }
 
 /**
- * Bloque: Pregunta sobre precio
+ * Bloque: Pregunta sobre precio/planes
  */
 function createPrecioBlock(
   lead: LeadProfile,
@@ -291,13 +307,22 @@ function createPrecioBlock(
 ): ConversationBlock {
   const messages: WhatsAppMessage[] = [];
   let currentTime = startTime;
+  const { activePreset } = usePresetStore.getState();
   
   // Lead pregunta
   const timing = PERSONALITY_TIMING[lead.personality];
   const delay = (timing.min + Math.random() * (timing.max - timing.min)) * 1000;
   currentTime = new Date(currentTime.getTime() + delay);
   
-  const preguntaTemplate = getRandomFromArray(PREGUNTAS_PRECIO[lead.personality]);
+  // Usar preguntas de coworking o inmobiliaria según preset
+  let preguntasSource: string[];
+  if (activePreset === 'coworking' && PREGUNTAS_COWORK.planes) {
+    preguntasSource = PREGUNTAS_COWORK.planes[lead.personality];
+  } else {
+    preguntasSource = PREGUNTAS_PRECIO[lead.personality];
+  }
+  
+  const preguntaTemplate = getRandomFromArray(preguntasSource);
   const pregunta = applyConsistentWriting(preguntaTemplate, lead);
   
   messages.push({
@@ -376,7 +401,7 @@ function createDisponibilidadBlock(
 }
 
 /**
- * Bloque: Pregunta sobre característica específica
+ * Bloque: Pregunta sobre característica específica o amenidades
  */
 function createCaracteristicaBlock(
   lead: LeadProfile,
@@ -386,12 +411,25 @@ function createCaracteristicaBlock(
 ): ConversationBlock {
   const messages: WhatsAppMessage[] = [];
   let currentTime = startTime;
+  const { activePreset } = usePresetStore.getState();
   
   const timing = PERSONALITY_TIMING[lead.personality];
   const delay = (timing.min + Math.random() * (timing.max - timing.min)) * 1000;
   currentTime = new Date(currentTime.getTime() + delay);
   
-  const preguntaTemplate = getRandomFromArray(PREGUNTAS_CARACTERISTICAS[tipo]);
+  // Usar preguntas de coworking o inmobiliaria
+  let preguntasSource: string[];
+  if (activePreset === 'coworking') {
+    // Para coworking, combinar amenidades y flexibilidad según personalidad
+    const amenidadesPreguntas = PREGUNTAS_COWORK.amenidades?.[lead.personality] || [];
+    const flexibilidadPreguntas = PREGUNTAS_COWORK.flexibilidad?.[lead.personality] || [];
+    const todasPreguntas = [...amenidadesPreguntas, ...flexibilidadPreguntas];
+    preguntasSource = todasPreguntas.length > 0 ? todasPreguntas : PREGUNTAS_CARACTERISTICAS[tipo];
+  } else {
+    preguntasSource = PREGUNTAS_CARACTERISTICAS[tipo];
+  }
+  
+  const preguntaTemplate = getRandomFromArray(preguntasSource);
   const pregunta = applyConsistentWriting(preguntaTemplate, lead);
   
   messages.push({

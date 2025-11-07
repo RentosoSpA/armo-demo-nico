@@ -2,6 +2,7 @@ import { Row, Typography, Button, Select } from 'antd';
 import { PlusOutlined, VerticalAlignTopOutlined, DownOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import ViewToggle, { cardsTableOptions } from '../common/ViewToggle';
+import { usePresetLabels } from '../../hooks/usePresetLabels';
 import '../../styles/components/_propiedades.scss';
 
 const { Title } = Typography;
@@ -18,15 +19,16 @@ interface Props {
 
 const PropiedadesHeader = ({ viewMode, onViewModeChange, estadoFilter, onEstadoFilterChange }: Props) => {
   const navigate = useNavigate();
+  const { getLabel } = usePresetLabels();
   
   return (
   <Row justify="space-between" align="middle" id="propiedades-header">
     <div>
       <Title level={2} className="title-text mb-0">
-        Propiedades
+        {getLabel('Propiedades', 'Espacios')}
       </Title>
       <div className="paragraph-text paragraph-secondary propiedades-subtitle">
-        Administra todas tus propiedades en un solo lugar.
+        {getLabel('Administra todas tus propiedades en un solo lugar.', 'Administra todos tus espacios de coworking en un solo lugar.')}
       </div>
     </div>
     <div className="propiedades-header-actions">
@@ -95,7 +97,7 @@ const PropiedadesHeader = ({ viewMode, onViewModeChange, estadoFilter, onEstadoF
         onClick={() => navigate('/propiedades/crear')}
         className="agregar-propiedad-btn"
       >
-        Agregar propiedad
+        {getLabel('Agregar propiedad', 'Agregar espacio')}
       </Button>
     </div>
   </Row>

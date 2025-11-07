@@ -8,12 +8,14 @@ import ImportPropiedadesModal from '../components/propiedades/ImportPropiedadesM
 import type { Propiedad } from '../types/propiedad';
 import { usePropiedadStore } from '../store/propiedadStore';
 import { useUserStore } from '../store/userStore';
+import { usePresetLabels } from '../hooks/usePresetLabels';
 import { updatePropiedadEstado } from '../services/mock/propiedadesServiceMock';
 import './Propiedades.scss';
 
 const Propiedades = () => {
   const navigate = useNavigate();
   const { propiedades, fetchPropiedades, loading, updatePropiedadLocal } = usePropiedadStore();
+  const { getLabel } = usePresetLabels();
   const [modalVisible, setModalVisible] = useState(false);
   const [importModalVisible, setImportModalVisible] = useState(false);
   const [viewMode, setViewMode] = useState<ViewMode>('cards');

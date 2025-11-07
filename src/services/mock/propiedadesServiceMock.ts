@@ -1,6 +1,9 @@
 import type { Propiedad, PropiedadCreate } from '../../types/propiedad';
 import { MOCK_DATA, simulateDelay, generateId } from './mockData';
 import { getPropertyImage } from './propertyImages';
+import { usePresetStore } from '../../store/presetStore';
+import { ESPACIOS_MOCK } from '../../presets/coworking/mocks/espaciosMock';
+import type { Espacio } from '../../presets/coworking/types/espacio';
 
 // Mock implementation of propiedades service
 const mockPropiedades: Propiedad[] = MOCK_DATA.propiedades.map(p => ({
@@ -17,13 +20,48 @@ const resolvePropertyImages = (propiedad: Propiedad): Propiedad => ({
   imagenPrincipal: getPropertyImage(propiedad.imagenPrincipal) || propiedad.imagenPrincipal
 });
 
+// Convierte Espacio de coworking a Propiedad
+const espacioToPropiedad = (espacio: Espacio): Propiedad => {
+  return {
+    id: espacio.id,
+    titulo: espacio.titulo,
+    tipo: espacio.tipo,
+    estado: espacio.estado,
+    operacion: Array.isArray(espacio.modalidad) ? espacio.modalidad : [espacio.modalidad],
+    precio: espacio.precio,
+    divisa: espacio.divisa,
+    descripcion: espacio.descripcion,
+    habitaciones: espacio.capacidad,
+    areaTotal: espacio.area_m2,
+    piso: espacio.piso,
+    direccion: espacio.ubicacion,
+    imagenPrincipal: espacio.imagenPrincipal,
+  } as Propiedad;
+};
+
 export const getPropiedades = async (): Promise<Propiedad[]> => {
   await simulateDelay();
+  const { activePreset } = usePresetStore.getState();
+  
+  if (activePreset === 'coworking') {
+    return ESPACIOS_MOCK.map(espacioToPropiedad);
+  }
+  
   return mockPropiedades.map(resolvePropertyImages);
 };
 
 export const getPropiedadById = async (id: string): Promise<Propiedad> => {
   await simulateDelay();
+  const { activePreset } = usePresetStore.getState();
+  
+  if (activePreset === 'coworking') {
+    const espacio = ESPACIOS_MOCK.find(e => e.id === id);
+    if (!espacio) {
+      throw new Error(`Espacio with id ${id} not found`);
+    }
+    return espacioToPropiedad(espacio);
+  }
+  
   const propiedad = mockPropiedades.find(p => p.id === id);
   if (!propiedad) {
     throw new Error(`Propiedad with id ${id} not found`);
@@ -33,7 +71,12 @@ export const getPropiedadById = async (id: string): Promise<Propiedad> => {
 
 export const getPropiedadesByEmpresa = async (_empresaId: string): Promise<Propiedad[]> => {
   await simulateDelay();
-  // Return all properties for mock
+  const { activePreset } = usePresetStore.getState();
+  
+  if (activePreset === 'coworking') {
+    return ESPACIOS_MOCK.map(espacioToPropiedad);
+  }
+  
   return mockPropiedades.map(resolvePropertyImages);
 };
 
