@@ -6,6 +6,7 @@ import type { Profile } from '../../types/profile';
 import type { Agente } from '../../types/agente';
 import { profileToUser } from '../../utils/typeAdapters';
 import RentosoIcon from '../../assets/RentosoIcon';
+import PresetSelector from '../common/PresetSelector';
 
 
 
@@ -66,15 +67,18 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
             <span className="home-button-text">Sitio Web</span>
           </button>
         </div>
-        <div className="home-button">
-          <div className="user-icon" onClick={() => {
-                seIsUserMenuOpen(!isUserMenuOpen)
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <PresetSelector />
+          <div className="home-button">
+            <div className="user-icon" onClick={() => {
+                  seIsUserMenuOpen(!isUserMenuOpen)
 
-              }
-          }>
-            <Avatar icon={<UserOutlined />} size="small" />
-            <Text>{getUserDisplayName()}</Text>
-            <Avatar icon={<DownOutlined/>} size={16} />
+                }
+            }>
+              <Avatar icon={<UserOutlined />} size="small" />
+              <Text>{getUserDisplayName()}</Text>
+              <Avatar icon={<DownOutlined/>} size={16} />
+            </div>
           </div>
         </div>
       </div>

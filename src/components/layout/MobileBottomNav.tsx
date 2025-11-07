@@ -7,14 +7,15 @@ import {
   Users,
   UserCheck,
 } from 'lucide-react';
+import { usePresetLabels } from '../../hooks/usePresetLabels';
 
 const { Text } = Typography;
 
-const menuItems = [
-  { key: 'Tablero', label: 'Tablero', icon: <LayoutDashboard size={20} /> },
-  { key: 'Propiedades', label: 'Propiedades', icon: <Home size={20} /> },
-  { key: 'Prospectos', label: 'Prospectos', icon: <Users size={20} /> },
-  { key: 'Propietarios', label: 'Propietarios', icon: <UserCheck size={20} /> },
+const getMenuItems = (getLabel: (label: string) => string) => [
+  { key: 'Tablero', label: getLabel('Tablero'), icon: <LayoutDashboard size={20} /> },
+  { key: 'Propiedades', label: getLabel('Propiedades'), icon: <Home size={20} /> },
+  { key: 'Prospectos', label: getLabel('Prospectos'), icon: <Users size={20} /> },
+  { key: 'Propietarios', label: getLabel('Propietarios'), icon: <UserCheck size={20} /> },
   { key: 'Oportunidades', label: 'Más', icon: <ClipboardCheck size={20} /> },
 ];
 
@@ -27,6 +28,9 @@ const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   selectedKey,
   handleMenuClick
 }) => {
+  const { getLabel } = usePresetLabels();
+  const menuItems = getMenuItems(getLabel);
+  
   return (
     <div className="mobile-bottom-nav">
       <div className="bottom-nav-container">

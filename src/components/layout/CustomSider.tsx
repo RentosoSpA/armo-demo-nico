@@ -10,21 +10,22 @@ import {
   CreditCard,
   Wallet,
 } from 'lucide-react';
+import { usePresetLabels } from '../../hooks/usePresetLabels';
 import '../../styles/components/menu.scss';
 
 const { Sider } = Layout;
 const { Text } = Typography;
 
-const menuItems = [
-  { key: 'Tablero', label: 'Tablero', icon: <LayoutDashboard size={18} /> },
-  { key: 'Oportunidades', label: 'Oportunidades', icon: <ClipboardCheck size={18} /> },
-  { key: 'Propiedades', label: 'Propiedades', icon: <Home size={18} /> },
-  { key: 'Finanzas', label: 'Finanzas', icon: <Wallet size={18} /> },
+const getMenuItems = (getLabel: (label: string) => string) => [
+  { key: 'Tablero', label: getLabel('Tablero'), icon: <LayoutDashboard size={18} /> },
+  { key: 'Oportunidades', label: getLabel('Oportunidades'), icon: <ClipboardCheck size={18} /> },
+  { key: 'Propiedades', label: getLabel('Propiedades'), icon: <Home size={18} /> },
+  { key: 'Finanzas', label: getLabel('Finanzas'), icon: <Wallet size={18} /> },
   // { key: 'Brigada', label: 'Brigada', icon: <Settings size={18} /> }, // Oculto temporalmente
-  { key: 'Cobros', label: 'Cobros', icon: <CreditCard size={18} /> },
-  { key: 'Visitas', label: 'Visitas', icon: <Calendar size={18} /> },
-  { key: 'Contratos', label: 'Contratos', icon: <File size={18} /> },
-  { key: 'Propietarios', label: 'Propietarios', icon: <UserCheck size={18} /> },
+  { key: 'Cobros', label: getLabel('Cobros'), icon: <CreditCard size={18} /> },
+  { key: 'Visitas', label: getLabel('Calendario'), icon: <Calendar size={18} /> },
+  { key: 'Contratos', label: getLabel('Contratos'), icon: <File size={18} /> },
+  { key: 'Propietarios', label: getLabel('Propietarios'), icon: <UserCheck size={18} /> },
 ];
 
 interface CustomSiderProps {
@@ -34,6 +35,9 @@ interface CustomSiderProps {
 }
 
 const CustomSider: React.FC<CustomSiderProps> = ({ handleMenuClick, selectedKey, className }) => {
+  const { getLabel } = usePresetLabels();
+  const menuItems = getMenuItems(getLabel);
+  
   return (
     <Sider
       className={`custom-sider ${className}`}
