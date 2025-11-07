@@ -4,8 +4,6 @@ import { MessageCircle, Eye } from 'lucide-react';
 import type { Cobro, EstadoCobro } from '../../types/cobro';
 import { formatCurrency } from '../../utils/formatters';
 
-const { TabPane } = Tabs;
-
 interface CobrosNotificationsProps {
   data: Cobro[];
 }
@@ -90,97 +88,105 @@ const CobrosNotifications: React.FC<CobrosNotificationsProps> = ({ data }) => {
         activeKey={activeTab} 
         onChange={setActiveTab}
         size="small"
-      >
-        <TabPane tab="Por cobrar" key="por-cobrar">
-          <div className="notif-list">
-            {filteredCobros.map(cobro => (
-              <div key={cobro.id} className="notif-item">
-                <div className="avatar">
-                  {getInitials(cobro.cliente.nombre)}
-                </div>
-                
-                <div className="content">
-                  <div className="client-name">
-                    {cobro.cliente.nombre}
+        items={[
+          {
+            key: 'por-cobrar',
+            label: 'Por cobrar',
+            children: (
+              <div className="notif-list">
+                {filteredCobros.map(cobro => (
+                  <div key={cobro.id} className="notif-item">
+                    <div className="avatar">
+                      {getInitials(cobro.cliente.nombre)}
+                    </div>
+                    
+                    <div className="content">
+                      <div className="client-name">
+                        {cobro.cliente.nombre}
+                      </div>
+                      <div className="property-title">
+                        {cobro.propiedad.titulo}
+                      </div>
+                      <div className="date-info">
+                        Vence: {formatDate(cobro.fechaVencimiento)}
+                      </div>
+                    </div>
+                    
+                    <div className="amount">
+                      <div className="amount-value">
+                        {formatCurrency(cobro.monto, cobro.divisa)}
+                      </div>
+                      <div className={`status-chip ${getStatusChipClass(cobro.estado)}`}>
+                        {getStatusText(cobro.estado)}
+                      </div>
+                    </div>
+                    
+                    <div className="actions">
+                      <Button
+                        size="small"
+                        className="action-btn whatsapp"
+                        icon={<MessageCircle size={12} />}
+                        onClick={() => handleWhatsAppClick(cobro)}
+                      />
+                      <Button
+                        size="small"
+                        className="action-btn"
+                        icon={<Eye size={12} />}
+                        onClick={() => handleVerClick(cobro)}
+                      />
+                    </div>
                   </div>
-                  <div className="property-title">
-                    {cobro.propiedad.titulo}
-                  </div>
-                  <div className="date-info">
-                    Vence: {formatDate(cobro.fechaVencimiento)}
-                  </div>
-                </div>
-                
-                <div className="amount">
-                  <div className="amount-value">
-                    {formatCurrency(cobro.monto, cobro.divisa)}
-                  </div>
-                  <div className={`status-chip ${getStatusChipClass(cobro.estado)}`}>
-                    {getStatusText(cobro.estado)}
-                  </div>
-                </div>
-                
-                <div className="actions">
-                  <Button
-                    size="small"
-                    className="action-btn whatsapp"
-                    icon={<MessageCircle size={12} />}
-                    onClick={() => handleWhatsAppClick(cobro)}
-                  />
-                  <Button
-                    size="small"
-                    className="action-btn"
-                    icon={<Eye size={12} />}
-                    onClick={() => handleVerClick(cobro)}
-                  />
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </TabPane>
-        
-        <TabPane tab="Pagado" key="pagado">
-          <div className="notif-list">
-            {filteredCobros.map(cobro => (
-              <div key={cobro.id} className="notif-item">
-                <div className="avatar">
-                  {getInitials(cobro.cliente.nombre)}
-                </div>
-                
-                <div className="content">
-                  <div className="client-name">
-                    {cobro.cliente.nombre}
+            )
+          },
+          {
+            key: 'pagado',
+            label: 'Pagado',
+            children: (
+              <div className="notif-list">
+                {filteredCobros.map(cobro => (
+                  <div key={cobro.id} className="notif-item">
+                    <div className="avatar">
+                      {getInitials(cobro.cliente.nombre)}
+                    </div>
+                    
+                    <div className="content">
+                      <div className="client-name">
+                        {cobro.cliente.nombre}
+                      </div>
+                      <div className="property-title">
+                        {cobro.propiedad.titulo}
+                      </div>
+                      <div className="date-info">
+                        Pagado: {cobro.fechaPago ? formatDate(cobro.fechaPago) : 'N/A'}
+                      </div>
+                    </div>
+                    
+                    <div className="amount">
+                      <div className="amount-value">
+                        {formatCurrency(cobro.monto, cobro.divisa)}
+                      </div>
+                      <div className={`status-chip ${getStatusChipClass(cobro.estado)}`}>
+                        {getStatusText(cobro.estado)}
+                      </div>
+                    </div>
+                    
+                    <div className="actions">
+                      <Button
+                        size="small"
+                        className="action-btn"
+                        icon={<Eye size={12} />}
+                        onClick={() => handleVerClick(cobro)}
+                      />
+                    </div>
                   </div>
-                  <div className="property-title">
-                    {cobro.propiedad.titulo}
-                  </div>
-                  <div className="date-info">
-                    Pagado: {cobro.fechaPago ? formatDate(cobro.fechaPago) : 'N/A'}
-                  </div>
-                </div>
-                
-                <div className="amount">
-                  <div className="amount-value">
-                    {formatCurrency(cobro.monto, cobro.divisa)}
-                  </div>
-                  <div className={`status-chip ${getStatusChipClass(cobro.estado)}`}>
-                    {getStatusText(cobro.estado)}
-                  </div>
-                </div>
-                
-                <div className="actions">
-                  <Button
-                    size="small"
-                    className="action-btn"
-                    icon={<Eye size={12} />}
-                    onClick={() => handleVerClick(cobro)}
-                  />
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
-        </TabPane>
-      </Tabs>
+            )
+          }
+        ]}
+      />
     </div>
   );
 };

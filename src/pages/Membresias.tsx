@@ -8,8 +8,6 @@ import { MEMBRESIAS_MOCK } from '../presets/coworking/mocks/membresiasMock';
 import type { Membresia } from '../presets/coworking/types/membresia';
 import './Membresias.scss';
 
-const { TabPane } = Tabs;
-
 const Membresias: React.FC = () => {
   const { message } = App.useApp();
   const [loading, setLoading] = useState(true);

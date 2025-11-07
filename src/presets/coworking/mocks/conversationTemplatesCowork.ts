@@ -140,6 +140,54 @@ export const PREGUNTAS_COWORK = {
 };
 
 export const RESPUESTAS_CURIOSO_COWORK = {
+  // ✅ Claves compatibles con sistema inmobiliario
+  saludo: [
+    'Hola {nombre}! 🐻 ¿En qué te puedo ayudar hoy?',
+    'Genial, {nombre}! Cuéntame qué tipo de espacio estás buscando 💼',
+    'Perfecto {nombre}! ¿Qué necesitas: escritorio, oficina o sala? 🏢'
+  ],
+  
+  // ✅ Mapear "precio" a planes para coworking
+  precio: [
+    'Tenemos varios planes 💼: Hot Desk ($120k/mes), Escritorio Flexible desde $80k, y Oficinas Privadas desde $450k. ¿Qué tipo de espacio buscas?',
+    'Manejamos planes mensuales, flexibles (5, 8 o 12 días) y oficinas virtuales 🏢. ¿Para qué lo necesitas?',
+    'Contamos con Hot Desk mensual $120k, planes flexibles desde $80k, oficinas privadas desde $450k y oficina virtual $75k 📊'
+  ],
+  
+  // ✅ Mapear "disponible_si"
+  disponible_si: [
+    'Sí, está disponible ✅',
+    'Disponible! Puedes empezar cuando quieras ✅',
+    'Sí! Tenemos espacio disponible de inmediato ✅'
+  ],
+  
+  // ✅ Mapear "estacionamiento_si"
+  estacionamiento_si: [
+    'Sí, tenemos estacionamiento disponible por $50k/mes adicional 🚗',
+    'Contamos con estacionamientos por $50k adicionales al mes 🅿️'
+  ],
+  
+  // ✅ Mapear "mascotas_si" (no aplica pero necesario para compatibilidad)
+  mascotas_si: [
+    'No aplica para espacios de coworking',
+    'N/A'
+  ],
+  
+  // ✅ Mapear "coordinar_visita"
+  coordinar_visita: [
+    'Te puedo agendar un tour para que conozcas el espacio. ¿Qué día te acomoda? 🚪',
+    'Genial! Podemos hacer un tour virtual ahora o presencial. ¿Cuál prefieres? 📅',
+    'Perfecto! Te agendo un tour. ¿Mañana o esta semana te viene bien? 🗓️'
+  ],
+  
+  // ✅ Mapear "confirmar_visita"
+  confirmar_visita: [
+    'Perfecto! Agendado el tour para {fecha} ✅',
+    'Genial! Te confirmo el tour para {fecha} 📅',
+    'Listo! Tour agendado {fecha} ✅'
+  ],
+  
+  // Claves específicas de coworking
   planes_generales: [
     'Tenemos varios planes 💼: Hot Desk ($120k/mes), Escritorio Flexible desde $80k, y Oficinas Privadas desde $450k. ¿Qué tipo de espacio buscas?',
     'Manejamos planes mensuales, flexibles (5, 8 o 12 días) y oficinas virtuales 🏢. ¿Para qué lo necesitas?',
@@ -187,12 +235,6 @@ export const RESPUESTAS_CURIOSO_COWORK = {
     'Las oficinas privadas van desde $450k (6 personas) hasta $800k (12 personas). Incluyen todo 🏢',
     'Oficina Privada 6 personas: $450k/mes con llave, acceso 24/7 y todas las amenidades 🔑',
     'Tenemos oficinas privadas de 4, 6, 8 y 12 personas desde $450k/mes. ¿Para cuántos la necesitas? 👥'
-  ],
-  
-  saludo: [
-    'Hola {nombre}! 🐻 ¿En qué te puedo ayudar hoy?',
-    'Genial, {nombre}! Cuéntame qué tipo de espacio estás buscando 💼',
-    'Perfecto {nombre}! ¿Qué necesitas: escritorio, oficina o sala? 🏢'
   ],
   
   estacionamiento: [

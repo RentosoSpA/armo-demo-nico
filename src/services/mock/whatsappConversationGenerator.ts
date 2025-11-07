@@ -43,6 +43,15 @@ function getRandomFromArray<T>(arr: T[]): T {
 }
 
 /**
+ * Type guard para validar arrays de strings
+ */
+function isValidStringArray(value: unknown): value is string[] {
+  return Array.isArray(value) && 
+         value.length > 0 && 
+         value.every(item => typeof item === 'string');
+}
+
+/**
  * Aplica el estilo de escritura consistente del lead a un texto
  * Orden crítico: signos → typos → mayúsculas → expresiones
  */
@@ -81,6 +90,10 @@ export function applyConsistentWriting(text: string, lead: LeadProfile): string 
  * Adapta las respuestas de CuriOso al tono del lead
  * Si el lead es formal → CuriOso formal
  * Si el lead es coloquial → CuriOso casual pero profesional
+ * 
+ * IMPORTANTE: Al agregar nuevas claves a RESPUESTAS_CURIOSO,
+ * asegúrate de agregar la versión equivalente en RESPUESTAS_CURIOSO_COWORK
+ * para evitar errores en modo coworking.
  */
 function generateCuriosoResponse(
   templateType: keyof typeof RESPUESTAS_CURIOSO,
@@ -89,14 +102,24 @@ function generateCuriosoResponse(
 ): string {
   const { activePreset } = usePresetStore.getState();
   
-  // Usar plantillas de coworking si el preset es coworking
+  // Intentar usar plantillas de coworking si el preset es coworking
   let templates: string[] = RESPUESTAS_CURIOSO[templateType];
   
   if (activePreset === 'coworking') {
-    const coworkTemplates = (RESPUESTAS_CURIOSO_COWORK as any)[templateType];
-    if (Array.isArray(coworkTemplates)) {
+    const coworkKey = templateType as keyof typeof RESPUESTAS_CURIOSO_COWORK;
+    const coworkTemplates = RESPUESTAS_CURIOSO_COWORK[coworkKey];
+    
+    // ✅ Verificar que la propiedad existe y es un array válido
+    if (isValidStringArray(coworkTemplates)) {
       templates = coworkTemplates;
     }
+    // Si no existe en cowork, usa el template inmobiliario como fallback
+  }
+  
+  // ✅ Garantizar que templates siempre sea un array válido
+  if (!isValidStringArray(templates)) {
+    console.warn(`[WhatsApp Generator] No templates found for: ${templateType}, preset: ${activePreset}`);
+    templates = ['Entendido']; // Fallback genérico
   }
   
   let response: string = getRandomFromArray(templates);
@@ -314,12 +337,21 @@ function createPrecioBlock(
   const delay = (timing.min + Math.random() * (timing.max - timing.min)) * 1000;
   currentTime = new Date(currentTime.getTime() + delay);
   
-  // Usar preguntas de coworking o inmobiliaria según preset
+  // ✅ Usar preguntas de coworking o inmobiliaria según preset con validación
   let preguntasSource: string[];
-  if (activePreset === 'coworking' && PREGUNTAS_COWORK.planes) {
-    preguntasSource = PREGUNTAS_COWORK.planes[lead.personality];
+  
+  if (activePreset === 'coworking') {
+    const planesPreguntas = PREGUNTAS_COWORK.planes?.[lead.personality];
+    preguntasSource = isValidStringArray(planesPreguntas)
+      ? planesPreguntas
+      : PREGUNTAS_PRECIO[lead.personality]; // Fallback a inmobiliaria
   } else {
     preguntasSource = PREGUNTAS_PRECIO[lead.personality];
+  }
+  
+  // ✅ Garantizar que siempre hay preguntas
+  if (!isValidStringArray(preguntasSource)) {
+    preguntasSource = ['¿Cuál es el precio?']; // Fallback genérico
   }
   
   const preguntaTemplate = getRandomFromArray(preguntasSource);
@@ -417,16 +449,25 @@ function createCaracteristicaBlock(
   const delay = (timing.min + Math.random() * (timing.max - timing.min)) * 1000;
   currentTime = new Date(currentTime.getTime() + delay);
   
-  // Usar preguntas de coworking o inmobiliaria
+  // ✅ Usar preguntas de coworking o inmobiliaria con validación robusta
   let preguntasSource: string[];
+  
   if (activePreset === 'coworking') {
     // Para coworking, combinar amenidades y flexibilidad según personalidad
     const amenidadesPreguntas = PREGUNTAS_COWORK.amenidades?.[lead.personality] || [];
     const flexibilidadPreguntas = PREGUNTAS_COWORK.flexibilidad?.[lead.personality] || [];
     const todasPreguntas = [...amenidadesPreguntas, ...flexibilidadPreguntas];
-    preguntasSource = todasPreguntas.length > 0 ? todasPreguntas : PREGUNTAS_CARACTERISTICAS[tipo];
+    
+    preguntasSource = todasPreguntas.length > 0 
+      ? todasPreguntas 
+      : PREGUNTAS_CARACTERISTICAS[tipo]; // Fallback
   } else {
     preguntasSource = PREGUNTAS_CARACTERISTICAS[tipo];
+  }
+  
+  // ✅ Garantizar que siempre hay preguntas
+  if (!isValidStringArray(preguntasSource)) {
+    preguntasSource = ['Tiene esa característica?']; // Fallback genérico
   }
   
   const preguntaTemplate = getRandomFromArray(preguntasSource);
