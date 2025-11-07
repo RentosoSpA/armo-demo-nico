@@ -46,6 +46,7 @@ const PerfilInmobiliario = React.lazy(() => import('./pages/PerfilInmobiliario')
 const RolesyAccesos = React.lazy(() => import('./pages/RolesyAccesos'));
 const Decisiones = React.lazy(() => import('./pages/Decisiones'));
 const Finanzas = React.lazy(() => import('./pages/Finanzas'));
+const Membresias = React.lazy(() => import('./pages/Membresias'));
 
 function App() {
   const SuspenseWrapper = ({ children }: { children: React.ReactNode }) => (
@@ -95,6 +96,7 @@ function App() {
                 <Route path="/prospectos" element={<SuspenseWrapper><Prospectos /></SuspenseWrapper>} />
                 <Route path="/finanzas" element={<SuspenseWrapper><Finanzas /></SuspenseWrapper>} />
                 <Route path="/clientes" element={<Navigate to="/propietarios" replace />} />
+                <Route path="/membresias" element={<SuspenseWrapper><Membresias /></SuspenseWrapper>} />
                 <Route path="/contratos" element={<SuspenseWrapper><Contratos /></SuspenseWrapper>} />
                 <Route path="/contratos/crear" element={<SuspenseWrapper><CrearContrato /></SuspenseWrapper>} />
                 {/* <Route path="/brigada" element={<SuspenseWrapper><Brigada /></SuspenseWrapper>} /> */}

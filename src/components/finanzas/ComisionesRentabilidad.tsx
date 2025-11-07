@@ -115,7 +115,7 @@ const ComisionesRentabilidad: React.FC<ComisionesRentabilidadProps> = ({
       </div>
 
       <div className="comisiones-top3-compact">
-        <h4 className="comisiones-top3-title">Top 3 Propiedades</h4>
+        <h4 className="comisiones-top3-title">💰 Top 3 Ingresos</h4>
         <div className="top3-list-compact">
           {top3.map((comision, index) => (
             <div

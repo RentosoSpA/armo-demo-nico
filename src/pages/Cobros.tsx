@@ -9,7 +9,7 @@ import CobrosNotifications from '../components/Cobros/CobrosNotifications';
 import CobrosCompactCalendar from '../components/Cobros/CobrosCompactCalendar';
 
 import type { Cobro, CobroStats, EstadoCobro } from '../types/cobro';
-import { getCobrosByEmpresa, getCobrosStats, updateCobro } from '../services/mock/cobrosServiceMock';
+import { getCobrosByEmpresa, getCobrosStats, updateCobro } from '../services/cobros/cobrosServiceAdapter';
 import { useUserStore } from '../store/userStore';
 import './Cobros.scss';
 

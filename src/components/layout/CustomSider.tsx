@@ -16,14 +16,14 @@ import '../../styles/components/menu.scss';
 const { Sider } = Layout;
 const { Text } = Typography;
 
-const getMenuItems = (getLabel: (label: string) => string) => [
+const getMenuItems = (getLabel: (label: string) => string, activePreset: string) => [
   { key: 'Tablero', label: getLabel('Tablero'), icon: <LayoutDashboard size={18} /> },
   { key: 'Oportunidades', label: getLabel('Oportunidades'), icon: <ClipboardCheck size={18} /> },
   { key: 'Propiedades', label: getLabel('Propiedades'), icon: <Home size={18} /> },
   { key: 'Finanzas', label: getLabel('Finanzas'), icon: <Wallet size={18} /> },
-  // { key: 'Brigada', label: 'Brigada', icon: <Settings size={18} /> }, // Oculto temporalmente
   { key: 'Cobros', label: getLabel('Cobros'), icon: <CreditCard size={18} /> },
   { key: 'Visitas', label: getLabel('Calendario'), icon: <Calendar size={18} /> },
+  ...(activePreset === 'coworking' ? [{ key: 'Membresias', label: 'Membresías', icon: <UserCheck size={18} /> }] : []),
   { key: 'Contratos', label: getLabel('Contratos'), icon: <File size={18} /> },
   { key: 'Propietarios', label: getLabel('Propietarios'), icon: <UserCheck size={18} /> },
 ];
@@ -35,8 +35,8 @@ interface CustomSiderProps {
 }
 
 const CustomSider: React.FC<CustomSiderProps> = ({ handleMenuClick, selectedKey, className }) => {
-  const { getLabel } = usePresetLabels();
-  const menuItems = getMenuItems(getLabel);
+  const { getLabel, activePreset } = usePresetLabels();
+  const menuItems = getMenuItems(getLabel, activePreset);
   
   return (
     <Sider

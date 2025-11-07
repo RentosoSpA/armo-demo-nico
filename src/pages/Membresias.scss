@@ -1,0 +1,174 @@
+.membresias-page {
+  padding: 24px 32px;
+  max-width: 1600px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.membresias-header {
+  margin-bottom: 32px;
+}
+
+.membresias-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: hsl(var(--foreground));
+  margin: 0 0 8px 0;
+}
+
+.membresias-subtitle {
+  font-size: 15px;
+  color: hsl(var(--muted-foreground));
+  margin: 0;
+}
+
+.membresias-tabs {
+  .ant-tabs-nav {
+    background: hsl(var(--card));
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 24px;
+  }
+
+  .ant-tabs-tab {
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: hsl(var(--accent));
+    }
+  }
+
+  .ant-tabs-tab-active {
+    background: hsl(var(--primary));
+    
+    .ant-tabs-tab-btn {
+      color: hsl(var(--primary-foreground)) !important;
+    }
+  }
+}
+
+.tab-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.membresias-content {
+  min-height: 400px;
+}
+
+.membresias-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  gap: 16px;
+  color: hsl(var(--muted-foreground));
+}
+
+.membresias-alert {
+  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+
+  .alert-icon {
+    font-size: 24px;
+  }
+
+  .alert-text {
+    font-weight: 500;
+  }
+}
+
+.membresias-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 24px;
+  animation: fadeIn 0.5s ease;
+}
+
+.membresias-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  color: hsl(var(--muted-foreground));
+  gap: 16px;
+
+  p {
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+.contratos-section {
+  background: hsl(var(--card));
+  border-radius: 16px;
+  padding: 32px;
+
+  h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: hsl(var(--foreground));
+    margin: 0 0 8px 0;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    color: hsl(var(--muted-foreground));
+    margin: 0 0 32px 0;
+  }
+}
+
+.contratos-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  color: hsl(var(--muted-foreground));
+  gap: 12px;
+
+  p {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  small {
+    font-size: 13px;
+    opacity: 0.7;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .membresias-page {
+    padding: 16px;
+  }
+
+  .membresias-grid {
+    grid-template-columns: 1fr;
+  }
+}
