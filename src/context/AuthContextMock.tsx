@@ -109,6 +109,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       // ✅ CRÍTICO: Obtener sesión actualizada y setear estados
       const session = await mockValidateSession();
       
+      // ✅ Setear preset automáticamente basado en email
+      const { getPresetByEmail } = await import('../config/userPresetMapping');
+      const preset = getPresetByEmail(email);
+      const { usePresetStore } = await import('../store/presetStore');
+      usePresetStore.getState().setPreset(preset);
+      
       if (session && session.data && session.data.uid) {
         // Crear mock user object
         const mockUser = {
@@ -184,6 +190,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       await mockAuthLogout();
       
       localStorage.removeItem('mock_session_backup');
+      // ✅ Limpiar preset al hacer logout
+      localStorage.removeItem('preset-storage');
       
       setUserProfile(null);
       setUserAgent(null);

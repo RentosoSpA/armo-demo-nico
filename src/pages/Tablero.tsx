@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Alert } from 'antd';
 import DashboardCustomizable from '../components/dashboard/DashboardCustomizable';
 import LoadingSplash from '../components/common/LoadingSplash';
-import { getNewDashboardData } from '../services/mock/saludDataMock';
+import { getDashboardData } from '../services/dashboard/dashboardServiceAdapter';
 import type { NewDashboardData } from '../types/salud-data';
 import { useUser } from '../store/userStore';
 
@@ -73,7 +73,7 @@ const Tablero: React.FC = () => {
     setError(null);
 
     try {
-      const response = await getNewDashboardData(empresa!.id);
+      const response = await getDashboardData(empresa!.id);
       setDashboardData(response.data);
     } catch (err) {
       console.error('Error fetching dashboard data:', err);

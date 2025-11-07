@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import type { Propiedad } from '../types/propiedad';
 import type { Empresa } from '../types/empresa';
 
-import { getPropiedadesByEmpresa } from '../services/mock/propiedadesServiceMock';
+import { getPortalPropiedades } from '../services/portal/portalServiceAdapter';
 import { getEmpresaByName } from '../services/mock/empresaServiceMock';
 import { getImages } from '../services/mock/multimediaServiceMock';
 
@@ -84,7 +84,7 @@ export const usePortalStore = create<PortalState>((set, get) => ({
     set({ loading: true, error: null });
 
     try {
-      const fetchedPropiedades = await getPropiedadesByEmpresa(empresaId);
+      const fetchedPropiedades = await getPortalPropiedades(empresaId);
       set({
         propiedades: fetchedPropiedades,
         filteredPropiedades: fetchedPropiedades,

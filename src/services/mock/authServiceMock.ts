@@ -37,6 +37,12 @@ const MOCK_CREDENTIALS = [
     email: 'vicente.aedo@rentoso.cl',
     password: 'QccvQ5la',
     uid: 'vicente-uid'
+  },
+  // Nube Cowork user
+  {
+    email: 'cristobal.camino@nubecowork.cl',
+    password: 'Rentoso2025',
+    uid: 'cristobal-nubecowork-uid'
   }
 ];
 

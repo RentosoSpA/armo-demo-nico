@@ -7,7 +7,7 @@ import CalendarioStats from '../components/Calendario/CalendarioStats';
 import CalendarioStatsEnhanced from '../components/Calendario/CalendarioStatsEnhanced';
 import type { Visita } from '../types/visita';
 import type { Prospecto } from '../types/profile';
-import { getVisitas } from '../services/mock/visitasServiceMock';
+import { getTours } from '../services/tours/toursServiceAdapter';
 import { getProspectos } from '../services/mock/prospectosServiceMock';
 import { formatDate } from '../utils/formatters';
 import { enhanceVisitasWithCuriosoData } from '../services/mock/curiosoActivityService';
@@ -25,7 +25,7 @@ const Calendario = () => {
 
   const fetchData = async () => {
     try {
-      const [visitas, prospectosData] = await Promise.all([getVisitas(), getProspectos()]);
+      const [visitas, prospectosData] = await Promise.all([getTours(), getProspectos()]);
       const enhancedVisitas = enhanceVisitasWithCuriosoData(visitas);
       setData(enhancedVisitas);
       setProspectos(prospectosData);

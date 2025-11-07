@@ -1,7 +1,23 @@
 import { MOCK_DATA, simulateDelay, generateId } from './mockData';
 import type { Empresa, EmpresaCreate } from '../../types/empresa';
 
-const mockEmpresas: Empresa[] = [MOCK_DATA.empresa as any];
+const mockEmpresas: Empresa[] = [
+  MOCK_DATA.empresa as any,
+  {
+    id: "empresa-nubecowork",
+    nombre: "Nube Cowork",
+    nit: "77.987.654-3",
+    direccion: "Valdivia, Chile",
+    codigo_telefonico: 56,
+    telefono: 632234567,
+    email: "contacto@nubecowork.cl",
+    sobre_nosotros: "Espacio de coworking en Valdivia que fomenta la innovación y colaboración",
+    mision: "Crear comunidad y espacios de trabajo flexibles para emprendedores y profesionales",
+    vision: "Ser el principal hub de innovación del sur de Chile",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  } as any
+];
 
 // Mock implementation of empresa service
 export const getEmpresa = async () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Spin, message } from 'antd';
 import { useUserStore } from '../store/userStore';
-import { getFinanzasCompleteData } from '../services/mock/finanzasServiceMock';
+import { getFinanzasCompleteData } from '../services/finanzas/finanzasServiceAdapter';
 import type { FinanzasCompleteData } from '../types/finanzas';
 import ResumenGeneral from '../components/finanzas/ResumenGeneral';
 import ComisionesRentabilidad from '../components/finanzas/ComisionesRentabilidad';
