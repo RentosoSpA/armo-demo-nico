@@ -1,14 +1,14 @@
 export const DASHBOARD_COWORK_MOCK = {
   kpis: {
-    espacios_disponibles: 12,
-    espacios_ocupados: 8,
-    total_espacios: 20,
-    miembros_activos: 42,
-    tours_mes: 18,
-    tours_semana: 8,
-    mrr: 5250000, // Monthly Recurring Revenue en CLP
-    tasa_ocupacion: 65, // Porcentaje
-    ingresos_adicionales: 450000, // Salas, impresión, etc.
+    espacios_disponibles: 2,
+    espacios_ocupados: 3,
+    total_espacios: 5,
+    miembros_activos: 3,
+    tours_mes: 8,
+    tours_semana: 2,
+    mrr: 605000, // Monthly Recurring Revenue en CLP (80k + 450k + 75k)
+    tasa_ocupacion: 60, // Porcentaje
+    ingresos_adicionales: 120000, // Salas, impresión, etc.
   },
   
   ocupacion_por_tipo: [

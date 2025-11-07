@@ -1,6 +1,7 @@
 import React from 'react';
 import { Select } from 'antd';
 import type { Propiedad } from '../../lib/contratos-mock';
+import { usePresetLabels } from '../../hooks/usePresetLabels';
 
 interface ContractsHeaderProps {
   propiedades: Propiedad[];
@@ -15,15 +16,17 @@ const ContractsHeader: React.FC<ContractsHeaderProps> = ({
   onSelectPropiedad,
   loading = false
 }) => {
+  const { getLabel } = usePresetLabels();
+  
   return (
     <div className="contracts-header">
       <div className="contracts-header-content">
         <div className="contracts-header-text">
-          <h1>Contratos</h1>
-          <p>Gestiona tus contratos y documentos legales</p>
+          <h1>{getLabel('Contratos', 'Membresías')}</h1>
+          <p>{getLabel('Gestiona tus contratos y documentos legales', 'Gestiona tus membresías y contratos')}</p>
         </div>
         <div className="contracts-header-selector">
-          <label>Propiedad</label>
+          <label>{getLabel('Propiedad', 'Espacio')}</label>
           <Select
             value={selectedPropiedadId}
             onChange={onSelectPropiedad}
@@ -32,11 +35,11 @@ const ContractsHeader: React.FC<ContractsHeaderProps> = ({
             filterOption={(input, option) =>
               (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
             }
-            placeholder="Selecciona una propiedad"
+            placeholder={getLabel('Selecciona una propiedad', 'Selecciona un espacio')}
             className="property-selector"
             options={propiedades.map(p => ({
               value: p.id,
-              label: `${p.titulo} · ${p.ciudad}`
+              label: `${p.titulo} · ${p.ciudad || ''}`
             }))}
           />
         </div>

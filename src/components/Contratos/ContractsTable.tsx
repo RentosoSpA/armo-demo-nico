@@ -1,6 +1,8 @@
 import { Table, Tag, Button, Empty } from 'antd';
 import { Eye } from 'lucide-react';
 import type { Contrato, Estado } from '../../lib/contratos-mock';
+import { usePresetStore } from '../../store/presetStore';
+import { usePresetLabels } from '../../hooks/usePresetLabels';
 
 interface ContractsTableProps {
   contratos: Contrato[];
@@ -13,19 +15,49 @@ const ContractsTable: React.FC<ContractsTableProps> = ({
   loading = false,
   onView
 }) => {
+  const { activePreset } = usePresetStore();
+  const { getLabel } = usePresetLabels();
 
-  const getEstadoColor = (estado: Estado) => {
+  const getEstadoColor = (estado: string) => {
+    if (activePreset === 'coworking') {
+      switch (estado) {
+        case 'activa': return 'green';
+        case 'renovacion_pendiente': return 'orange';
+        case 'suspendida': return 'red';
+        case 'cancelada': return 'default';
+        default: return 'default';
+      }
+    }
+    
+    // Estados inmobiliaria
     switch (estado) {
-      case 'Firmado': return 'green';
-      case 'Enviado': return 'blue';
-      case 'Pendiente': return 'orange';
+      case 'Firmado': 
+      case 'firmado': return 'green';
+      case 'Enviado':
+      case 'enviado': return 'blue';
+      case 'Pendiente':
+      case 'pendiente': return 'orange';
+      case 'anulado': return 'red';
       default: return 'default';
     }
   };
 
+  const formatEstado = (estado: string) => {
+    if (activePreset === 'coworking') {
+      const estadosMap: Record<string, string> = {
+        'activa': 'Activa',
+        'renovacion_pendiente': 'Renovación Pendiente',
+        'suspendida': 'Suspendida',
+        'cancelada': 'Cancelada'
+      };
+      return estadosMap[estado] || estado;
+    }
+    return estado;
+  };
+
   const columns = [
     {
-      title: 'Título',
+      title: activePreset === 'coworking' ? 'Plan / Miembro' : 'Título',
       dataIndex: 'titulo',
       key: 'titulo',
       ellipsis: true
@@ -34,9 +66,9 @@ const ContractsTable: React.FC<ContractsTableProps> = ({
       title: 'Estado',
       dataIndex: 'estado',
       key: 'estado',
-      width: 120,
-      render: (estado: Estado) => (
-        <Tag color={getEstadoColor(estado)}>{estado}</Tag>
+      width: 180,
+      render: (estado: string) => (
+        <Tag color={getEstadoColor(estado)}>{formatEstado(estado)}</Tag>
       )
     },
     {
@@ -71,7 +103,10 @@ const ContractsTable: React.FC<ContractsTableProps> = ({
     <div className="contracts-table-container">
       {contratos.length === 0 && !loading ? (
         <Empty
-          description="No hay contratos para esta propiedad"
+          description={getLabel(
+            'No hay contratos para esta propiedad',
+            'No hay membresías para este espacio'
+          )}
           image={Empty.PRESENTED_IMAGE_SIMPLE}
           className="contracts-empty-state"
         />

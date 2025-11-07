@@ -7,7 +7,10 @@ import { COWORKING_MENU_LABELS } from '../presets/coworking/config/menuLabels';
 export const usePresetLabels = () => {
   const { activePreset } = usePresetStore();
 
-  const getLabel = (inmobiliariaLabel: string): string => {
+  const getLabel = (inmobiliariaLabel: string, coworkingLabel?: string): string => {
+    if (activePreset === 'coworking' && coworkingLabel) {
+      return coworkingLabel;
+    }
     if (activePreset === 'coworking') {
       return COWORKING_MENU_LABELS[inmobiliariaLabel as keyof typeof COWORKING_MENU_LABELS] || inmobiliariaLabel;
     }

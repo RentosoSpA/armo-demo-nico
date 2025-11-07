@@ -7,18 +7,20 @@ import CreateSection from '../components/Contratos/CreateSection';
 import GenerateForm from '../components/Contratos/GenerateForm';
 import type { Contrato, Plantilla, Propiedad, Prospecto } from '../lib/contratos-mock';
 import {
-  listContratosByProp,
-  listPlantillas,
   listPropiedades,
   listProspectos,
   uploadToTemplate,
   useTemplateGenerate
 } from '../services/mock/contratosNewServiceMock';
+import { getMembresias } from '../services/membresias/membresiasServiceAdapter';
+import { getPlantillas } from '../services/plantillas/plantillasServiceAdapter';
+import { usePresetLabels } from '../hooks/usePresetLabels';
 import '../styles/contratos.scss';
 
 const Contratos = () => {
   const { message } = App.useApp();
   const navigate = useNavigate();
+  const { getLabel, isCoworking } = usePresetLabels();
 
   // Data lists
   const [propiedades, setPropiedades] = useState<Propiedad[]>([]);
@@ -66,7 +68,7 @@ const Contratos = () => {
       const [props, prosps, plants] = await Promise.all([
         listPropiedades(),
         listProspectos(),
-        listPlantillas()
+        getPlantillas()
       ]);
       setPropiedades(props);
       setProspectos(prosps);
@@ -86,10 +88,14 @@ const Contratos = () => {
   const loadContratos = async (propiedadId: string) => {
     setContratosLoading(true);
     try {
-      const list = await listContratosByProp(propiedadId);
-      setContratos(list);
+      const list = await getMembresias();
+      // Filtrar por propiedad/espacio si es necesario
+      const filtered = propiedadId === 'all' 
+        ? list 
+        : list.filter(c => c.propiedadId === propiedadId);
+      setContratos(filtered);
     } catch (error) {
-      message.error('Error al cargar contratos');
+      message.error(`Error al cargar ${isCoworking ? 'membresías' : 'contratos'}`);
     } finally {
       setContratosLoading(false);
     }
@@ -170,7 +176,7 @@ const Contratos = () => {
 
       {selectedPropiedadId && (
         <Card className="contracts-section-card">
-          <h2>Mis contratos</h2>
+          <h2>{getLabel('Mis contratos', 'Mis membresías')}</h2>
           <ContractsTable
             contratos={contratos}
             loading={contratosLoading}
