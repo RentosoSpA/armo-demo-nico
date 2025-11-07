@@ -1,0 +1,1 @@
+import{bF as t,j as e}from"./index-BmXdxNCh.js";import{F as a}from"./FormPropiedad-B7l6qTkB.js";import"./imagenesServiceSupabase-OUgH2Lyo.js";import"./chevron-left-DJRchSGG.js";import"./index-B-COQ5gT.js";const n=()=>{const{currentUser:o}=t(),r=()=>{};return e.jsx(a,{mode:"create",onCreated:r,userId:o==null?void 0:o.uid})};export{n as default};

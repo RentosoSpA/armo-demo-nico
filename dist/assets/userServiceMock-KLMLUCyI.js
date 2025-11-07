@@ -1,0 +1,1 @@
+import{x as n,bC as o}from"./index-BmXdxNCh.js";const d=async(t,a,e)=>(await n(),{id:o(),uid:t,email:a,nombre:e.nombre||"",apellido:e.apellido||"",telefono:e.telefono||"",createdAt:new Date().toISOString(),updatedAt:new Date().toISOString()});export{d as createUser};
